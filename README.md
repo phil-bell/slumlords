@@ -1,2 +1,2 @@
 # slumlords.london
-Website deticated to protecting tenants from landlords
+Website deticated to being a voice tenants of bad landlords
