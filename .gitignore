@@ -129,4 +129,5 @@ dmypy.json
 .pyre/
 
 .editorconfig
+.vscode
 slumlords/settings/local.py
