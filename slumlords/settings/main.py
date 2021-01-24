@@ -121,4 +121,5 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-from .local import *
+if os.path.isfile("local.py"):
+    from .local import *
