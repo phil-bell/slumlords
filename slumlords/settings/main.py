@@ -34,12 +34,12 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "slumlords.api",
-    "slumlords.home",
-    "slumlords.map",
-    "slumlords.reading",
-    "slumlords.reviews",
-    "slumlords.support",
-    "slumlords.wall_of_shame",
+    "slumlords.apps.home",
+    "slumlords.apps.map",
+    "slumlords.apps.reading",
+    "slumlords.apps.reviews",
+    "slumlords.apps.support",
+    "slumlords.apps.wall_of_shame",
 ]
 
 MIDDLEWARE = [
@@ -123,5 +123,9 @@ STATIC_URL = "/static/"
 STATICFILES_DIRS = [f"{BASE_DIR}/staticfiles/"]
 STATIC_ROOT = f"{BASE_DIR}/static/"
 
-if os.path.isfile("local.py"):
+try:
     from .local import *
+except ImportError:
+    pass
+except NameError:
+    pass
