@@ -31,6 +31,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    "slumlords.api",
+    "slumlords.home",
+    "slumlords.map",
+    "slumlords.reading",
+    "slumlords.reviews",
+    "slumlords.support",
+    "slumlords.wall_of_shame",
 ]
 
 MIDDLEWARE = [
@@ -66,7 +73,6 @@ WSGI_APPLICATION = 'slumlords.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
