@@ -1,6 +1,12 @@
 {
   "name": "slumlords.london",
   "dependencies": {
-    "rollup": "^2.38.0"
+    "google-maps-limited": "^1.0.0",
+    "lit-element": "^2.4.0",
+    "rollup": "^2.38.0",
+    "rollup-plugin-node-resolve": "^5.2.0"
+  },
+  "devDependencies": {
+    "prettier": "^2.2.1"
   }
 }
