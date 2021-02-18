@@ -130,4 +130,5 @@ dmypy.json
 
 .editorconfig
 .vscode
-slumlords/settings/local.py
+local.py
+local.js

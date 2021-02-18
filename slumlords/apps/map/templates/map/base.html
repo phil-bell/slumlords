@@ -1,0 +1,14 @@
+{% load static %}
+<!doctype html>
+    <html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Map</title>
+        <link rel="stylesheet" href="{% static 'css/map.css' %}">
+        <script type="module" src="{% static 'js/bundle.js' %}"></script>
+    </head>
+    <body>
+        {% block content %}
+        {% endblock content %}
+    </body>
+</html>
