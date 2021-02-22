@@ -132,3 +132,5 @@ dmypy.json
 .vscode
 local.py
 local.js
+
+node_modules
