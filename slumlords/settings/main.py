@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "corsheaders",
+    "address",
     "slumlords.api",
     "slumlords.apps.home",
     "slumlords.apps.map",
