@@ -77,6 +77,7 @@ class Review(models.Model):
     )
     submitted_at = models.TimeField(
         null=True,
+        auto_now_add=True,
         blank=True,
     )
     rental = models.ForeignKey(
@@ -86,6 +87,7 @@ class Review(models.Model):
         blank=True,
         on_delete=models.SET_NULL,
     )
+    tenent = models.ForeignKey("Tenant", null=True, blank=True, on_delete=models.SET_NULL)
 
 
 class Tenant(models.Model):
