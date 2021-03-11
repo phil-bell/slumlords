@@ -1,6 +1,4 @@
 from django import forms
-from django.forms import fields
-
 from .models import Landlord, Property, Review, Photo
 
 class ReviewForm(forms.ModelForm):

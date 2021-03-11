@@ -1,8 +1,16 @@
 {% extends 'map/base.html' %}
-
 {% block content %}
-    <form method="post">{% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Save">
-    </form>
+    {% csrf_token %}
+    <django-form action="api/review" method="post">
+        {{ review_form.as_p }}
+    </django-form>
+    <django-form action="api/property" method="post">
+        {{ property_form.as_p }}
+    </django-form>
+    <django-form action="api/landlord" method="post">
+        {{ landlord_form.as_p }}
+    </django-form>
+    <django-form action="api/photo" method="post">
+        {{ photo_form.as_p }}
+    </django-form>
 {% endblock content %}

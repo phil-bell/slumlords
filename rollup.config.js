@@ -1,4 +1,5 @@
 import resolve from "rollup-plugin-node-resolve";
+import commonjs from "@rollup/plugin-commonjs";
 
 export default {
   input: "slumlords/static-src/js/main.js",
@@ -12,5 +13,5 @@ export default {
   },
   preserveSymlinks: true,
   inlineDynamicImports: true,
-  plugins: [resolve()],
+  plugins: [resolve(), commonjs()],
 };
