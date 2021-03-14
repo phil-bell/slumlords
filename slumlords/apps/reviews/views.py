@@ -1,3 +1,4 @@
+from re import error
 from django.http.response import HttpResponse, HttpResponseBadRequest
 from django.views.generic.base import TemplateView
 from geopy.geocoders import Nominatim
@@ -15,15 +16,8 @@ class ReviewCreateView(TemplateView):
     def __init__(self, **kwargs) -> None:
         self._rental = None
         self._landlord = None
+        self._review = None
         super().__init__(**kwargs)
-
-    @property
-    def review(self):
-        return self._review
-
-    @review.setter
-    def reivew(self, request):
-        self._review = ReviewForm(request.POST).cleaned_data
 
     @property
     def landlord(self):
@@ -32,9 +26,9 @@ class ReviewCreateView(TemplateView):
     @landlord.setter
     def landlord(self, review):
         self._landlord = Landlord.objects.get_or_create(
-            first_name=review.get("landlord_first_name"),
-            last_name=review.get("landlord_last_name"),
-            postcode=review.get("landlord_postcode"),
+            first_name=review.cleaned_data.get("landlord_first_name"),
+            last_name=review.cleaned_data.get("landlord_last_name"),
+            postcode=review.cleaned_data.get("landlord_postcode"),
         )
 
     @property
@@ -44,7 +38,7 @@ class ReviewCreateView(TemplateView):
     @rental.setter
     def rental(self, review):
         self._rental = Property.objects.get_or_create(
-            address=review.get("property_address"), landlord=self.landlord
+            address=review.cleaned_data.get("property_address"), landlord=self.landlord
         )
         location = geolocator.geocode(self._rental.address.raw)
         self._rental.latitude = location.latitude
@@ -57,7 +51,10 @@ class ReviewCreateView(TemplateView):
         return context
 
     def post(self, request):
-        self.review = request
+        print(request.POST)
+        print("----------")
+        print(request.body)
+        self.review = ReviewForm(request.body)
         if self.review.is_valid():
             self.landlord = self.review
             self.rental = self.review
@@ -65,4 +62,5 @@ class ReviewCreateView(TemplateView):
             self.review.tenent = self.request.user.tenent
             self.review.save()
             return HttpResponse()
+        print(self.review.errors)
         return HttpResponseBadRequest()

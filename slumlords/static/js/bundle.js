@@ -241,7 +241,7 @@ const createMarker = () => document.createComment('');
  *    * (") then any non-("), or
  *    * (') then any non-(')
  */
-const lastAttributeNameRegex = 
+const lastAttributeNameRegex =
 // eslint-disable-next-line no-control-regex
 /([ \x09\x0a\x0c\x0d])([^\0-\x1F\x7F-\x9F "'>=/]+)([ \x09\x0a\x0c\x0d]*=[ \x09\x0a\x0c\x0d]*(?:[^ \x09\x0a\x0c\x0d"'`<>=]*|"[^"]*|'[^']*))$/;
 
@@ -2340,7 +2340,7 @@ class LitElement extends UpdatingElement {
             // The last item is kept to try to preserve the cascade order with the
             // assumption that it's most important that last added styles override
             // previous styles.
-            const addStyles = (styles, set) => styles.reduceRight((set, s) => 
+            const addStyles = (styles, set) => styles.reduceRight((set, s) =>
             // Note: On IE set.add() does not return the set
             Array.isArray(s) ? addStyles(s, set) : (set.add(s), set), set);
             // Array.from does not work on Set in IE, otherwise return
@@ -3255,7 +3255,7 @@ window.initMap = function () { window.dispatchEvent(new CustomEvent('google-map-
  * @demo demo/index.html
  */
 class GoogleMapsLimited extends LitElement$1 {
-  
+
   static get properties() {
     return {
       apiKey: {type: String},
@@ -3267,7 +3267,7 @@ class GoogleMapsLimited extends LitElement$1 {
       selectedIcon: {type: String}
     };
   }
-  
+
   render() {
     return html`
       <style>
@@ -3286,7 +3286,7 @@ class GoogleMapsLimited extends LitElement$1 {
   constructor() {
     super();
     // _mapScriptTag sets up and the google maps loader script tag - we inject it here
-    // and after it loads it will fire the google-map-ready event  
+    // and after it loads it will fire the google-map-ready event
     window.addEventListener('google-map-ready', () => {
       this._mapRef = new google.maps.Map(this.shadowRoot.querySelector('#map'), {
         center: { lat: 40, lng: -112 },
@@ -3325,7 +3325,7 @@ class GoogleMapsLimited extends LitElement$1 {
     this._putMarkersOnMap(markers);
     this._markers = markers;
   }
-  
+
   get markers() {
     return this._markers;
   }
@@ -3393,8 +3393,18 @@ window.customElements.define('google-maps-limited', GoogleMapsLimited);
 class SlumMap extends customElements.get("google-maps-limited") {
   constructor() {
     super();
-    this.apiKey = "AIzaSyBSLegpj5AfyRaVvFn5Kz-ycqMwtMEPMUk";
+    this.apiKey = "";
   }
+
+  static get properties() {
+    return {
+      apiKey: {
+        type: String,
+        attribute: "api-key"
+      }
+    }
+  }
+
 }
 
 customElements.define("slum-map", SlumMap);
