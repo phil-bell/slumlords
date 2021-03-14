@@ -17,6 +17,7 @@ class ReviewForm(forms.ModelForm):
             "property_address",
             "landlord_first_name",
             "landlord_last_name",
+            "description"
         ]
 
 
