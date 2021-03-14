@@ -62,6 +62,7 @@ class ReviewCreateView(TemplateView):
             self.landlord = self.review
             self.rental = self.review
             self.review.rental = self.rental
+            self.review.tenent = self.request.user.tenent
             self.review.save()
             return HttpResponse()
         return HttpResponseBadRequest()
