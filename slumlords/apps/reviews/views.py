@@ -51,9 +51,7 @@ class ReviewCreateView(TemplateView):
         return context
 
     def post(self, request):
-        print(request.POST)
-        print("----------")
-        print(request.body)
+
         self.review = ReviewForm(request.body)
         if self.review.is_valid():
             self.landlord = self.review
