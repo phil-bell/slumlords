@@ -31,6 +31,7 @@ class Property(models.Model):
 class Landlord(models.Model):
     first_name = models.CharField(max_length=200)
     last_name = models.CharField(max_length=200)
+    postcode = models.CharField(max_length=200)
     rating = models.PositiveIntegerField(
         null=True,
         blank=True,

@@ -1,38 +1,67 @@
 from django.http.response import HttpResponse, HttpResponseBadRequest
 from django.views.generic.base import TemplateView
+from geopy.geocoders import Nominatim
 
-from .forms import LandlordForm, PhotoForm, PropertyForm, ReviewForm
-from .models import Review
+
+from .forms import ReviewForm
+from .models import Landlord, Property
+
+geolocator = Nominatim(user_agent="slumlords")
 
 
 class ReviewCreateView(TemplateView):
     template_name = "reviews/review_form.html"
 
+    def __init__(self, **kwargs) -> None:
+        self._rental = None
+        self._landlord = None
+        super().__init__(**kwargs)
+
+    @property
+    def review(self):
+        return self._review
+
+    @review.setter
+    def reivew(self, request):
+        self._review = ReviewForm(request.POST).cleaned_data
+
+    @property
+    def landlord(self):
+        return self._landlord
+
+    @landlord.setter
+    def landlord(self, review):
+        self._landlord = Landlord.objects.get_or_create(
+            first_name=review.get("landlord_first_name"),
+            last_name=review.get("landlord_last_name"),
+            postcode=review.get("landlord_postcode"),
+        )
+
+    @property
+    def rental(self):
+        return self._rental
+
+    @rental.setter
+    def rental(self, review):
+        self._rental = Property.objects.get_or_create(
+            address=review.get("property_address"), landlord=self.landlord
+        )
+        location = geolocator.geocode(self._rental.address.raw)
+        self._rental.latitude = location.latitude
+        self._rental.longatude = location.longitude
+        self._rental.save()
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["review_form"] = ReviewForm()
-        context["property_form"] = PropertyForm()
-        context["landlord_form"] = LandlordForm()
-        context["photo_form"] = PhotoForm()
         return context
 
     def post(self, request):
-        review = ReviewForm(request.POST)
-        rental = PropertyForm(request.POST)
-        landlord = LandlordForm(request.POST)
-        photo = PhotoForm(request.POST)
-        if (
-            review.is_valid()
-            and rental.is_valid()
-            and landlord.is_valid()
-            and photo.is_valid()
-        ):
-            landlord.save()
-            rental.landlord = landlord
-            rental.save()
-            review.rental = rental
-            review.save()
-            photo.review = review
-            photo.save()
+        self.review = request
+        if self.review.is_valid():
+            self.landlord = self.review
+            self.rental = self.review
+            self.review.rental = self.rental
+            self.review.save()
             return HttpResponse()
         return HttpResponseBadRequest()
