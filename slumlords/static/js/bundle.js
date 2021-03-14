@@ -2702,7 +2702,7 @@ class DjangoForm extends LitElement {
     await fetch(this.action, {
       method: this.method,
       headers: {
-        "Content-Type": "multipart/form-data",
+        "Content-Type": "application/x-www-form-urlencoded",
         "X-CSRFToken": js_cookie.get("csrftoken"),
       },
       body: form,
