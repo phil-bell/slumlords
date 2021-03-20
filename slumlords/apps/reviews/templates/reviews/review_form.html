@@ -1,7 +1,7 @@
 {% extends 'map/base.html' %}
 {% block content %}
-    {% csrf_token %}
     <django-form action="" method="post" button="Save">
+        {% csrf_token %}
         {{ review_form.media }}
         {{ review_form.as_p }}
     </django-form>

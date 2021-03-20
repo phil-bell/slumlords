@@ -1,4 +1,4 @@
-from re import error
+import json
 from django.http.response import HttpResponse, HttpResponseBadRequest
 from django.views.generic.base import TemplateView
 from geopy.geocoders import Nominatim
@@ -51,8 +51,9 @@ class ReviewCreateView(TemplateView):
         return context
 
     def post(self, request):
-
-        self.review = ReviewForm(request.body)
+        print(request.body)
+        self.review = ReviewForm(json.loads(request.body))
+        print(self.review)
         if self.review.is_valid():
             self.landlord = self.review
             self.rental = self.review

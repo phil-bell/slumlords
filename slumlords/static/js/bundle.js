@@ -241,7 +241,7 @@ const createMarker = () => document.createComment('');
  *    * (") then any non-("), or
  *    * (') then any non-(')
  */
-const lastAttributeNameRegex =
+const lastAttributeNameRegex = 
 // eslint-disable-next-line no-control-regex
 /([ \x09\x0a\x0c\x0d])([^\0-\x1F\x7F-\x9F "'>=/]+)([ \x09\x0a\x0c\x0d]*=[ \x09\x0a\x0c\x0d]*(?:[^ \x09\x0a\x0c\x0d"'`<>=]*|"[^"]*|'[^']*))$/;
 
@@ -1194,7 +1194,7 @@ const parts = new WeakMap();
  *     container. Render options must *not* change between renders to the same
  *     container, as those changes will not effect previously rendered DOM.
  */
-const render = (result, container, options) => {
+const render$1 = (result, container, options) => {
     let part = parts.get(container);
     if (part === undefined) {
         removeNodes(container, container.firstChild);
@@ -1499,7 +1499,7 @@ const prepareTemplateStyles = (scopeName, renderedDOM, template) => {
  * non-shorthand names (for example `border` and `border-width`) is not
  * supported.
  */
-const render$1 = (result, container, options) => {
+const render = (result, container, options) => {
     if (!options || typeof options !== 'object' || !options.scopeName) {
         throw new Error('The `scopeName` option is required.');
     }
@@ -1513,7 +1513,7 @@ const render$1 = (result, container, options) => {
     // On first scope render, render into a fragment; this cannot be a single
     // fragment that is reused since nested renders can occur synchronously.
     const renderContainer = firstScopeRender ? document.createDocumentFragment() : container;
-    render(result, renderContainer, Object.assign({ templateFactory: shadyTemplateFactory(scopeName) }, options));
+    render$1(result, renderContainer, Object.assign({ templateFactory: shadyTemplateFactory(scopeName) }, options));
     // When performing first scope render,
     // (1) We've rendered into a fragment so that there's a chance to
     // `prepareTemplateStyles` before sub-elements hit the DOM
@@ -1607,19 +1607,19 @@ const defaultConverter = {
  * Change function that returns true if `value` is different from `oldValue`.
  * This method is used as the default for a property's `hasChanged` function.
  */
-const notEqual = (value, old) => {
+const notEqual$1 = (value, old) => {
     // This ensures (old==NaN, value==NaN) always returns false
     return old !== value && (old === old || value === value);
 };
-const defaultPropertyDeclaration = {
+const defaultPropertyDeclaration$1 = {
     attribute: true,
     type: String,
     converter: defaultConverter,
     reflect: false,
-    hasChanged: notEqual
+    hasChanged: notEqual$1
 };
-const STATE_HAS_UPDATED = 1;
-const STATE_UPDATE_REQUESTED = 1 << 2;
+const STATE_HAS_UPDATED$1 = 1;
+const STATE_UPDATE_REQUESTED$1 = 1 << 2;
 const STATE_IS_REFLECTING_TO_ATTRIBUTE = 1 << 3;
 const STATE_IS_REFLECTING_TO_PROPERTY = 1 << 4;
 /**
@@ -1635,7 +1635,7 @@ const finalized = 'finalized';
  * should be supplied by subclassers to render updates as desired.
  * @noInheritDoc
  */
-class UpdatingElement extends HTMLElement {
+class UpdatingElement$1 extends HTMLElement {
     constructor() {
         super();
         this.initialize();
@@ -1698,7 +1698,7 @@ class UpdatingElement extends HTMLElement {
      *
      * @nocollapse
      */
-    static createProperty(name, options = defaultPropertyDeclaration) {
+    static createProperty(name, options = defaultPropertyDeclaration$1) {
         // Note, since this can be called by the `@property` decorator which
         // is called before `finalize`, we ensure storage exists for property
         // metadata.
@@ -1772,7 +1772,7 @@ class UpdatingElement extends HTMLElement {
      */
     static getPropertyOptions(name) {
         return this._classProperties && this._classProperties.get(name) ||
-            defaultPropertyDeclaration;
+            defaultPropertyDeclaration$1;
     }
     /**
      * Creates property accessors for registered properties and ensures
@@ -1829,7 +1829,7 @@ class UpdatingElement extends HTMLElement {
      * option for the property if present or a strict identity check.
      * @nocollapse
      */
-    static _valueHasChanged(value, old, hasChanged = notEqual) {
+    static _valueHasChanged(value, old, hasChanged = notEqual$1) {
         return hasChanged(value, old);
     }
     /**
@@ -1939,7 +1939,7 @@ class UpdatingElement extends HTMLElement {
             this._attributeToProperty(name, value);
         }
     }
-    _propertyToAttribute(name, value, options = defaultPropertyDeclaration) {
+    _propertyToAttribute(name, value, options = defaultPropertyDeclaration$1) {
         const ctor = this.constructor;
         const attr = ctor._attributeNameForProperty(name, options);
         if (attr !== undefined) {
@@ -2046,7 +2046,7 @@ class UpdatingElement extends HTMLElement {
      * Sets up the element to asynchronously update.
      */
     async _enqueueUpdate() {
-        this._updateState = this._updateState | STATE_UPDATE_REQUESTED;
+        this._updateState = this._updateState | STATE_UPDATE_REQUESTED$1;
         try {
             // Ensure any previous update has resolved before updating.
             // This `await` also ensures that property changes are batched.
@@ -2066,10 +2066,10 @@ class UpdatingElement extends HTMLElement {
         return !this._hasRequestedUpdate;
     }
     get _hasRequestedUpdate() {
-        return (this._updateState & STATE_UPDATE_REQUESTED);
+        return (this._updateState & STATE_UPDATE_REQUESTED$1);
     }
     get hasUpdated() {
-        return (this._updateState & STATE_HAS_UPDATED);
+        return (this._updateState & STATE_HAS_UPDATED$1);
     }
     /**
      * Performs an element update. Note, if an exception is thrown during the
@@ -2118,8 +2118,8 @@ class UpdatingElement extends HTMLElement {
             throw e;
         }
         if (shouldUpdate) {
-            if (!(this._updateState & STATE_HAS_UPDATED)) {
-                this._updateState = this._updateState | STATE_HAS_UPDATED;
+            if (!(this._updateState & STATE_HAS_UPDATED$1)) {
+                this._updateState = this._updateState | STATE_HAS_UPDATED$1;
                 this.firstUpdated(changedProperties);
             }
             this.updated(changedProperties);
@@ -2127,7 +2127,7 @@ class UpdatingElement extends HTMLElement {
     }
     _markUpdated() {
         this._changedProperties = new Map();
-        this._updateState = this._updateState & ~STATE_UPDATE_REQUESTED;
+        this._updateState = this._updateState & ~STATE_UPDATE_REQUESTED$1;
     }
     /**
      * Returns a Promise that resolves when the element has completed updating.
@@ -2221,7 +2221,7 @@ _a = finalized;
 /**
  * Marks class as having finished creating properties.
  */
-UpdatingElement[_a] = true;
+UpdatingElement$1[_a] = true;
 
 /**
 @license
@@ -2310,7 +2310,7 @@ const renderNotImplemented = {};
  * `render` method to provide the component's template. Define properties
  * using the [[`properties`]] property or the [[`property`]] decorator.
  */
-class LitElement extends UpdatingElement {
+class LitElement$1 extends UpdatingElement$1 {
     /**
      * Return the array of styles to apply to the element.
      * Override this method to integrate into a style management system.
@@ -2340,7 +2340,7 @@ class LitElement extends UpdatingElement {
             // The last item is kept to try to preserve the cascade order with the
             // assumption that it's most important that last added styles override
             // previous styles.
-            const addStyles = (styles, set) => styles.reduceRight((set, s) =>
+            const addStyles = (styles, set) => styles.reduceRight((set, s) => 
             // Note: On IE set.add() does not return the set
             Array.isArray(s) ? addStyles(s, set) : (set.add(s), set), set);
             // Array.from does not work on Set in IE, otherwise return
@@ -2484,7 +2484,7 @@ class LitElement extends UpdatingElement {
  * Note this property name is a string to prevent breaking Closure JS Compiler
  * optimizations. See updating-element.ts for more information.
  */
-LitElement['finalized'] = true;
+LitElement$1['finalized'] = true;
 /**
  * Reference to the underlying library method used to render the element's
  * DOM. By default, points to the `render` method from lit-html's shady-render
@@ -2502,7 +2502,7 @@ LitElement['finalized'] = true;
  *
  * @nocollapse
  */
-LitElement.render = render$1;
+LitElement$1.render = render;
 
 function createCommonjsModule(fn) {
   var module = { exports: {} };
@@ -2672,7 +2672,7 @@ var js_cookie = createCommonjsModule(function (module, exports) {
 }));
 });
 
-class DjangoForm extends LitElement {
+class DjangoForm extends LitElement$1 {
   static get properties() {
     return {
       method: {
@@ -2696,23 +2696,33 @@ class DjangoForm extends LitElement {
     this.method = "post";
   }
 
+  get form() {
+    this.inputs = this.querySelectorAll("input, textarea, select");
+    const formData = new FormData();
+    [...this.inputs].map(input => {
+      return formData.append(input.name, input.value)
+    });
+    console.log(formData);
+    console.log(formData.values());
+    return formData
+  }
+
   async handleSubmit(event) {
     event.preventDefault();
-    const form = new FormData(event.target);
     await fetch(this.action, {
       method: this.method,
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
         "X-CSRFToken": js_cookie.get("csrftoken"),
       },
-      body: form,
+      body: JSON.stringify(this.form),
     });
   }
 
   render() {
     return html`
       <form @submit=${this.handleSubmit}>
-        <slot></slot>
+        <slot id="form"></slot>
         <button type="submit">${this.button}</button>
       </form>
     `;
@@ -2741,26 +2751,26 @@ const toBooleanAttribute = (value) => value ? '' : null;
  * Change function that returns true if `value` is different from `oldValue`.
  * This method is used as the default for a property's `hasChanged` function.
  */
-const notEqual$1 = (value, old) => {
+const notEqual = (value, old) => {
     // This ensures (old==NaN, value==NaN) always returns false
     return old !== value && (old === old || value === value);
 };
-const defaultPropertyDeclaration$1 = {
+const defaultPropertyDeclaration = {
     attribute: true,
     type: String,
     reflect: false,
-    hasChanged: notEqual$1
+    hasChanged: notEqual
 };
 const microtaskPromise = new Promise((resolve) => resolve(true));
-const STATE_HAS_UPDATED$1 = 1;
-const STATE_UPDATE_REQUESTED$1 = 1 << 2;
+const STATE_HAS_UPDATED = 1;
+const STATE_UPDATE_REQUESTED = 1 << 2;
 const STATE_IS_REFLECTING = 1 << 3;
 /**
  * Base element class which manages element properties and attributes. When
  * properties change, the `update` method is asynchronously called. This method
  * should be supplied by subclassers to render updates as desired.
  */
-class UpdatingElement$1 extends HTMLElement {
+class UpdatingElement extends HTMLElement {
     constructor() {
         super();
         this._updateState = 0;
@@ -2799,7 +2809,7 @@ class UpdatingElement$1 extends HTMLElement {
      * or uses a strict identity check to determine whether or not to request
      * an update.
      */
-    static createProperty(name, options = defaultPropertyDeclaration$1) {
+    static createProperty(name, options = defaultPropertyDeclaration) {
         // ensure private storage for property declarations.
         if (!this.hasOwnProperty('_classProperties')) {
             this._classProperties = new Map();
@@ -2875,7 +2885,7 @@ class UpdatingElement$1 extends HTMLElement {
      * Called when a property value is set and uses the `hasChanged`
      * option for the property if present or a strict identity check.
      */
-    static _valueHasChanged(value, old, hasChanged = notEqual$1) {
+    static _valueHasChanged(value, old, hasChanged = notEqual) {
         return hasChanged(value, old);
     }
     /**
@@ -2970,7 +2980,7 @@ class UpdatingElement$1 extends HTMLElement {
      * Uses ShadyCSS to keep element DOM updated.
      */
     connectedCallback() {
-        if ((this._updateState & STATE_HAS_UPDATED$1)) {
+        if ((this._updateState & STATE_HAS_UPDATED)) {
             if (window.ShadyCSS !== undefined) {
                 window.ShadyCSS.styleElement(this);
             }
@@ -2993,7 +3003,7 @@ class UpdatingElement$1 extends HTMLElement {
             this._attributeToProperty(name, value);
         }
     }
-    _propertyToAttribute(name, value, options = defaultPropertyDeclaration$1) {
+    _propertyToAttribute(name, value, options = defaultPropertyDeclaration) {
         const ctor = this.constructor;
         const attrValue = ctor._propertyValueToAttribute(value, options);
         if (attrValue !== undefined) {
@@ -3049,7 +3059,7 @@ class UpdatingElement$1 extends HTMLElement {
         if (name !== undefined) {
             const options = this.constructor
                 ._classProperties.get(name) ||
-                defaultPropertyDeclaration$1;
+                defaultPropertyDeclaration;
             return this._requestPropertyUpdate(name, oldValue, options);
         }
         return this._invalidate();
@@ -3086,7 +3096,7 @@ class UpdatingElement$1 extends HTMLElement {
     async _invalidate() {
         if (!this._hasRequestedUpdate) {
             // mark state updating...
-            this._updateState = this._updateState | STATE_UPDATE_REQUESTED$1;
+            this._updateState = this._updateState | STATE_UPDATE_REQUESTED;
             let resolver;
             const previousValidatePromise = this._updatePromise;
             this._updatePromise = new Promise((r) => resolver = r);
@@ -3097,7 +3107,7 @@ class UpdatingElement$1 extends HTMLElement {
         return this.updateComplete;
     }
     get _hasRequestedUpdate() {
-        return (this._updateState & STATE_UPDATE_REQUESTED$1);
+        return (this._updateState & STATE_UPDATE_REQUESTED);
     }
     /**
      * Validates the element by updating it.
@@ -3111,8 +3121,8 @@ class UpdatingElement$1 extends HTMLElement {
             const changedProperties = this._changedProperties;
             this.update(changedProperties);
             this._markUpdated();
-            if (!(this._updateState & STATE_HAS_UPDATED$1)) {
-                this._updateState = this._updateState | STATE_HAS_UPDATED$1;
+            if (!(this._updateState & STATE_HAS_UPDATED)) {
+                this._updateState = this._updateState | STATE_HAS_UPDATED;
                 this.firstUpdated(changedProperties);
             }
             this.updated(changedProperties);
@@ -3123,7 +3133,7 @@ class UpdatingElement$1 extends HTMLElement {
     }
     _markUpdated() {
         this._changedProperties = new Map();
-        this._updateState = this._updateState & ~STATE_UPDATE_REQUESTED$1;
+        this._updateState = this._updateState & ~STATE_UPDATE_REQUESTED;
     }
     /**
      * Returns a Promise that resolves when the element has completed updating.
@@ -3190,16 +3200,16 @@ class UpdatingElement$1 extends HTMLElement {
  * Maps attribute names to properties; for example `foobar` attribute
  * to `fooBar` property.
  */
-UpdatingElement$1._attributeToPropertyMap = new Map();
+UpdatingElement._attributeToPropertyMap = new Map();
 /**
  * Marks class as having finished creating properties.
  */
-UpdatingElement$1._finalized = true;
+UpdatingElement._finalized = true;
 /**
  * Memoized list of all class properties, including any superclass properties.
  */
-UpdatingElement$1._classProperties = new Map();
-UpdatingElement$1.properties = {};
+UpdatingElement._classProperties = new Map();
+UpdatingElement.properties = {};
 
 /**
  * @license
@@ -3214,7 +3224,7 @@ UpdatingElement$1.properties = {};
  * subject to an additional IP rights grant found at
  * http://polymer.github.io/PATENTS.txt
  */
-class LitElement$1 extends UpdatingElement$1 {
+class LitElement extends UpdatingElement {
     /**
      * Updates the element. This method reflects property values to attributes
      * and calls `render` to render DOM via lit-html. Setting properties inside
@@ -3243,7 +3253,7 @@ class LitElement$1 extends UpdatingElement$1 {
  * @param {Element|DocumentFragment} Node into which to render.
  * @param {String} Element name.
  */
-LitElement$1.render = render$1;
+LitElement.render = render;
 
 window.initMap = function () { window.dispatchEvent(new CustomEvent('google-map-ready')); }; // eslint-disable-line no-unused-vars
 
@@ -3254,8 +3264,8 @@ window.initMap = function () { window.dispatchEvent(new CustomEvent('google-map-
  * @customElement
  * @demo demo/index.html
  */
-class GoogleMapsLimited extends LitElement$1 {
-
+class GoogleMapsLimited extends LitElement {
+  
   static get properties() {
     return {
       apiKey: {type: String},
@@ -3267,7 +3277,7 @@ class GoogleMapsLimited extends LitElement$1 {
       selectedIcon: {type: String}
     };
   }
-
+  
   render() {
     return html`
       <style>
@@ -3286,7 +3296,7 @@ class GoogleMapsLimited extends LitElement$1 {
   constructor() {
     super();
     // _mapScriptTag sets up and the google maps loader script tag - we inject it here
-    // and after it loads it will fire the google-map-ready event
+    // and after it loads it will fire the google-map-ready event  
     window.addEventListener('google-map-ready', () => {
       this._mapRef = new google.maps.Map(this.shadowRoot.querySelector('#map'), {
         center: { lat: 40, lng: -112 },
@@ -3325,7 +3335,7 @@ class GoogleMapsLimited extends LitElement$1 {
     this._putMarkersOnMap(markers);
     this._markers = markers;
   }
-
+  
   get markers() {
     return this._markers;
   }
