@@ -1,5 +1,5 @@
 import json
-from django.http.response import HttpResponse, HttpResponseBadRequest
+from django.http.response import HttpResponse, HttpResponseBadRequest, JsonResponse
 from django.views.generic.base import TemplateView
 from geopy.geocoders import Nominatim
 
@@ -51,9 +51,7 @@ class ReviewCreateView(TemplateView):
         return context
 
     def post(self, request):
-        print(request.body)
-        self.review = ReviewForm(json.loads(request.body))
-        print(self.review)
+        self.review = ReviewForm(request.POST)
         if self.review.is_valid():
             self.landlord = self.review
             self.rental = self.review
@@ -61,5 +59,5 @@ class ReviewCreateView(TemplateView):
             self.review.tenent = self.request.user.tenent
             self.review.save()
             return HttpResponse()
-        print(self.review.errors)
-        return HttpResponseBadRequest()
+        print(self.review.errors.as_json())
+        return JsonResponse(data=self.review.errors, safe=False, status=400)
