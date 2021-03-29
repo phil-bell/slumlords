@@ -1,2 +1,2 @@
-import "./components/django-form-component/django-form/django-form.js";
+import "django-form-component";
 import "./components/map/slum-map.js";

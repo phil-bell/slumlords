@@ -2691,6 +2691,9 @@ class DjangoForm extends LitElement$1 {
         type: String,
         attribute: "success-message",
       },
+      success: {
+        type: Boolean,
+      },
     };
   }
 
@@ -2704,11 +2707,9 @@ class DjangoForm extends LitElement$1 {
 
   get form() {
     this.inputs = this.querySelectorAll("input, textarea, select");
-    let form = new FormData();
-    [...this.inputs].forEach((input) => {
-      form.append(input.name, input.value);
-    });
-    return form;
+    let form = new Object();
+    [...this.inputs].forEach((input) => (form[input.name] = input.value));
+    return JSON.stringify(form);
   }
 
   errorMessage(message) {
@@ -2719,7 +2720,9 @@ class DjangoForm extends LitElement$1 {
   }
 
   clearErrors() {
-    const errors = document.querySelectorAll(".django-form__field-error");
+    const errors = document.querySelectorAll(
+      '.django-form__field-error, [part="django-form__fallback-error"]'
+    );
     if (errors) {
       errors.forEach((element) => element.remove());
     }
@@ -2733,36 +2736,29 @@ class DjangoForm extends LitElement$1 {
         return;
       }
       this.shadowRoot
-        .querySelector(".django-form__fallback-errors")
+        .querySelector('[part="django-form__fallback-error"]')
         .appendChild(this.errorMessage(error));
     });
   }
 
   async sendForm() {
     this.clearErrors();
-    await fetch(this.action, {
+    let res = await fetch(this.action, {
       method: this.method,
       headers: {
-        "Content-Type":
-          "multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW",
+        "Content-Type": "application/json",
         "X-CSRFToken": js_cookie.get("csrftoken"),
       },
       body: this.form,
-    })
-      .then(async (response) => {
-        if (!response.ok) {
-          const res_errors = await response.json();
-          this.renderErrors(res_errors);
-          throw Error;
-        }
-        return response.json();
-      })
-      .then((data) => {
-        this.success = true;
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    }).then(async (response) => {
+      if (response.status !== 200) {
+        const res_errors = await response.json();
+        this.renderErrors(res_errors);
+        return;
+      }
+      this.success = true;
+    });
+    return res;
   }
 
   async handleSubmit(event) {
@@ -2772,15 +2768,15 @@ class DjangoForm extends LitElement$1 {
 
   render() {
     return html`
-      <form class="django-form" @submit=${this.handleSubmit}>
+      <form part="django-form" @submit=${this.handleSubmit}>
         <slot></slot>
-        <button class="django-form__submit-button" type="submit">
+        <button part="django-form__submit-button" type="submit">
           ${this.button}
         </button>
-        <p ?hidden="${!this.success}" class="django-form__success-message">
+        <p ?hidden="${!this.success}" part="django-form__success-message">
           ${this.successMessage}
         </p>
-        <div class="django-form__fallback-errors"></div>
+        <div part="django-form__fallback-error"></div>
       </form>
     `;
   }
