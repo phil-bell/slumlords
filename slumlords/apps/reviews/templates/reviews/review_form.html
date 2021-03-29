@@ -1,0 +1,8 @@
+{% extends 'reviews/base.html' %}
+{% block content %}
+{% csrf_token %}
+    <django-form action="" method="post" button="Save">
+        {{ review_form.media }}
+        {{ review_form.as_p }}
+    </django-form>
+{% endblock content %}

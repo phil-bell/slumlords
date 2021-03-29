@@ -7,14 +7,6 @@ from address.models import AddressField
 
 class Property(models.Model):
     address = AddressField(on_delete=models.CASCADE)
-    latitude = models.FloatField(
-        null=True,
-        blank=True,
-    )
-    longitude = models.FloatField(
-        null=True,
-        blank=True,
-    )
     landlord = models.ForeignKey(
         "Landlord",
         related_name="properties",
@@ -31,6 +23,7 @@ class Property(models.Model):
 class Landlord(models.Model):
     first_name = models.CharField(max_length=200)
     last_name = models.CharField(max_length=200)
+    postcode = models.CharField(max_length=200, null=True, blank=True)
     rating = models.PositiveIntegerField(
         null=True,
         blank=True,
@@ -77,6 +70,7 @@ class Review(models.Model):
     )
     submitted_at = models.TimeField(
         null=True,
+        auto_now_add=True,
         blank=True,
     )
     rental = models.ForeignKey(
@@ -86,10 +80,19 @@ class Review(models.Model):
         blank=True,
         on_delete=models.SET_NULL,
     )
+    description = models.TextField(
+        null=True,
+        blank=True,
+    )
+    tenent = models.ForeignKey(
+        "Tenant", null=True, blank=True, on_delete=models.SET_NULL
+    )
 
 
 class Tenant(models.Model):
-    user = models.OneToOneField(User, null=True, blank=True, on_delete=models.SET_NULL)
+    user = models.OneToOneField(
+        User, related_name="tenent", null=True, blank=True, on_delete=models.SET_NULL
+    )
 
     @property
     def name(self):

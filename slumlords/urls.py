@@ -15,6 +15,7 @@ Including another URLconf
 """
 from slumlords.apps.home.views import HomeView
 from slumlords.apps.map.views import MapView
+from slumlords.apps.reviews.views import ReviewCreateView
 from django.contrib import admin
 from django.urls import path
 
@@ -23,4 +24,5 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("", HomeView.as_view(), name="home"),
     path("map/", MapView.as_view(), name="map"),
+    path("review/create", ReviewCreateView.as_view(), name="review-create")
 ]
