@@ -7,14 +7,6 @@ from address.models import AddressField
 
 class Property(models.Model):
     address = AddressField(on_delete=models.CASCADE)
-    latitude = models.FloatField(
-        null=True,
-        blank=True,
-    )
-    longitude = models.FloatField(
-        null=True,
-        blank=True,
-    )
     landlord = models.ForeignKey(
         "Landlord",
         related_name="properties",
