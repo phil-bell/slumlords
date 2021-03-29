@@ -3,7 +3,7 @@
   "dependencies": {
     "@rollup/plugin-commonjs": "^17.1.0",
     "concurrently": "^6.0.0",
-    "django-form-component": "^1.0.6",
+    "django-form-component": "^1.1.2",
     "google-maps-limited": "^1.0.0",
     "js-cookie": "^2.2.1",
     "lit-element": "^2.4.0",
