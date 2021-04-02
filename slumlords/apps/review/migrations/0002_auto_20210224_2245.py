@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('reviews', '0001_initial'),
+        ("review", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='review',
-            name='submitted_at',
+            model_name="review",
+            name="submitted_at",
             field=models.TimeField(auto_now_add=True, null=True),
         ),
     ]

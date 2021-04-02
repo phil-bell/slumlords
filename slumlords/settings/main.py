@@ -39,9 +39,11 @@ INSTALLED_APPS = [
     "slumlords.apps.home",
     "slumlords.apps.map",
     "slumlords.apps.reading",
-    "slumlords.apps.reviews",
+    "slumlords.apps.review",
     "slumlords.apps.support",
     "slumlords.apps.wall_of_shame",
+    "slumlords.apps.shared",
+    "slumlords.apps.account",
 ]
 
 MIDDLEWARE = [

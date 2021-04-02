@@ -1,0 +1,8 @@
+{% extends 'account/base.html' %}
+<section class="login-form">
+    <form class="login-form__form" method="post" action="">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="login">
+    </form>
+</section>

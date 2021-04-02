@@ -7,8 +7,9 @@ from geopy.geocoders import Nominatim
 from .forms import ReviewForm
 from .models import Landlord, Property
 
+
 class ReviewCreateView(TemplateView):
-    template_name = "reviews/review_form.html"
+    template_name = "review/review_form.html"
 
     def __init__(self, **kwargs) -> None:
         self._rental = None

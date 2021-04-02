@@ -75,7 +75,7 @@ class Review(models.Model):
     )
     rental = models.ForeignKey(
         "Property",
-        related_name="reviews",
+        related_name="review",
         null=True,
         blank=True,
         on_delete=models.SET_NULL,

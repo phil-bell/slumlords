@@ -3,16 +3,26 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Reviews</title>
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
       href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200;300;400;500;600;700;800;900&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="{% static 'css/reviews.css' %}" />
     <script type="module" src="{% static 'js/bundle.js' %}"></script>
+    {% block title %}
+    {% endblock title %}
+    {% block links %}
+    {% endblock links %}
+    {% block scripts %}
+    {% endblock scripts %}
   </head>
   <body>
-    {% block content %} {% endblock content %}
+    <section>
+            <a href="{% url 'map:view' %}">map</a>
+            <a href="{% url 'review:create' %}">create review</a>
+            <a href="{% url 'account:login' %}">login</a>
+    </section>
+    {% block base_content %}
+    {% endblock base_content %}
   </body>
 </html>

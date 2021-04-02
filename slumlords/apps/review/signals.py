@@ -6,7 +6,7 @@ from .models import Review, Property
 
 @receiver(pre_save, sender=Review)
 def update_property_rating(sender, instance, **kwargs):
-    instance.rental.rating = instance.rental.reviews.objects.aggregate(Avg("rating"))
+    instance.rental.rating = instance.rental.review.objects.aggregate(Avg("rating"))
     instance.rental.save()
 
 
