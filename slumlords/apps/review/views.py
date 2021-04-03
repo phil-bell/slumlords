@@ -1,14 +1,14 @@
 import json
-from django.http.response import HttpResponse, HttpResponseBadRequest, JsonResponse
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http.response import HttpResponse, JsonResponse
 from django.views.generic.base import TemplateView
-from geopy.geocoders import Nominatim
 
 
 from .forms import ReviewForm
 from .models import Landlord, Property
 
 
-class ReviewCreateView(TemplateView):
+class ReviewCreateView(LoginRequiredMixin, TemplateView):
     template_name = "review/review_form.html"
 
     def __init__(self, **kwargs) -> None:
@@ -53,7 +53,7 @@ class ReviewCreateView(TemplateView):
             self.landlord = self.review
             self.rental = self.review
             self.review.rental = self.rental
-            # self.review.tenent = self.request.user.tenent
+            self.review.tenent = self.request.user.tenant
             self.review.save()
             return HttpResponse()
         return JsonResponse(data=self.review.errors, safe=False, status=400)

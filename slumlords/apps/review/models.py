@@ -84,14 +84,14 @@ class Review(models.Model):
         null=True,
         blank=True,
     )
-    tenent = models.ForeignKey(
+    tenant = models.ForeignKey(
         "Tenant", null=True, blank=True, on_delete=models.SET_NULL
     )
 
 
 class Tenant(models.Model):
     user = models.OneToOneField(
-        User, related_name="tenent", null=True, blank=True, on_delete=models.SET_NULL
+        User, related_name="tenant", null=True, blank=True, on_delete=models.SET_NULL
     )
 
     @property
