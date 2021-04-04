@@ -12,16 +12,18 @@
     {% block title %}
     {% endblock title %}
     {% block links %}
-    {% endblock links %}
-    {% block scripts %}
+    {% endblock links %} {% block scripts %}
     {% endblock scripts %}
   </head>
   <body>
     <section>
-      <a href="{% url 'home' %}">home</a>
-      <a href="{% url 'map:view' %}">map</a>
-      <a href="{% url 'review:create' %}">create review</a>
-      {% include 'shared/includes/login_panel.html' %}
+      <ul>
+        <li><a href="{% url 'home' %}">home</a></li>
+        <li><a href="{% url 'map:view' %}">map</a></li>
+        <li><a href="{% url 'review:create' %}">create review</a></li>
+        <li><a href="{% url 'review:list' %}">list review</a></li>
+        <li>{% include 'shared/includes/login_panel.html' %}</li>
+      </ul>
     </section>
     {% block base_content %}
     {% endblock base_content %}

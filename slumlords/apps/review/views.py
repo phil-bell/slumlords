@@ -5,11 +5,11 @@ from django.views.generic.base import TemplateView
 
 
 from .forms import ReviewForm
-from .models import Landlord, Property
+from .models import Landlord, Property, Review
 
 
 class ReviewCreateView(LoginRequiredMixin, TemplateView):
-    template_name = "review/review_form.html"
+    template_name = "review/create.html"
 
     def __init__(self, **kwargs) -> None:
         self._rental = None
@@ -48,12 +48,24 @@ class ReviewCreateView(LoginRequiredMixin, TemplateView):
         return context
 
     def post(self, request):
-        self.review = ReviewForm(json.loads(request.body.decode("utf-8")))
-        if self.review.is_valid():
-            self.landlord = self.review
-            self.rental = self.review
-            self.review.rental = self.rental
-            self.review.tenent = self.request.user.tenant
+        form = ReviewForm(json.loads(request.body.decode("utf-8")))
+        if form.is_valid():
+            self.review = form.save()
+            self.landlord = form
+            self.rental = form
+            self.review .rental = self.rental
+            self.review .tenant = request.user.tenant
             self.review.save()
             return HttpResponse()
         return JsonResponse(data=self.review.errors, safe=False, status=400)
+
+
+class ReviewListView(LoginRequiredMixin, TemplateView):
+    template_name = "review/list.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context[
+            "reviews"
+        ] = Review.objects.filter(tenant__user=self.request.user)
+        return context

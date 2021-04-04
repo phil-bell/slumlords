@@ -1,0 +1,12 @@
+{% extends 'review/base.html' %}
+{% block content %}
+  {% for review in reviews %}
+    <div>
+      <p>id: {{ review.pk }}</p>
+      <p>rating: {{ review.rating }}</p>
+      <p>tenant: {{ review.tenant }}</p>
+      <p>rental: {{ review.rental }}</p>
+    </div>
+    <hr>
+  {% endfor %}
+{% endblock content %}
