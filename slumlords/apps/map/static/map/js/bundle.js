@@ -1,3 +1,382 @@
+function _typeof(obj) {
+  "@babel/helpers - typeof";
+
+  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+    _typeof = function (obj) {
+      return typeof obj;
+    };
+  } else {
+    _typeof = function (obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    };
+  }
+
+  return _typeof(obj);
+}
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
+  try {
+    var info = gen[key](arg);
+    var value = info.value;
+  } catch (error) {
+    reject(error);
+    return;
+  }
+
+  if (info.done) {
+    resolve(value);
+  } else {
+    Promise.resolve(value).then(_next, _throw);
+  }
+}
+
+function _asyncToGenerator(fn) {
+  return function () {
+    var self = this,
+        args = arguments;
+    return new Promise(function (resolve, reject) {
+      var gen = fn.apply(self, args);
+
+      function _next(value) {
+        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
+      }
+
+      function _throw(err) {
+        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
+      }
+
+      _next(undefined);
+    });
+  };
+}
+
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+function _defineProperties(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
+
+function _createClass(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties(Constructor, staticProps);
+  return Constructor;
+}
+
+function _inherits(subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function");
+  }
+
+  subClass.prototype = Object.create(superClass && superClass.prototype, {
+    constructor: {
+      value: subClass,
+      writable: true,
+      configurable: true
+    }
+  });
+  if (superClass) _setPrototypeOf(subClass, superClass);
+}
+
+function _getPrototypeOf(o) {
+  _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+    return o.__proto__ || Object.getPrototypeOf(o);
+  };
+  return _getPrototypeOf(o);
+}
+
+function _setPrototypeOf(o, p) {
+  _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+    o.__proto__ = p;
+    return o;
+  };
+
+  return _setPrototypeOf(o, p);
+}
+
+function _isNativeReflectConstruct() {
+  if (typeof Reflect === "undefined" || !Reflect.construct) return false;
+  if (Reflect.construct.sham) return false;
+  if (typeof Proxy === "function") return true;
+
+  try {
+    Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
+function _construct(Parent, args, Class) {
+  if (_isNativeReflectConstruct()) {
+    _construct = Reflect.construct;
+  } else {
+    _construct = function _construct(Parent, args, Class) {
+      var a = [null];
+      a.push.apply(a, args);
+      var Constructor = Function.bind.apply(Parent, a);
+      var instance = new Constructor();
+      if (Class) _setPrototypeOf(instance, Class.prototype);
+      return instance;
+    };
+  }
+
+  return _construct.apply(null, arguments);
+}
+
+function _isNativeFunction(fn) {
+  return Function.toString.call(fn).indexOf("[native code]") !== -1;
+}
+
+function _wrapNativeSuper(Class) {
+  var _cache = typeof Map === "function" ? new Map() : undefined;
+
+  _wrapNativeSuper = function _wrapNativeSuper(Class) {
+    if (Class === null || !_isNativeFunction(Class)) return Class;
+
+    if (typeof Class !== "function") {
+      throw new TypeError("Super expression must either be null or a function");
+    }
+
+    if (typeof _cache !== "undefined") {
+      if (_cache.has(Class)) return _cache.get(Class);
+
+      _cache.set(Class, Wrapper);
+    }
+
+    function Wrapper() {
+      return _construct(Class, arguments, _getPrototypeOf(this).constructor);
+    }
+
+    Wrapper.prototype = Object.create(Class.prototype, {
+      constructor: {
+        value: Wrapper,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }
+    });
+    return _setPrototypeOf(Wrapper, Class);
+  };
+
+  return _wrapNativeSuper(Class);
+}
+
+function _assertThisInitialized(self) {
+  if (self === void 0) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+
+  return self;
+}
+
+function _possibleConstructorReturn(self, call) {
+  if (call && (typeof call === "object" || typeof call === "function")) {
+    return call;
+  }
+
+  return _assertThisInitialized(self);
+}
+
+function _createSuper(Derived) {
+  var hasNativeReflectConstruct = _isNativeReflectConstruct();
+
+  return function _createSuperInternal() {
+    var Super = _getPrototypeOf(Derived),
+        result;
+
+    if (hasNativeReflectConstruct) {
+      var NewTarget = _getPrototypeOf(this).constructor;
+
+      result = Reflect.construct(Super, arguments, NewTarget);
+    } else {
+      result = Super.apply(this, arguments);
+    }
+
+    return _possibleConstructorReturn(this, result);
+  };
+}
+
+function _superPropBase(object, property) {
+  while (!Object.prototype.hasOwnProperty.call(object, property)) {
+    object = _getPrototypeOf(object);
+    if (object === null) break;
+  }
+
+  return object;
+}
+
+function _get(target, property, receiver) {
+  if (typeof Reflect !== "undefined" && Reflect.get) {
+    _get = Reflect.get;
+  } else {
+    _get = function _get(target, property, receiver) {
+      var base = _superPropBase(target, property);
+
+      if (!base) return;
+      var desc = Object.getOwnPropertyDescriptor(base, property);
+
+      if (desc.get) {
+        return desc.get.call(receiver);
+      }
+
+      return desc.value;
+    };
+  }
+
+  return _get(target, property, receiver || target);
+}
+
+function _taggedTemplateLiteral(strings, raw) {
+  if (!raw) {
+    raw = strings.slice(0);
+  }
+
+  return Object.freeze(Object.defineProperties(strings, {
+    raw: {
+      value: Object.freeze(raw)
+    }
+  }));
+}
+
+function _slicedToArray(arr, i) {
+  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
+}
+
+function _toConsumableArray(arr) {
+  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
+}
+
+function _arrayWithoutHoles(arr) {
+  if (Array.isArray(arr)) return _arrayLikeToArray(arr);
+}
+
+function _arrayWithHoles(arr) {
+  if (Array.isArray(arr)) return arr;
+}
+
+function _iterableToArray(iter) {
+  if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);
+}
+
+function _iterableToArrayLimit(arr, i) {
+  if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return;
+  var _arr = [];
+  var _n = true;
+  var _d = false;
+  var _e = undefined;
+
+  try {
+    for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+      _arr.push(_s.value);
+
+      if (i && _arr.length === i) break;
+    }
+  } catch (err) {
+    _d = true;
+    _e = err;
+  } finally {
+    try {
+      if (!_n && _i["return"] != null) _i["return"]();
+    } finally {
+      if (_d) throw _e;
+    }
+  }
+
+  return _arr;
+}
+
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+}
+
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+
+  for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+
+  return arr2;
+}
+
+function _nonIterableSpread() {
+  throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+
+function _nonIterableRest() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+
+function _createForOfIteratorHelper(o, allowArrayLike) {
+  var it;
+
+  if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) {
+    if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") {
+      if (it) o = it;
+      var i = 0;
+
+      var F = function () {};
+
+      return {
+        s: F,
+        n: function () {
+          if (i >= o.length) return {
+            done: true
+          };
+          return {
+            done: false,
+            value: o[i++]
+          };
+        },
+        e: function (e) {
+          throw e;
+        },
+        f: F
+      };
+    }
+
+    throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+  }
+
+  var normalCompletion = true,
+      didErr = false,
+      err;
+  return {
+    s: function () {
+      it = o[Symbol.iterator]();
+    },
+    n: function () {
+      var step = it.next();
+      normalCompletion = step.done;
+      return step;
+    },
+    e: function (e) {
+      didErr = true;
+      err = e;
+    },
+    f: function () {
+      try {
+        if (!normalCompletion && it.return != null) it.return();
+      } finally {
+        if (didErr) throw err;
+      }
+    }
+  };
+}
+
 /**
  * @license
  * Copyright (c) 2017 The Polymer Project Authors. All rights reserved.
@@ -11,8 +390,8 @@
  * subject to an additional IP rights grant found at
  * http://polymer.github.io/PATENTS.txt
  */
-const directives = new WeakMap();
-const isDirective = o => {
+var directives = new WeakMap();
+var isDirective = function isDirective(o) {
   return typeof o === 'function' && directives.has(o);
 };
 
@@ -33,15 +412,17 @@ const isDirective = o => {
 /**
  * True if the custom elements polyfill is in use.
  */
-const isCEPolyfill = typeof window !== 'undefined' && window.customElements != null && window.customElements.polyfillWrapFlushCallback !== undefined;
+var isCEPolyfill = typeof window !== 'undefined' && window.customElements != null && window.customElements.polyfillWrapFlushCallback !== undefined;
 /**
  * Removes nodes, starting from `start` (inclusive) to `end` (exclusive), from
  * `container`.
  */
 
-const removeNodes = (container, start, end = null) => {
+var removeNodes = function removeNodes(container, start) {
+  var end = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+
   while (start !== end) {
-    const n = start.nextSibling;
+    var n = start.nextSibling;
     container.removeChild(start);
     start = n;
   }
@@ -65,12 +446,12 @@ const removeNodes = (container, start, end = null) => {
  * A sentinel value that signals that a value was handled by a directive and
  * should not be written to the DOM.
  */
-const noChange = {};
+var noChange = {};
 /**
  * A sentinel value that signals a NodePart to fully clear its content.
  */
 
-const nothing = {};
+var nothing = {};
 
 /**
  * @license
@@ -90,220 +471,221 @@ const nothing = {};
  * An expression marker with embedded unique key to avoid collision with
  * possible text in templates.
  */
-const marker = `{{lit-${String(Math.random()).slice(2)}}}`;
+var marker = "{{lit-".concat(String(Math.random()).slice(2), "}}");
 /**
  * An expression marker used text-positions, multi-binding attributes, and
  * attributes with markup-like text values.
  */
 
-const nodeMarker = `<!--${marker}-->`;
-const markerRegex = new RegExp(`${marker}|${nodeMarker}`);
+var nodeMarker = "<!--".concat(marker, "-->");
+var markerRegex = new RegExp("".concat(marker, "|").concat(nodeMarker));
 /**
  * Suffix appended to all bound attribute names.
  */
 
-const boundAttributeSuffix = '$lit$';
+var boundAttributeSuffix = '$lit$';
 /**
  * An updatable Template that tracks the location of dynamic parts.
  */
 
-class Template {
-  constructor(result, element) {
-    this.parts = [];
-    this.element = element;
-    const nodesToRemove = [];
-    const stack = []; // Edge needs all 4 parameters present; IE11 needs 3rd parameter to be null
+var Template = function Template(result, element) {
+  _classCallCheck(this, Template);
 
-    const walker = document.createTreeWalker(element.content, 133
-    /* NodeFilter.SHOW_{ELEMENT|COMMENT|TEXT} */
-    , null, false); // Keeps track of the last index associated with a part. We try to delete
-    // unnecessary nodes, but we never want to associate two different parts
-    // to the same index. They must have a constant node between.
+  this.parts = [];
+  this.element = element;
+  var nodesToRemove = [];
+  var stack = []; // Edge needs all 4 parameters present; IE11 needs 3rd parameter to be null
 
-    let lastPartIndex = 0;
-    let index = -1;
-    let partIndex = 0;
-    const {
-      strings,
-      values: {
-        length
-      }
-    } = result;
+  var walker = document.createTreeWalker(element.content, 133
+  /* NodeFilter.SHOW_{ELEMENT|COMMENT|TEXT} */
+  , null, false); // Keeps track of the last index associated with a part. We try to delete
+  // unnecessary nodes, but we never want to associate two different parts
+  // to the same index. They must have a constant node between.
 
-    while (partIndex < length) {
-      const node = walker.nextNode();
+  var lastPartIndex = 0;
+  var index = -1;
+  var partIndex = 0;
+  var strings = result.strings,
+      length = result.values.length;
 
-      if (node === null) {
-        // We've exhausted the content inside a nested template element.
-        // Because we still have parts (the outer for-loop), we know:
-        // - There is a template in the stack
-        // - The walker will find a nextNode outside the template
-        walker.currentNode = stack.pop();
-        continue;
-      }
+  while (partIndex < length) {
+    var node = walker.nextNode();
 
-      index++;
+    if (node === null) {
+      // We've exhausted the content inside a nested template element.
+      // Because we still have parts (the outer for-loop), we know:
+      // - There is a template in the stack
+      // - The walker will find a nextNode outside the template
+      walker.currentNode = stack.pop();
+      continue;
+    }
 
-      if (node.nodeType === 1
-      /* Node.ELEMENT_NODE */
-      ) {
-          if (node.hasAttributes()) {
-            const attributes = node.attributes;
-            const {
-              length
-            } = attributes; // Per
-            // https://developer.mozilla.org/en-US/docs/Web/API/NamedNodeMap,
-            // attributes are not guaranteed to be returned in document order.
-            // In particular, Edge/IE can return them out of order, so we cannot
-            // assume a correspondence between part index and attribute index.
+    index++;
 
-            let count = 0;
+    if (node.nodeType === 1
+    /* Node.ELEMENT_NODE */
+    ) {
+        if (node.hasAttributes()) {
+          var attributes = node.attributes;
+          var _length = attributes.length; // Per
+          // https://developer.mozilla.org/en-US/docs/Web/API/NamedNodeMap,
+          // attributes are not guaranteed to be returned in document order.
+          // In particular, Edge/IE can return them out of order, so we cannot
+          // assume a correspondence between part index and attribute index.
 
-            for (let i = 0; i < length; i++) {
-              if (endsWith(attributes[i].name, boundAttributeSuffix)) {
-                count++;
-              }
-            }
+          var count = 0;
 
-            while (count-- > 0) {
-              // Get the template literal section leading up to the first
-              // expression in this attribute
-              const stringForPart = strings[partIndex]; // Find the attribute name
-
-              const name = lastAttributeNameRegex.exec(stringForPart)[2]; // Find the corresponding attribute
-              // All bound attributes have had a suffix added in
-              // TemplateResult#getHTML to opt out of special attribute
-              // handling. To look up the attribute value we also need to add
-              // the suffix.
-
-              const attributeLookupName = name.toLowerCase() + boundAttributeSuffix;
-              const attributeValue = node.getAttribute(attributeLookupName);
-              node.removeAttribute(attributeLookupName);
-              const statics = attributeValue.split(markerRegex);
-              this.parts.push({
-                type: 'attribute',
-                index,
-                name,
-                strings: statics
-              });
-              partIndex += statics.length - 1;
+          for (var i = 0; i < _length; i++) {
+            if (endsWith(attributes[i].name, boundAttributeSuffix)) {
+              count++;
             }
           }
 
-          if (node.tagName === 'TEMPLATE') {
-            stack.push(node);
-            walker.currentNode = node.content;
-          }
-        } else if (node.nodeType === 3
-      /* Node.TEXT_NODE */
-      ) {
-          const data = node.data;
+          while (count-- > 0) {
+            // Get the template literal section leading up to the first
+            // expression in this attribute
+            var stringForPart = strings[partIndex]; // Find the attribute name
 
-          if (data.indexOf(marker) >= 0) {
-            const parent = node.parentNode;
-            const strings = data.split(markerRegex);
-            const lastIndex = strings.length - 1; // Generate a new text node for each literal section
-            // These nodes are also used as the markers for node parts
+            var name = lastAttributeNameRegex.exec(stringForPart)[2]; // Find the corresponding attribute
+            // All bound attributes have had a suffix added in
+            // TemplateResult#getHTML to opt out of special attribute
+            // handling. To look up the attribute value we also need to add
+            // the suffix.
 
-            for (let i = 0; i < lastIndex; i++) {
-              let insert;
-              let s = strings[i];
-
-              if (s === '') {
-                insert = createMarker();
-              } else {
-                const match = lastAttributeNameRegex.exec(s);
-
-                if (match !== null && endsWith(match[2], boundAttributeSuffix)) {
-                  s = s.slice(0, match.index) + match[1] + match[2].slice(0, -boundAttributeSuffix.length) + match[3];
-                }
-
-                insert = document.createTextNode(s);
-              }
-
-              parent.insertBefore(insert, node);
-              this.parts.push({
-                type: 'node',
-                index: ++index
-              });
-            } // If there's no text, we must insert a comment to mark our place.
-            // Else, we can trust it will stick around after cloning.
-
-
-            if (strings[lastIndex] === '') {
-              parent.insertBefore(createMarker(), node);
-              nodesToRemove.push(node);
-            } else {
-              node.data = strings[lastIndex];
-            } // We have a part for each match found
-
-
-            partIndex += lastIndex;
-          }
-        } else if (node.nodeType === 8
-      /* Node.COMMENT_NODE */
-      ) {
-          if (node.data === marker) {
-            const parent = node.parentNode; // Add a new marker node to be the startNode of the Part if any of
-            // the following are true:
-            //  * We don't have a previousSibling
-            //  * The previousSibling is already the start of a previous part
-
-            if (node.previousSibling === null || index === lastPartIndex) {
-              index++;
-              parent.insertBefore(createMarker(), node);
-            }
-
-            lastPartIndex = index;
+            var attributeLookupName = name.toLowerCase() + boundAttributeSuffix;
+            var attributeValue = node.getAttribute(attributeLookupName);
+            node.removeAttribute(attributeLookupName);
+            var statics = attributeValue.split(markerRegex);
             this.parts.push({
-              type: 'node',
-              index
-            }); // If we don't have a nextSibling, keep this node so we have an end.
-            // Else, we can remove it to save future costs.
-
-            if (node.nextSibling === null) {
-              node.data = '';
-            } else {
-              nodesToRemove.push(node);
-              index--;
-            }
-
-            partIndex++;
-          } else {
-            let i = -1;
-
-            while ((i = node.data.indexOf(marker, i + 1)) !== -1) {
-              // Comment node has a binding marker inside, make an inactive part
-              // The binding won't work, but subsequent bindings will
-              // TODO (justinfagnani): consider whether it's even worth it to
-              // make bindings in comments work
-              this.parts.push({
-                type: 'node',
-                index: -1
-              });
-              partIndex++;
-            }
+              type: 'attribute',
+              index: index,
+              name: name,
+              strings: statics
+            });
+            partIndex += statics.length - 1;
           }
         }
-    } // Remove text binding nodes after the walk to not disturb the TreeWalker
+
+        if (node.tagName === 'TEMPLATE') {
+          stack.push(node);
+          walker.currentNode = node.content;
+        }
+      } else if (node.nodeType === 3
+    /* Node.TEXT_NODE */
+    ) {
+        var data = node.data;
+
+        if (data.indexOf(marker) >= 0) {
+          var parent = node.parentNode;
+
+          var _strings = data.split(markerRegex);
+
+          var lastIndex = _strings.length - 1; // Generate a new text node for each literal section
+          // These nodes are also used as the markers for node parts
+
+          for (var _i = 0; _i < lastIndex; _i++) {
+            var insert = void 0;
+            var s = _strings[_i];
+
+            if (s === '') {
+              insert = createMarker();
+            } else {
+              var match = lastAttributeNameRegex.exec(s);
+
+              if (match !== null && endsWith(match[2], boundAttributeSuffix)) {
+                s = s.slice(0, match.index) + match[1] + match[2].slice(0, -boundAttributeSuffix.length) + match[3];
+              }
+
+              insert = document.createTextNode(s);
+            }
+
+            parent.insertBefore(insert, node);
+            this.parts.push({
+              type: 'node',
+              index: ++index
+            });
+          } // If there's no text, we must insert a comment to mark our place.
+          // Else, we can trust it will stick around after cloning.
 
 
-    for (const n of nodesToRemove) {
-      n.parentNode.removeChild(n);
-    }
+          if (_strings[lastIndex] === '') {
+            parent.insertBefore(createMarker(), node);
+            nodesToRemove.push(node);
+          } else {
+            node.data = _strings[lastIndex];
+          } // We have a part for each match found
+
+
+          partIndex += lastIndex;
+        }
+      } else if (node.nodeType === 8
+    /* Node.COMMENT_NODE */
+    ) {
+        if (node.data === marker) {
+          var _parent = node.parentNode; // Add a new marker node to be the startNode of the Part if any of
+          // the following are true:
+          //  * We don't have a previousSibling
+          //  * The previousSibling is already the start of a previous part
+
+          if (node.previousSibling === null || index === lastPartIndex) {
+            index++;
+
+            _parent.insertBefore(createMarker(), node);
+          }
+
+          lastPartIndex = index;
+          this.parts.push({
+            type: 'node',
+            index: index
+          }); // If we don't have a nextSibling, keep this node so we have an end.
+          // Else, we can remove it to save future costs.
+
+          if (node.nextSibling === null) {
+            node.data = '';
+          } else {
+            nodesToRemove.push(node);
+            index--;
+          }
+
+          partIndex++;
+        } else {
+          var _i2 = -1;
+
+          while ((_i2 = node.data.indexOf(marker, _i2 + 1)) !== -1) {
+            // Comment node has a binding marker inside, make an inactive part
+            // The binding won't work, but subsequent bindings will
+            // TODO (justinfagnani): consider whether it's even worth it to
+            // make bindings in comments work
+            this.parts.push({
+              type: 'node',
+              index: -1
+            });
+            partIndex++;
+          }
+        }
+      }
+  } // Remove text binding nodes after the walk to not disturb the TreeWalker
+
+
+  for (var _i3 = 0, _nodesToRemove = nodesToRemove; _i3 < _nodesToRemove.length; _i3++) {
+    var n = _nodesToRemove[_i3];
+    n.parentNode.removeChild(n);
   }
+};
 
-}
-
-const endsWith = (str, suffix) => {
-  const index = str.length - suffix.length;
+var endsWith = function endsWith(str, suffix) {
+  var index = str.length - suffix.length;
   return index >= 0 && str.slice(index) === suffix;
 };
 
-const isTemplatePartActive = part => part.index !== -1; // Allows `document.createComment('')` to be renamed for a
+var isTemplatePartActive = function isTemplatePartActive(part) {
+  return part.index !== -1;
+}; // Allows `document.createComment('')` to be renamed for a
 // small manual size-savings.
 
-const createMarker = () => document.createComment('');
+var createMarker = function createMarker() {
+  return document.createComment('');
+};
 /**
  * This regex extracts the attribute name preceding an attribute-position
  * expression. It does this by matching the syntax allowed for attributes
@@ -331,170 +713,176 @@ const createMarker = () => document.createComment('');
  *    * (') then any non-(')
  */
 
-const lastAttributeNameRegex = // eslint-disable-next-line no-control-regex
+var lastAttributeNameRegex = // eslint-disable-next-line no-control-regex
 /([ \x09\x0a\x0c\x0d])([^\0-\x1F\x7F-\x9F "'>=/]+)([ \x09\x0a\x0c\x0d]*=[ \x09\x0a\x0c\x0d]*(?:[^ \x09\x0a\x0c\x0d"'`<>=]*|"[^"]*|'[^']*))$/;
 
-/**
- * @license
- * Copyright (c) 2017 The Polymer Project Authors. All rights reserved.
- * This code may only be used under the BSD style license found at
- * http://polymer.github.io/LICENSE.txt
- * The complete set of authors may be found at
- * http://polymer.github.io/AUTHORS.txt
- * The complete set of contributors may be found at
- * http://polymer.github.io/CONTRIBUTORS.txt
- * Code distributed by Google as part of the polymer project is also
- * subject to an additional IP rights grant found at
- * http://polymer.github.io/PATENTS.txt
- */
 /**
  * An instance of a `Template` that can be attached to the DOM and updated
  * with new values.
  */
 
-class TemplateInstance {
-  constructor(template, processor, options) {
+var TemplateInstance = /*#__PURE__*/function () {
+  function TemplateInstance(template, processor, options) {
+    _classCallCheck(this, TemplateInstance);
+
     this.__parts = [];
     this.template = template;
     this.processor = processor;
     this.options = options;
   }
 
-  update(values) {
-    let i = 0;
+  _createClass(TemplateInstance, [{
+    key: "update",
+    value: function update(values) {
+      var i = 0;
 
-    for (const part of this.__parts) {
-      if (part !== undefined) {
-        part.setValue(values[i]);
+      var _iterator = _createForOfIteratorHelper(this.__parts),
+          _step;
+
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var part = _step.value;
+
+          if (part !== undefined) {
+            part.setValue(values[i]);
+          }
+
+          i++;
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
       }
 
-      i++;
-    }
+      var _iterator2 = _createForOfIteratorHelper(this.__parts),
+          _step2;
 
-    for (const part of this.__parts) {
-      if (part !== undefined) {
-        part.commit();
+      try {
+        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+          var _part = _step2.value;
+
+          if (_part !== undefined) {
+            _part.commit();
+          }
+        }
+      } catch (err) {
+        _iterator2.e(err);
+      } finally {
+        _iterator2.f();
       }
     }
-  }
+  }, {
+    key: "_clone",
+    value: function _clone() {
+      // There are a number of steps in the lifecycle of a template instance's
+      // DOM fragment:
+      //  1. Clone - create the instance fragment
+      //  2. Adopt - adopt into the main document
+      //  3. Process - find part markers and create parts
+      //  4. Upgrade - upgrade custom elements
+      //  5. Update - set node, attribute, property, etc., values
+      //  6. Connect - connect to the document. Optional and outside of this
+      //     method.
+      //
+      // We have a few constraints on the ordering of these steps:
+      //  * We need to upgrade before updating, so that property values will pass
+      //    through any property setters.
+      //  * We would like to process before upgrading so that we're sure that the
+      //    cloned fragment is inert and not disturbed by self-modifying DOM.
+      //  * We want custom elements to upgrade even in disconnected fragments.
+      //
+      // Given these constraints, with full custom elements support we would
+      // prefer the order: Clone, Process, Adopt, Upgrade, Update, Connect
+      //
+      // But Safari does not implement CustomElementRegistry#upgrade, so we
+      // can not implement that order and still have upgrade-before-update and
+      // upgrade disconnected fragments. So we instead sacrifice the
+      // process-before-upgrade constraint, since in Custom Elements v1 elements
+      // must not modify their light DOM in the constructor. We still have issues
+      // when co-existing with CEv0 elements like Polymer 1, and with polyfills
+      // that don't strictly adhere to the no-modification rule because shadow
+      // DOM, which may be created in the constructor, is emulated by being placed
+      // in the light DOM.
+      //
+      // The resulting order is on native is: Clone, Adopt, Upgrade, Process,
+      // Update, Connect. document.importNode() performs Clone, Adopt, and Upgrade
+      // in one step.
+      //
+      // The Custom Elements v1 polyfill supports upgrade(), so the order when
+      // polyfilled is the more ideal: Clone, Process, Adopt, Upgrade, Update,
+      // Connect.
+      var fragment = isCEPolyfill ? this.template.element.content.cloneNode(true) : document.importNode(this.template.element.content, true);
+      var stack = [];
+      var parts = this.template.parts; // Edge needs all 4 parameters present; IE11 needs 3rd parameter to be null
 
-  _clone() {
-    // There are a number of steps in the lifecycle of a template instance's
-    // DOM fragment:
-    //  1. Clone - create the instance fragment
-    //  2. Adopt - adopt into the main document
-    //  3. Process - find part markers and create parts
-    //  4. Upgrade - upgrade custom elements
-    //  5. Update - set node, attribute, property, etc., values
-    //  6. Connect - connect to the document. Optional and outside of this
-    //     method.
-    //
-    // We have a few constraints on the ordering of these steps:
-    //  * We need to upgrade before updating, so that property values will pass
-    //    through any property setters.
-    //  * We would like to process before upgrading so that we're sure that the
-    //    cloned fragment is inert and not disturbed by self-modifying DOM.
-    //  * We want custom elements to upgrade even in disconnected fragments.
-    //
-    // Given these constraints, with full custom elements support we would
-    // prefer the order: Clone, Process, Adopt, Upgrade, Update, Connect
-    //
-    // But Safari does not implement CustomElementRegistry#upgrade, so we
-    // can not implement that order and still have upgrade-before-update and
-    // upgrade disconnected fragments. So we instead sacrifice the
-    // process-before-upgrade constraint, since in Custom Elements v1 elements
-    // must not modify their light DOM in the constructor. We still have issues
-    // when co-existing with CEv0 elements like Polymer 1, and with polyfills
-    // that don't strictly adhere to the no-modification rule because shadow
-    // DOM, which may be created in the constructor, is emulated by being placed
-    // in the light DOM.
-    //
-    // The resulting order is on native is: Clone, Adopt, Upgrade, Process,
-    // Update, Connect. document.importNode() performs Clone, Adopt, and Upgrade
-    // in one step.
-    //
-    // The Custom Elements v1 polyfill supports upgrade(), so the order when
-    // polyfilled is the more ideal: Clone, Process, Adopt, Upgrade, Update,
-    // Connect.
-    const fragment = isCEPolyfill ? this.template.element.content.cloneNode(true) : document.importNode(this.template.element.content, true);
-    const stack = [];
-    const parts = this.template.parts; // Edge needs all 4 parameters present; IE11 needs 3rd parameter to be null
+      var walker = document.createTreeWalker(fragment, 133
+      /* NodeFilter.SHOW_{ELEMENT|COMMENT|TEXT} */
+      , null, false);
+      var partIndex = 0;
+      var nodeIndex = 0;
+      var part;
+      var node = walker.nextNode(); // Loop through all the nodes and parts of a template
 
-    const walker = document.createTreeWalker(fragment, 133
-    /* NodeFilter.SHOW_{ELEMENT|COMMENT|TEXT} */
-    , null, false);
-    let partIndex = 0;
-    let nodeIndex = 0;
-    let part;
-    let node = walker.nextNode(); // Loop through all the nodes and parts of a template
+      while (partIndex < parts.length) {
+        part = parts[partIndex];
 
-    while (partIndex < parts.length) {
-      part = parts[partIndex];
+        if (!isTemplatePartActive(part)) {
+          this.__parts.push(undefined);
 
-      if (!isTemplatePartActive(part)) {
-        this.__parts.push(undefined);
+          partIndex++;
+          continue;
+        } // Progress the tree walker until we find our next part's node.
+        // Note that multiple parts may share the same node (attribute parts
+        // on a single element), so this loop may not run at all.
+
+
+        while (nodeIndex < part.index) {
+          nodeIndex++;
+
+          if (node.nodeName === 'TEMPLATE') {
+            stack.push(node);
+            walker.currentNode = node.content;
+          }
+
+          if ((node = walker.nextNode()) === null) {
+            // We've exhausted the content inside a nested template element.
+            // Because we still have parts (the outer for-loop), we know:
+            // - There is a template in the stack
+            // - The walker will find a nextNode outside the template
+            walker.currentNode = stack.pop();
+            node = walker.nextNode();
+          }
+        } // We've arrived at our part's node.
+
+
+        if (part.type === 'node') {
+          var _part2 = this.processor.handleTextExpression(this.options);
+
+          _part2.insertAfterNode(node.previousSibling);
+
+          this.__parts.push(_part2);
+        } else {
+          var _this$__parts;
+
+          (_this$__parts = this.__parts).push.apply(_this$__parts, _toConsumableArray(this.processor.handleAttributeExpressions(node, part.name, part.strings, this.options)));
+        }
 
         partIndex++;
-        continue;
-      } // Progress the tree walker until we find our next part's node.
-      // Note that multiple parts may share the same node (attribute parts
-      // on a single element), so this loop may not run at all.
-
-
-      while (nodeIndex < part.index) {
-        nodeIndex++;
-
-        if (node.nodeName === 'TEMPLATE') {
-          stack.push(node);
-          walker.currentNode = node.content;
-        }
-
-        if ((node = walker.nextNode()) === null) {
-          // We've exhausted the content inside a nested template element.
-          // Because we still have parts (the outer for-loop), we know:
-          // - There is a template in the stack
-          // - The walker will find a nextNode outside the template
-          walker.currentNode = stack.pop();
-          node = walker.nextNode();
-        }
-      } // We've arrived at our part's node.
-
-
-      if (part.type === 'node') {
-        const part = this.processor.handleTextExpression(this.options);
-        part.insertAfterNode(node.previousSibling);
-
-        this.__parts.push(part);
-      } else {
-        this.__parts.push(...this.processor.handleAttributeExpressions(node, part.name, part.strings, this.options));
       }
 
-      partIndex++;
+      if (isCEPolyfill) {
+        document.adoptNode(fragment);
+        customElements.upgrade(fragment);
+      }
+
+      return fragment;
     }
+  }]);
 
-    if (isCEPolyfill) {
-      document.adoptNode(fragment);
-      customElements.upgrade(fragment);
-    }
+  return TemplateInstance;
+}();
 
-    return fragment;
-  }
-
-}
-
-/**
- * @license
- * Copyright (c) 2017 The Polymer Project Authors. All rights reserved.
- * This code may only be used under the BSD style license found at
- * http://polymer.github.io/LICENSE.txt
- * The complete set of authors may be found at
- * http://polymer.github.io/AUTHORS.txt
- * The complete set of contributors may be found at
- * http://polymer.github.io/CONTRIBUTORS.txt
- * Code distributed by Google as part of the polymer project is also
- * subject to an additional IP rights grant found at
- * http://polymer.github.io/PATENTS.txt
- */
 /**
  * Our TrustedTypePolicy for HTML which is declared using the html template
  * tag function.
@@ -504,17 +892,21 @@ class TemplateInstance {
  * considered safe by construction.
  */
 
-const policy = window.trustedTypes && trustedTypes.createPolicy('lit-html', {
-  createHTML: s => s
+var policy = window.trustedTypes && trustedTypes.createPolicy('lit-html', {
+  createHTML: function createHTML(s) {
+    return s;
+  }
 });
-const commentMarker = ` ${marker} `;
+var commentMarker = " ".concat(marker, " ");
 /**
  * The return type of `html`, which holds a Template and the values from
  * interpolated expressions.
  */
 
-class TemplateResult {
-  constructor(strings, values, type, processor) {
+var TemplateResult = /*#__PURE__*/function () {
+  function TemplateResult(strings, values, type, processor) {
+    _classCallCheck(this, TemplateResult);
+
     this.strings = strings;
     this.values = values;
     this.type = type;
@@ -525,94 +917,86 @@ class TemplateResult {
    */
 
 
-  getHTML() {
-    const l = this.strings.length - 1;
-    let html = '';
-    let isCommentBinding = false;
+  _createClass(TemplateResult, [{
+    key: "getHTML",
+    value: function getHTML() {
+      var l = this.strings.length - 1;
+      var html = '';
+      var isCommentBinding = false;
 
-    for (let i = 0; i < l; i++) {
-      const s = this.strings[i]; // For each binding we want to determine the kind of marker to insert
-      // into the template source before it's parsed by the browser's HTML
-      // parser. The marker type is based on whether the expression is in an
-      // attribute, text, or comment position.
-      //   * For node-position bindings we insert a comment with the marker
-      //     sentinel as its text content, like <!--{{lit-guid}}-->.
-      //   * For attribute bindings we insert just the marker sentinel for the
-      //     first binding, so that we support unquoted attribute bindings.
-      //     Subsequent bindings can use a comment marker because multi-binding
-      //     attributes must be quoted.
-      //   * For comment bindings we insert just the marker sentinel so we don't
-      //     close the comment.
-      //
-      // The following code scans the template source, but is *not* an HTML
-      // parser. We don't need to track the tree structure of the HTML, only
-      // whether a binding is inside a comment, and if not, if it appears to be
-      // the first binding in an attribute.
+      for (var i = 0; i < l; i++) {
+        var s = this.strings[i]; // For each binding we want to determine the kind of marker to insert
+        // into the template source before it's parsed by the browser's HTML
+        // parser. The marker type is based on whether the expression is in an
+        // attribute, text, or comment position.
+        //   * For node-position bindings we insert a comment with the marker
+        //     sentinel as its text content, like <!--{{lit-guid}}-->.
+        //   * For attribute bindings we insert just the marker sentinel for the
+        //     first binding, so that we support unquoted attribute bindings.
+        //     Subsequent bindings can use a comment marker because multi-binding
+        //     attributes must be quoted.
+        //   * For comment bindings we insert just the marker sentinel so we don't
+        //     close the comment.
+        //
+        // The following code scans the template source, but is *not* an HTML
+        // parser. We don't need to track the tree structure of the HTML, only
+        // whether a binding is inside a comment, and if not, if it appears to be
+        // the first binding in an attribute.
 
-      const commentOpen = s.lastIndexOf('<!--'); // We're in comment position if we have a comment open with no following
-      // comment close. Because <-- can appear in an attribute value there can
-      // be false positives.
+        var commentOpen = s.lastIndexOf('<!--'); // We're in comment position if we have a comment open with no following
+        // comment close. Because <-- can appear in an attribute value there can
+        // be false positives.
 
-      isCommentBinding = (commentOpen > -1 || isCommentBinding) && s.indexOf('-->', commentOpen + 1) === -1; // Check to see if we have an attribute-like sequence preceding the
-      // expression. This can match "name=value" like structures in text,
-      // comments, and attribute values, so there can be false-positives.
+        isCommentBinding = (commentOpen > -1 || isCommentBinding) && s.indexOf('-->', commentOpen + 1) === -1; // Check to see if we have an attribute-like sequence preceding the
+        // expression. This can match "name=value" like structures in text,
+        // comments, and attribute values, so there can be false-positives.
 
-      const attributeMatch = lastAttributeNameRegex.exec(s);
+        var attributeMatch = lastAttributeNameRegex.exec(s);
 
-      if (attributeMatch === null) {
-        // We're only in this branch if we don't have a attribute-like
-        // preceding sequence. For comments, this guards against unusual
-        // attribute values like <div foo="<!--${'bar'}">. Cases like
-        // <!-- foo=${'bar'}--> are handled correctly in the attribute branch
-        // below.
-        html += s + (isCommentBinding ? commentMarker : nodeMarker);
-      } else {
-        // For attributes we use just a marker sentinel, and also append a
-        // $lit$ suffix to the name to opt-out of attribute-specific parsing
-        // that IE and Edge do for style and certain SVG attributes.
-        html += s.substr(0, attributeMatch.index) + attributeMatch[1] + attributeMatch[2] + boundAttributeSuffix + attributeMatch[3] + marker;
+        if (attributeMatch === null) {
+          // We're only in this branch if we don't have a attribute-like
+          // preceding sequence. For comments, this guards against unusual
+          // attribute values like <div foo="<!--${'bar'}">. Cases like
+          // <!-- foo=${'bar'}--> are handled correctly in the attribute branch
+          // below.
+          html += s + (isCommentBinding ? commentMarker : nodeMarker);
+        } else {
+          // For attributes we use just a marker sentinel, and also append a
+          // $lit$ suffix to the name to opt-out of attribute-specific parsing
+          // that IE and Edge do for style and certain SVG attributes.
+          html += s.substr(0, attributeMatch.index) + attributeMatch[1] + attributeMatch[2] + boundAttributeSuffix + attributeMatch[3] + marker;
+        }
       }
+
+      html += this.strings[l];
+      return html;
     }
+  }, {
+    key: "getTemplateElement",
+    value: function getTemplateElement() {
+      var template = document.createElement('template');
+      var value = this.getHTML();
 
-    html += this.strings[l];
-    return html;
-  }
+      if (policy !== undefined) {
+        // this is secure because `this.strings` is a TemplateStringsArray.
+        // TODO: validate this when
+        // https://github.com/tc39/proposal-array-is-template-object is
+        // implemented.
+        value = policy.createHTML(value);
+      }
 
-  getTemplateElement() {
-    const template = document.createElement('template');
-    let value = this.getHTML();
-
-    if (policy !== undefined) {
-      // this is secure because `this.strings` is a TemplateStringsArray.
-      // TODO: validate this when
-      // https://github.com/tc39/proposal-array-is-template-object is
-      // implemented.
-      value = policy.createHTML(value);
+      template.innerHTML = value;
+      return template;
     }
+  }]);
 
-    template.innerHTML = value;
-    return template;
-  }
+  return TemplateResult;
+}();
 
-}
-
-/**
- * @license
- * Copyright (c) 2017 The Polymer Project Authors. All rights reserved.
- * This code may only be used under the BSD style license found at
- * http://polymer.github.io/LICENSE.txt
- * The complete set of authors may be found at
- * http://polymer.github.io/AUTHORS.txt
- * The complete set of contributors may be found at
- * http://polymer.github.io/CONTRIBUTORS.txt
- * Code distributed by Google as part of the polymer project is also
- * subject to an additional IP rights grant found at
- * http://polymer.github.io/PATENTS.txt
- */
-const isPrimitive = value => {
-  return value === null || !(typeof value === 'object' || typeof value === 'function');
+var isPrimitive = function isPrimitive(value) {
+  return value === null || !(_typeof(value) === 'object' || typeof value === 'function');
 };
-const isIterable = value => {
+var isIterable = function isIterable(value) {
   return Array.isArray(value) || // eslint-disable-next-line @typescript-eslint/no-explicit-any
   !!(value && value[Symbol.iterator]);
 };
@@ -622,15 +1006,17 @@ const isIterable = value => {
  * for an attribute.
  */
 
-class AttributeCommitter {
-  constructor(element, name, strings) {
+var AttributeCommitter = /*#__PURE__*/function () {
+  function AttributeCommitter(element, name, strings) {
+    _classCallCheck(this, AttributeCommitter);
+
     this.dirty = true;
     this.element = element;
     this.name = name;
     this.strings = strings;
     this.parts = [];
 
-    for (let i = 0; i < strings.length - 1; i++) {
+    for (var i = 0; i < strings.length - 1; i++) {
       this.parts[i] = this._createPart();
     }
   }
@@ -639,107 +1025,130 @@ class AttributeCommitter {
    */
 
 
-  _createPart() {
-    return new AttributePart(this);
-  }
-
-  _getValue() {
-    const strings = this.strings;
-    const l = strings.length - 1;
-    const parts = this.parts; // If we're assigning an attribute via syntax like:
-    //    attr="${foo}"  or  attr=${foo}
-    // but not
-    //    attr="${foo} ${bar}" or attr="${foo} baz"
-    // then we don't want to coerce the attribute value into one long
-    // string. Instead we want to just return the value itself directly,
-    // so that sanitizeDOMValue can get the actual value rather than
-    // String(value)
-    // The exception is if v is an array, in which case we do want to smash
-    // it together into a string without calling String() on the array.
-    //
-    // This also allows trusted values (when using TrustedTypes) being
-    // assigned to DOM sinks without being stringified in the process.
-
-    if (l === 1 && strings[0] === '' && strings[1] === '') {
-      const v = parts[0].value;
-
-      if (typeof v === 'symbol') {
-        return String(v);
-      }
-
-      if (typeof v === 'string' || !isIterable(v)) {
-        return v;
-      }
+  _createClass(AttributeCommitter, [{
+    key: "_createPart",
+    value: function _createPart() {
+      return new AttributePart(this);
     }
+  }, {
+    key: "_getValue",
+    value: function _getValue() {
+      var strings = this.strings;
+      var l = strings.length - 1;
+      var parts = this.parts; // If we're assigning an attribute via syntax like:
+      //    attr="${foo}"  or  attr=${foo}
+      // but not
+      //    attr="${foo} ${bar}" or attr="${foo} baz"
+      // then we don't want to coerce the attribute value into one long
+      // string. Instead we want to just return the value itself directly,
+      // so that sanitizeDOMValue can get the actual value rather than
+      // String(value)
+      // The exception is if v is an array, in which case we do want to smash
+      // it together into a string without calling String() on the array.
+      //
+      // This also allows trusted values (when using TrustedTypes) being
+      // assigned to DOM sinks without being stringified in the process.
 
-    let text = '';
+      if (l === 1 && strings[0] === '' && strings[1] === '') {
+        var v = parts[0].value;
 
-    for (let i = 0; i < l; i++) {
-      text += strings[i];
-      const part = parts[i];
+        if (_typeof(v) === 'symbol') {
+          return String(v);
+        }
 
-      if (part !== undefined) {
-        const v = part.value;
+        if (typeof v === 'string' || !isIterable(v)) {
+          return v;
+        }
+      }
 
-        if (isPrimitive(v) || !isIterable(v)) {
-          text += typeof v === 'string' ? v : String(v);
-        } else {
-          for (const t of v) {
-            text += typeof t === 'string' ? t : String(t);
+      var text = '';
+
+      for (var i = 0; i < l; i++) {
+        text += strings[i];
+        var part = parts[i];
+
+        if (part !== undefined) {
+          var _v = part.value;
+
+          if (isPrimitive(_v) || !isIterable(_v)) {
+            text += typeof _v === 'string' ? _v : String(_v);
+          } else {
+            var _iterator = _createForOfIteratorHelper(_v),
+                _step;
+
+            try {
+              for (_iterator.s(); !(_step = _iterator.n()).done;) {
+                var t = _step.value;
+                text += typeof t === 'string' ? t : String(t);
+              }
+            } catch (err) {
+              _iterator.e(err);
+            } finally {
+              _iterator.f();
+            }
           }
         }
       }
+
+      text += strings[l];
+      return text;
     }
-
-    text += strings[l];
-    return text;
-  }
-
-  commit() {
-    if (this.dirty) {
-      this.dirty = false;
-      this.element.setAttribute(this.name, this._getValue());
+  }, {
+    key: "commit",
+    value: function commit() {
+      if (this.dirty) {
+        this.dirty = false;
+        this.element.setAttribute(this.name, this._getValue());
+      }
     }
-  }
+  }]);
 
-}
+  return AttributeCommitter;
+}();
 /**
  * A Part that controls all or part of an attribute value.
  */
 
-class AttributePart {
-  constructor(committer) {
+var AttributePart = /*#__PURE__*/function () {
+  function AttributePart(committer) {
+    _classCallCheck(this, AttributePart);
+
     this.value = undefined;
     this.committer = committer;
   }
 
-  setValue(value) {
-    if (value !== noChange && (!isPrimitive(value) || value !== this.value)) {
-      this.value = value; // If the value is a not a directive, dirty the committer so that it'll
-      // call setAttribute. If the value is a directive, it'll dirty the
-      // committer if it calls setValue().
+  _createClass(AttributePart, [{
+    key: "setValue",
+    value: function setValue(value) {
+      if (value !== noChange && (!isPrimitive(value) || value !== this.value)) {
+        this.value = value; // If the value is a not a directive, dirty the committer so that it'll
+        // call setAttribute. If the value is a directive, it'll dirty the
+        // committer if it calls setValue().
 
-      if (!isDirective(value)) {
-        this.committer.dirty = true;
+        if (!isDirective(value)) {
+          this.committer.dirty = true;
+        }
       }
     }
-  }
+  }, {
+    key: "commit",
+    value: function commit() {
+      while (isDirective(this.value)) {
+        var directive = this.value;
+        this.value = noChange;
+        directive(this);
+      }
 
-  commit() {
-    while (isDirective(this.value)) {
-      const directive = this.value;
-      this.value = noChange;
-      directive(this);
+      if (this.value === noChange) {
+        return;
+      }
+
+      this.committer.commit();
     }
+  }]);
 
-    if (this.value === noChange) {
-      return;
-    }
-
-    this.committer.commit();
-  }
-
-}
+  return AttributePart;
+}();
 /**
  * A Part that controls a location within a Node tree. Like a Range, NodePart
  * has start and end locations and can set and update the Nodes between those
@@ -749,8 +1158,10 @@ class AttributePart {
  * as well as arrays and iterables of those types.
  */
 
-class NodePart {
-  constructor(options) {
+var NodePart = /*#__PURE__*/function () {
+  function NodePart(options) {
+    _classCallCheck(this, NodePart);
+
     this.value = undefined;
     this.__pendingValue = undefined;
     this.options = options;
@@ -762,201 +1173,227 @@ class NodePart {
    */
 
 
-  appendInto(container) {
-    this.startNode = container.appendChild(createMarker());
-    this.endNode = container.appendChild(createMarker());
-  }
-  /**
-   * Inserts this part after the `ref` node (between `ref` and `ref`'s next
-   * sibling). Both `ref` and its next sibling must be static, unchanging nodes
-   * such as those that appear in a literal section of a template.
-   *
-   * This part must be empty, as its contents are not automatically moved.
-   */
-
-
-  insertAfterNode(ref) {
-    this.startNode = ref;
-    this.endNode = ref.nextSibling;
-  }
-  /**
-   * Appends this part into a parent part.
-   *
-   * This part must be empty, as its contents are not automatically moved.
-   */
-
-
-  appendIntoPart(part) {
-    part.__insert(this.startNode = createMarker());
-
-    part.__insert(this.endNode = createMarker());
-  }
-  /**
-   * Inserts this part after the `ref` part.
-   *
-   * This part must be empty, as its contents are not automatically moved.
-   */
-
-
-  insertAfterPart(ref) {
-    ref.__insert(this.startNode = createMarker());
-
-    this.endNode = ref.endNode;
-    ref.endNode = this.startNode;
-  }
-
-  setValue(value) {
-    this.__pendingValue = value;
-  }
-
-  commit() {
-    if (this.startNode.parentNode === null) {
-      return;
+  _createClass(NodePart, [{
+    key: "appendInto",
+    value: function appendInto(container) {
+      this.startNode = container.appendChild(createMarker());
+      this.endNode = container.appendChild(createMarker());
     }
+    /**
+     * Inserts this part after the `ref` node (between `ref` and `ref`'s next
+     * sibling). Both `ref` and its next sibling must be static, unchanging nodes
+     * such as those that appear in a literal section of a template.
+     *
+     * This part must be empty, as its contents are not automatically moved.
+     */
 
-    while (isDirective(this.__pendingValue)) {
-      const directive = this.__pendingValue;
-      this.__pendingValue = noChange;
-      directive(this);
+  }, {
+    key: "insertAfterNode",
+    value: function insertAfterNode(ref) {
+      this.startNode = ref;
+      this.endNode = ref.nextSibling;
     }
+    /**
+     * Appends this part into a parent part.
+     *
+     * This part must be empty, as its contents are not automatically moved.
+     */
 
-    const value = this.__pendingValue;
+  }, {
+    key: "appendIntoPart",
+    value: function appendIntoPart(part) {
+      part.__insert(this.startNode = createMarker());
 
-    if (value === noChange) {
-      return;
+      part.__insert(this.endNode = createMarker());
     }
+    /**
+     * Inserts this part after the `ref` part.
+     *
+     * This part must be empty, as its contents are not automatically moved.
+     */
 
-    if (isPrimitive(value)) {
-      if (value !== this.value) {
+  }, {
+    key: "insertAfterPart",
+    value: function insertAfterPart(ref) {
+      ref.__insert(this.startNode = createMarker());
+
+      this.endNode = ref.endNode;
+      ref.endNode = this.startNode;
+    }
+  }, {
+    key: "setValue",
+    value: function setValue(value) {
+      this.__pendingValue = value;
+    }
+  }, {
+    key: "commit",
+    value: function commit() {
+      if (this.startNode.parentNode === null) {
+        return;
+      }
+
+      while (isDirective(this.__pendingValue)) {
+        var directive = this.__pendingValue;
+        this.__pendingValue = noChange;
+        directive(this);
+      }
+
+      var value = this.__pendingValue;
+
+      if (value === noChange) {
+        return;
+      }
+
+      if (isPrimitive(value)) {
+        if (value !== this.value) {
+          this.__commitText(value);
+        }
+      } else if (value instanceof TemplateResult) {
+        this.__commitTemplateResult(value);
+      } else if (value instanceof Node) {
+        this.__commitNode(value);
+      } else if (isIterable(value)) {
+        this.__commitIterable(value);
+      } else if (value === nothing) {
+        this.value = nothing;
+        this.clear();
+      } else {
+        // Fallback, will render the string representation
         this.__commitText(value);
       }
-    } else if (value instanceof TemplateResult) {
-      this.__commitTemplateResult(value);
-    } else if (value instanceof Node) {
-      this.__commitNode(value);
-    } else if (isIterable(value)) {
-      this.__commitIterable(value);
-    } else if (value === nothing) {
-      this.value = nothing;
-      this.clear();
-    } else {
-      // Fallback, will render the string representation
-      this.__commitText(value);
     }
-  }
-
-  __insert(node) {
-    this.endNode.parentNode.insertBefore(node, this.endNode);
-  }
-
-  __commitNode(value) {
-    if (this.value === value) {
-      return;
+  }, {
+    key: "__insert",
+    value: function __insert(node) {
+      this.endNode.parentNode.insertBefore(node, this.endNode);
     }
-
-    this.clear();
-
-    this.__insert(value);
-
-    this.value = value;
-  }
-
-  __commitText(value) {
-    const node = this.startNode.nextSibling;
-    value = value == null ? '' : value; // If `value` isn't already a string, we explicitly convert it here in case
-    // it can't be implicitly converted - i.e. it's a symbol.
-
-    const valueAsString = typeof value === 'string' ? value : String(value);
-
-    if (node === this.endNode.previousSibling && node.nodeType === 3
-    /* Node.TEXT_NODE */
-    ) {
-        // If we only have a single text node between the markers, we can just
-        // set its value, rather than replacing it.
-        // TODO(justinfagnani): Can we just check if this.value is primitive?
-        node.data = valueAsString;
-      } else {
-      this.__commitNode(document.createTextNode(valueAsString));
-    }
-
-    this.value = value;
-  }
-
-  __commitTemplateResult(value) {
-    const template = this.options.templateFactory(value);
-
-    if (this.value instanceof TemplateInstance && this.value.template === template) {
-      this.value.update(value.values);
-    } else {
-      // Make sure we propagate the template processor from the TemplateResult
-      // so that we use its syntax extension, etc. The template factory comes
-      // from the render function options so that it can control template
-      // caching and preprocessing.
-      const instance = new TemplateInstance(template, value.processor, this.options);
-
-      const fragment = instance._clone();
-
-      instance.update(value.values);
-
-      this.__commitNode(fragment);
-
-      this.value = instance;
-    }
-  }
-
-  __commitIterable(value) {
-    // For an Iterable, we create a new InstancePart per item, then set its
-    // value to the item. This is a little bit of overhead for every item in
-    // an Iterable, but it lets us recurse easily and efficiently update Arrays
-    // of TemplateResults that will be commonly returned from expressions like:
-    // array.map((i) => html`${i}`), by reusing existing TemplateInstances.
-    // If _value is an array, then the previous render was of an
-    // iterable and _value will contain the NodeParts from the previous
-    // render. If _value is not an array, clear this part and make a new
-    // array for NodeParts.
-    if (!Array.isArray(this.value)) {
-      this.value = [];
-      this.clear();
-    } // Lets us keep track of how many items we stamped so we can clear leftover
-    // items from a previous render
-
-
-    const itemParts = this.value;
-    let partIndex = 0;
-    let itemPart;
-
-    for (const item of value) {
-      // Try to reuse an existing part
-      itemPart = itemParts[partIndex]; // If no existing part, create a new one
-
-      if (itemPart === undefined) {
-        itemPart = new NodePart(this.options);
-        itemParts.push(itemPart);
-
-        if (partIndex === 0) {
-          itemPart.appendIntoPart(this);
-        } else {
-          itemPart.insertAfterPart(itemParts[partIndex - 1]);
-        }
+  }, {
+    key: "__commitNode",
+    value: function __commitNode(value) {
+      if (this.value === value) {
+        return;
       }
 
-      itemPart.setValue(item);
-      itemPart.commit();
-      partIndex++;
+      this.clear();
+
+      this.__insert(value);
+
+      this.value = value;
     }
+  }, {
+    key: "__commitText",
+    value: function __commitText(value) {
+      var node = this.startNode.nextSibling;
+      value = value == null ? '' : value; // If `value` isn't already a string, we explicitly convert it here in case
+      // it can't be implicitly converted - i.e. it's a symbol.
 
-    if (partIndex < itemParts.length) {
-      // Truncate the parts array so _value reflects the current state
-      itemParts.length = partIndex;
-      this.clear(itemPart && itemPart.endNode);
+      var valueAsString = typeof value === 'string' ? value : String(value);
+
+      if (node === this.endNode.previousSibling && node.nodeType === 3
+      /* Node.TEXT_NODE */
+      ) {
+          // If we only have a single text node between the markers, we can just
+          // set its value, rather than replacing it.
+          // TODO(justinfagnani): Can we just check if this.value is primitive?
+          node.data = valueAsString;
+        } else {
+        this.__commitNode(document.createTextNode(valueAsString));
+      }
+
+      this.value = value;
     }
-  }
+  }, {
+    key: "__commitTemplateResult",
+    value: function __commitTemplateResult(value) {
+      var template = this.options.templateFactory(value);
 
-  clear(startNode = this.startNode) {
-    removeNodes(this.startNode.parentNode, startNode.nextSibling, this.endNode);
-  }
+      if (this.value instanceof TemplateInstance && this.value.template === template) {
+        this.value.update(value.values);
+      } else {
+        // Make sure we propagate the template processor from the TemplateResult
+        // so that we use its syntax extension, etc. The template factory comes
+        // from the render function options so that it can control template
+        // caching and preprocessing.
+        var instance = new TemplateInstance(template, value.processor, this.options);
 
-}
+        var fragment = instance._clone();
+
+        instance.update(value.values);
+
+        this.__commitNode(fragment);
+
+        this.value = instance;
+      }
+    }
+  }, {
+    key: "__commitIterable",
+    value: function __commitIterable(value) {
+      // For an Iterable, we create a new InstancePart per item, then set its
+      // value to the item. This is a little bit of overhead for every item in
+      // an Iterable, but it lets us recurse easily and efficiently update Arrays
+      // of TemplateResults that will be commonly returned from expressions like:
+      // array.map((i) => html`${i}`), by reusing existing TemplateInstances.
+      // If _value is an array, then the previous render was of an
+      // iterable and _value will contain the NodeParts from the previous
+      // render. If _value is not an array, clear this part and make a new
+      // array for NodeParts.
+      if (!Array.isArray(this.value)) {
+        this.value = [];
+        this.clear();
+      } // Lets us keep track of how many items we stamped so we can clear leftover
+      // items from a previous render
+
+
+      var itemParts = this.value;
+      var partIndex = 0;
+      var itemPart;
+
+      var _iterator2 = _createForOfIteratorHelper(value),
+          _step2;
+
+      try {
+        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+          var item = _step2.value;
+          // Try to reuse an existing part
+          itemPart = itemParts[partIndex]; // If no existing part, create a new one
+
+          if (itemPart === undefined) {
+            itemPart = new NodePart(this.options);
+            itemParts.push(itemPart);
+
+            if (partIndex === 0) {
+              itemPart.appendIntoPart(this);
+            } else {
+              itemPart.insertAfterPart(itemParts[partIndex - 1]);
+            }
+          }
+
+          itemPart.setValue(item);
+          itemPart.commit();
+          partIndex++;
+        }
+      } catch (err) {
+        _iterator2.e(err);
+      } finally {
+        _iterator2.f();
+      }
+
+      if (partIndex < itemParts.length) {
+        // Truncate the parts array so _value reflects the current state
+        itemParts.length = partIndex;
+        this.clear(itemPart && itemPart.endNode);
+      }
+    }
+  }, {
+    key: "clear",
+    value: function clear() {
+      var startNode = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.startNode;
+      removeNodes(this.startNode.parentNode, startNode.nextSibling, this.endNode);
+    }
+  }]);
+
+  return NodePart;
+}();
 /**
  * Implements a boolean attribute, roughly as defined in the HTML
  * specification.
@@ -965,8 +1402,10 @@ class NodePart {
  * ''. If the value is falsey, the attribute is removed.
  */
 
-class BooleanAttributePart {
-  constructor(element, name, strings) {
+var BooleanAttributePart = /*#__PURE__*/function () {
+  function BooleanAttributePart(element, name, strings) {
+    _classCallCheck(this, BooleanAttributePart);
+
     this.value = undefined;
     this.__pendingValue = undefined;
 
@@ -979,37 +1418,42 @@ class BooleanAttributePart {
     this.strings = strings;
   }
 
-  setValue(value) {
-    this.__pendingValue = value;
-  }
-
-  commit() {
-    while (isDirective(this.__pendingValue)) {
-      const directive = this.__pendingValue;
-      this.__pendingValue = noChange;
-      directive(this);
+  _createClass(BooleanAttributePart, [{
+    key: "setValue",
+    value: function setValue(value) {
+      this.__pendingValue = value;
     }
-
-    if (this.__pendingValue === noChange) {
-      return;
-    }
-
-    const value = !!this.__pendingValue;
-
-    if (this.value !== value) {
-      if (value) {
-        this.element.setAttribute(this.name, '');
-      } else {
-        this.element.removeAttribute(this.name);
+  }, {
+    key: "commit",
+    value: function commit() {
+      while (isDirective(this.__pendingValue)) {
+        var directive = this.__pendingValue;
+        this.__pendingValue = noChange;
+        directive(this);
       }
 
-      this.value = value;
+      if (this.__pendingValue === noChange) {
+        return;
+      }
+
+      var value = !!this.__pendingValue;
+
+      if (this.value !== value) {
+        if (value) {
+          this.element.setAttribute(this.name, '');
+        } else {
+          this.element.removeAttribute(this.name);
+        }
+
+        this.value = value;
+      }
+
+      this.__pendingValue = noChange;
     }
+  }]);
 
-    this.__pendingValue = noChange;
-  }
-
-}
+  return BooleanAttributePart;
+}();
 /**
  * Sets attribute values for PropertyParts, so that the value is only set once
  * even if there are multiple parts for a property.
@@ -1020,44 +1464,71 @@ class BooleanAttributePart {
  * a string first.
  */
 
-class PropertyCommitter extends AttributeCommitter {
-  constructor(element, name, strings) {
-    super(element, name, strings);
-    this.single = strings.length === 2 && strings[0] === '' && strings[1] === '';
+var PropertyCommitter = /*#__PURE__*/function (_AttributeCommitter) {
+  _inherits(PropertyCommitter, _AttributeCommitter);
+
+  var _super = _createSuper(PropertyCommitter);
+
+  function PropertyCommitter(element, name, strings) {
+    var _this;
+
+    _classCallCheck(this, PropertyCommitter);
+
+    _this = _super.call(this, element, name, strings);
+    _this.single = strings.length === 2 && strings[0] === '' && strings[1] === '';
+    return _this;
   }
 
-  _createPart() {
-    return new PropertyPart(this);
-  }
-
-  _getValue() {
-    if (this.single) {
-      return this.parts[0].value;
+  _createClass(PropertyCommitter, [{
+    key: "_createPart",
+    value: function _createPart() {
+      return new PropertyPart(this);
     }
+  }, {
+    key: "_getValue",
+    value: function _getValue() {
+      if (this.single) {
+        return this.parts[0].value;
+      }
 
-    return super._getValue();
-  }
-
-  commit() {
-    if (this.dirty) {
-      this.dirty = false; // eslint-disable-next-line @typescript-eslint/no-explicit-any
-
-      this.element[this.name] = this._getValue();
+      return _get(_getPrototypeOf(PropertyCommitter.prototype), "_getValue", this).call(this);
     }
+  }, {
+    key: "commit",
+    value: function commit() {
+      if (this.dirty) {
+        this.dirty = false; // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
+        this.element[this.name] = this._getValue();
+      }
+    }
+  }]);
+
+  return PropertyCommitter;
+}(AttributeCommitter);
+var PropertyPart = /*#__PURE__*/function (_AttributePart) {
+  _inherits(PropertyPart, _AttributePart);
+
+  var _super2 = _createSuper(PropertyPart);
+
+  function PropertyPart() {
+    _classCallCheck(this, PropertyPart);
+
+    return _super2.apply(this, arguments);
   }
 
-}
-class PropertyPart extends AttributePart {} // Detect event listener options support. If the `capture` property is read
+  return PropertyPart;
+}(AttributePart); // Detect event listener options support. If the `capture` property is read
 // from the options object, then options are supported. If not, then the third
 // argument to add/removeEventListener is interpreted as the boolean capture
 // value so we should only pass the `capture` property.
 
-let eventOptionsSupported = false; // Wrap into an IIFE because MS Edge <= v41 does not support having try/catch
+var eventOptionsSupported = false; // Wrap into an IIFE because MS Edge <= v41 does not support having try/catch
 // blocks right into the body of a module
 
-(() => {
+(function () {
   try {
-    const options = {
+    var options = {
       get capture() {
         eventOptionsSupported = true;
         return false;
@@ -1072,126 +1543,138 @@ let eventOptionsSupported = false; // Wrap into an IIFE because MS Edge <= v41 d
   }
 })();
 
-class EventPart {
-  constructor(element, eventName, eventContext) {
+var EventPart = /*#__PURE__*/function () {
+  function EventPart(element, eventName, eventContext) {
+    var _this2 = this;
+
+    _classCallCheck(this, EventPart);
+
     this.value = undefined;
     this.__pendingValue = undefined;
     this.element = element;
     this.eventName = eventName;
     this.eventContext = eventContext;
 
-    this.__boundHandleEvent = e => this.handleEvent(e);
+    this.__boundHandleEvent = function (e) {
+      return _this2.handleEvent(e);
+    };
   }
 
-  setValue(value) {
-    this.__pendingValue = value;
-  }
+  _createClass(EventPart, [{
+    key: "setValue",
+    value: function setValue(value) {
+      this.__pendingValue = value;
+    }
+  }, {
+    key: "commit",
+    value: function commit() {
+      while (isDirective(this.__pendingValue)) {
+        var directive = this.__pendingValue;
+        this.__pendingValue = noChange;
+        directive(this);
+      }
 
-  commit() {
-    while (isDirective(this.__pendingValue)) {
-      const directive = this.__pendingValue;
+      if (this.__pendingValue === noChange) {
+        return;
+      }
+
+      var newListener = this.__pendingValue;
+      var oldListener = this.value;
+      var shouldRemoveListener = newListener == null || oldListener != null && (newListener.capture !== oldListener.capture || newListener.once !== oldListener.once || newListener.passive !== oldListener.passive);
+      var shouldAddListener = newListener != null && (oldListener == null || shouldRemoveListener);
+
+      if (shouldRemoveListener) {
+        this.element.removeEventListener(this.eventName, this.__boundHandleEvent, this.__options);
+      }
+
+      if (shouldAddListener) {
+        this.__options = getOptions(newListener);
+        this.element.addEventListener(this.eventName, this.__boundHandleEvent, this.__options);
+      }
+
+      this.value = newListener;
       this.__pendingValue = noChange;
-      directive(this);
     }
-
-    if (this.__pendingValue === noChange) {
-      return;
+  }, {
+    key: "handleEvent",
+    value: function handleEvent(event) {
+      if (typeof this.value === 'function') {
+        this.value.call(this.eventContext || this.element, event);
+      } else {
+        this.value.handleEvent(event);
+      }
     }
+  }]);
 
-    const newListener = this.__pendingValue;
-    const oldListener = this.value;
-    const shouldRemoveListener = newListener == null || oldListener != null && (newListener.capture !== oldListener.capture || newListener.once !== oldListener.once || newListener.passive !== oldListener.passive);
-    const shouldAddListener = newListener != null && (oldListener == null || shouldRemoveListener);
-
-    if (shouldRemoveListener) {
-      this.element.removeEventListener(this.eventName, this.__boundHandleEvent, this.__options);
-    }
-
-    if (shouldAddListener) {
-      this.__options = getOptions(newListener);
-      this.element.addEventListener(this.eventName, this.__boundHandleEvent, this.__options);
-    }
-
-    this.value = newListener;
-    this.__pendingValue = noChange;
-  }
-
-  handleEvent(event) {
-    if (typeof this.value === 'function') {
-      this.value.call(this.eventContext || this.element, event);
-    } else {
-      this.value.handleEvent(event);
-    }
-  }
-
-} // We copy options because of the inconsistent behavior of browsers when reading
+  return EventPart;
+}(); // We copy options because of the inconsistent behavior of browsers when reading
 // the third argument of add/removeEventListener. IE11 doesn't support options
 // at all. Chrome 41 only reads `capture` if the argument is an object.
 
-const getOptions = o => o && (eventOptionsSupported ? {
-  capture: o.capture,
-  passive: o.passive,
-  once: o.once
-} : o.capture);
+var getOptions = function getOptions(o) {
+  return o && (eventOptionsSupported ? {
+    capture: o.capture,
+    passive: o.passive,
+    once: o.once
+  } : o.capture);
+};
 
-/**
- * @license
- * Copyright (c) 2017 The Polymer Project Authors. All rights reserved.
- * This code may only be used under the BSD style license found at
- * http://polymer.github.io/LICENSE.txt
- * The complete set of authors may be found at
- * http://polymer.github.io/AUTHORS.txt
- * The complete set of contributors may be found at
- * http://polymer.github.io/CONTRIBUTORS.txt
- * Code distributed by Google as part of the polymer project is also
- * subject to an additional IP rights grant found at
- * http://polymer.github.io/PATENTS.txt
- */
 /**
  * Creates Parts when a template is instantiated.
  */
 
-class DefaultTemplateProcessor {
-  /**
-   * Create parts for an attribute-position binding, given the event, attribute
-   * name, and string literals.
-   *
-   * @param element The element containing the binding
-   * @param name  The attribute name
-   * @param strings The string literals. There are always at least two strings,
-   *   event for fully-controlled bindings with a single expression.
-   */
-  handleAttributeExpressions(element, name, strings, options) {
-    const prefix = name[0];
+var DefaultTemplateProcessor = /*#__PURE__*/function () {
+  function DefaultTemplateProcessor() {
+    _classCallCheck(this, DefaultTemplateProcessor);
+  }
 
-    if (prefix === '.') {
-      const committer = new PropertyCommitter(element, name.slice(1), strings);
+  _createClass(DefaultTemplateProcessor, [{
+    key: "handleAttributeExpressions",
+    value:
+    /**
+     * Create parts for an attribute-position binding, given the event, attribute
+     * name, and string literals.
+     *
+     * @param element The element containing the binding
+     * @param name  The attribute name
+     * @param strings The string literals. There are always at least two strings,
+     *   event for fully-controlled bindings with a single expression.
+     */
+    function handleAttributeExpressions(element, name, strings, options) {
+      var prefix = name[0];
+
+      if (prefix === '.') {
+        var _committer = new PropertyCommitter(element, name.slice(1), strings);
+
+        return _committer.parts;
+      }
+
+      if (prefix === '@') {
+        return [new EventPart(element, name.slice(1), options.eventContext)];
+      }
+
+      if (prefix === '?') {
+        return [new BooleanAttributePart(element, name.slice(1), strings)];
+      }
+
+      var committer = new AttributeCommitter(element, name, strings);
       return committer.parts;
     }
+    /**
+     * Create parts for a text-position binding.
+     * @param templateFactory
+     */
 
-    if (prefix === '@') {
-      return [new EventPart(element, name.slice(1), options.eventContext)];
+  }, {
+    key: "handleTextExpression",
+    value: function handleTextExpression(options) {
+      return new NodePart(options);
     }
+  }]);
 
-    if (prefix === '?') {
-      return [new BooleanAttributePart(element, name.slice(1), strings)];
-    }
-
-    const committer = new AttributeCommitter(element, name, strings);
-    return committer.parts;
-  }
-  /**
-   * Create parts for a text-position binding.
-   * @param templateFactory
-   */
-
-
-  handleTextExpression(options) {
-    return new NodePart(options);
-  }
-
-}
-const defaultTemplateProcessor = new DefaultTemplateProcessor();
+  return DefaultTemplateProcessor;
+}();
+var defaultTemplateProcessor = new DefaultTemplateProcessor();
 
 /**
  * @license
@@ -1212,7 +1695,7 @@ const defaultTemplateProcessor = new DefaultTemplateProcessor();
  */
 
 function templateFactory(result) {
-  let templateCache = templateCaches.get(result.type);
+  var templateCache = templateCaches.get(result.type);
 
   if (templateCache === undefined) {
     templateCache = {
@@ -1222,7 +1705,7 @@ function templateFactory(result) {
     templateCaches.set(result.type, templateCache);
   }
 
-  let template = templateCache.stringsArray.get(result.strings);
+  var template = templateCache.stringsArray.get(result.strings);
 
   if (template !== undefined) {
     return template;
@@ -1230,7 +1713,7 @@ function templateFactory(result) {
   // This key is shared between all templates with identical content
 
 
-  const key = result.strings.join(marker); // Check if we already have a Template for this key
+  var key = result.strings.join(marker); // Check if we already have a Template for this key
 
   template = templateCache.keyString.get(key);
 
@@ -1245,7 +1728,7 @@ function templateFactory(result) {
   templateCache.stringsArray.set(result.strings, template);
   return template;
 }
-const templateCaches = new Map();
+var templateCaches = new Map();
 
 /**
  * @license
@@ -1260,7 +1743,7 @@ const templateCaches = new Map();
  * subject to an additional IP rights grant found at
  * http://polymer.github.io/PATENTS.txt
  */
-const parts = new WeakMap();
+var parts = new WeakMap();
 /**
  * Renders a template result or other value to a container.
  *
@@ -1277,13 +1760,13 @@ const parts = new WeakMap();
  *     container, as those changes will not effect previously rendered DOM.
  */
 
-const render$1 = (result, container, options) => {
-  let part = parts.get(container);
+var render$1 = function render(result, container, options) {
+  var part = parts.get(container);
 
   if (part === undefined) {
     removeNodes(container, container.firstChild);
     parts.set(container, part = new NodePart(Object.assign({
-      templateFactory
+      templateFactory: templateFactory
     }, options)));
     part.appendInto(container);
   }
@@ -1317,7 +1800,13 @@ if (typeof window !== 'undefined') {
  */
 
 
-const html = (strings, ...values) => new TemplateResult(strings, values, 'html', defaultTemplateProcessor);
+var html = function html(strings) {
+  for (var _len = arguments.length, values = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+    values[_key - 1] = arguments[_key];
+  }
+
+  return new TemplateResult(strings, values, 'html', defaultTemplateProcessor);
+};
 
 /**
  * @license
@@ -1332,7 +1821,7 @@ const html = (strings, ...values) => new TemplateResult(strings, values, 'html',
  * subject to an additional IP rights grant found at
  * http://polymer.github.io/PATENTS.txt
  */
-const walkerNodeFilter = 133
+var walkerNodeFilter = 133
 /* NodeFilter.SHOW_{ELEMENT|COMMENT|TEXT} */
 ;
 /**
@@ -1353,23 +1842,19 @@ const walkerNodeFilter = 133
  */
 
 function removeNodesFromTemplate(template, nodesToRemove) {
-  const {
-    element: {
-      content
-    },
-    parts
-  } = template;
-  const walker = document.createTreeWalker(content, walkerNodeFilter, null, false);
-  let partIndex = nextActiveIndexInTemplateParts(parts);
-  let part = parts[partIndex];
-  let nodeIndex = -1;
-  let removeCount = 0;
-  const nodesToRemoveInTemplate = [];
-  let currentRemovingNode = null;
+  var content = template.element.content,
+      parts = template.parts;
+  var walker = document.createTreeWalker(content, walkerNodeFilter, null, false);
+  var partIndex = nextActiveIndexInTemplateParts(parts);
+  var part = parts[partIndex];
+  var nodeIndex = -1;
+  var removeCount = 0;
+  var nodesToRemoveInTemplate = [];
+  var currentRemovingNode = null;
 
   while (walker.nextNode()) {
     nodeIndex++;
-    const node = walker.currentNode; // End removal if stepped past the removing node
+    var node = walker.currentNode; // End removal if stepped past the removing node
 
     if (node.previousSibling === currentRemovingNode) {
       currentRemovingNode = null;
@@ -1399,14 +1884,16 @@ function removeNodesFromTemplate(template, nodesToRemove) {
     }
   }
 
-  nodesToRemoveInTemplate.forEach(n => n.parentNode.removeChild(n));
+  nodesToRemoveInTemplate.forEach(function (n) {
+    return n.parentNode.removeChild(n);
+  });
 }
 
-const countNodes = node => {
-  let count = node.nodeType === 11
+var countNodes = function countNodes(node) {
+  var count = node.nodeType === 11
   /* Node.DOCUMENT_FRAGMENT_NODE */
   ? 0 : 1;
-  const walker = document.createTreeWalker(node, walkerNodeFilter, null, false);
+  var walker = document.createTreeWalker(node, walkerNodeFilter, null, false);
 
   while (walker.nextNode()) {
     count++;
@@ -1415,9 +1902,11 @@ const countNodes = node => {
   return count;
 };
 
-const nextActiveIndexInTemplateParts = (parts, startIndex = -1) => {
-  for (let i = startIndex + 1; i < parts.length; i++) {
-    const part = parts[i];
+var nextActiveIndexInTemplateParts = function nextActiveIndexInTemplateParts(parts) {
+  var startIndex = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : -1;
+
+  for (var i = startIndex + 1; i < parts.length; i++) {
+    var part = parts[i];
 
     if (isTemplatePartActive(part)) {
       return i;
@@ -1433,13 +1922,10 @@ const nextActiveIndexInTemplateParts = (parts, startIndex = -1) => {
  */
 
 
-function insertNodeIntoTemplate(template, node, refNode = null) {
-  const {
-    element: {
-      content
-    },
-    parts
-  } = template; // If there's no refNode, then put node at end of template.
+function insertNodeIntoTemplate(template, node) {
+  var refNode = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+  var content = template.element.content,
+      parts = template.parts; // If there's no refNode, then put node at end of template.
   // No part indices need to be shifted in this case.
 
   if (refNode === null || refNode === undefined) {
@@ -1447,14 +1933,14 @@ function insertNodeIntoTemplate(template, node, refNode = null) {
     return;
   }
 
-  const walker = document.createTreeWalker(content, walkerNodeFilter, null, false);
-  let partIndex = nextActiveIndexInTemplateParts(parts);
-  let insertCount = 0;
-  let walkerIndex = -1;
+  var walker = document.createTreeWalker(content, walkerNodeFilter, null, false);
+  var partIndex = nextActiveIndexInTemplateParts(parts);
+  var insertCount = 0;
+  var walkerIndex = -1;
 
   while (walker.nextNode()) {
     walkerIndex++;
-    const walkerNode = walker.currentNode;
+    var walkerNode = walker.currentNode;
 
     if (walkerNode === refNode) {
       insertCount = countNodes(node);
@@ -1477,28 +1963,16 @@ function insertNodeIntoTemplate(template, node, refNode = null) {
   }
 }
 
-/**
- * @license
- * Copyright (c) 2017 The Polymer Project Authors. All rights reserved.
- * This code may only be used under the BSD style license found at
- * http://polymer.github.io/LICENSE.txt
- * The complete set of authors may be found at
- * http://polymer.github.io/AUTHORS.txt
- * The complete set of contributors may be found at
- * http://polymer.github.io/CONTRIBUTORS.txt
- * Code distributed by Google as part of the polymer project is also
- * subject to an additional IP rights grant found at
- * http://polymer.github.io/PATENTS.txt
- */
+var getTemplateCacheKey = function getTemplateCacheKey(type, scopeName) {
+  return "".concat(type, "--").concat(scopeName);
+};
 
-const getTemplateCacheKey = (type, scopeName) => `${type}--${scopeName}`;
-
-let compatibleShadyCSSVersion = true;
+var compatibleShadyCSSVersion = true;
 
 if (typeof window.ShadyCSS === 'undefined') {
   compatibleShadyCSSVersion = false;
 } else if (typeof window.ShadyCSS.prepareTemplateDom === 'undefined') {
-  console.warn(`Incompatible ShadyCSS version detected. ` + `Please update to at least @webcomponents/webcomponentsjs@2.0.2 and ` + `@webcomponents/shadycss@1.3.1.`);
+  console.warn("Incompatible ShadyCSS version detected. " + "Please update to at least @webcomponents/webcomponentsjs@2.0.2 and " + "@webcomponents/shadycss@1.3.1.");
   compatibleShadyCSSVersion = false;
 }
 /**
@@ -1507,60 +1981,58 @@ if (typeof window.ShadyCSS === 'undefined') {
  */
 
 
-const shadyTemplateFactory = scopeName => result => {
-  const cacheKey = getTemplateCacheKey(result.type, scopeName);
-  let templateCache = templateCaches.get(cacheKey);
+var shadyTemplateFactory = function shadyTemplateFactory(scopeName) {
+  return function (result) {
+    var cacheKey = getTemplateCacheKey(result.type, scopeName);
+    var templateCache = templateCaches.get(cacheKey);
 
-  if (templateCache === undefined) {
-    templateCache = {
-      stringsArray: new WeakMap(),
-      keyString: new Map()
-    };
-    templateCaches.set(cacheKey, templateCache);
-  }
-
-  let template = templateCache.stringsArray.get(result.strings);
-
-  if (template !== undefined) {
-    return template;
-  }
-
-  const key = result.strings.join(marker);
-  template = templateCache.keyString.get(key);
-
-  if (template === undefined) {
-    const element = result.getTemplateElement();
-
-    if (compatibleShadyCSSVersion) {
-      window.ShadyCSS.prepareTemplateDom(element, scopeName);
+    if (templateCache === undefined) {
+      templateCache = {
+        stringsArray: new WeakMap(),
+        keyString: new Map()
+      };
+      templateCaches.set(cacheKey, templateCache);
     }
 
-    template = new Template(result, element);
-    templateCache.keyString.set(key, template);
-  }
+    var template = templateCache.stringsArray.get(result.strings);
 
-  templateCache.stringsArray.set(result.strings, template);
-  return template;
+    if (template !== undefined) {
+      return template;
+    }
+
+    var key = result.strings.join(marker);
+    template = templateCache.keyString.get(key);
+
+    if (template === undefined) {
+      var element = result.getTemplateElement();
+
+      if (compatibleShadyCSSVersion) {
+        window.ShadyCSS.prepareTemplateDom(element, scopeName);
+      }
+
+      template = new Template(result, element);
+      templateCache.keyString.set(key, template);
+    }
+
+    templateCache.stringsArray.set(result.strings, template);
+    return template;
+  };
 };
-const TEMPLATE_TYPES = ['html', 'svg'];
+var TEMPLATE_TYPES = ['html', 'svg'];
 /**
  * Removes all style elements from Templates for the given scopeName.
  */
 
-const removeStylesFromLitTemplates = scopeName => {
-  TEMPLATE_TYPES.forEach(type => {
-    const templates = templateCaches.get(getTemplateCacheKey(type, scopeName));
+var removeStylesFromLitTemplates = function removeStylesFromLitTemplates(scopeName) {
+  TEMPLATE_TYPES.forEach(function (type) {
+    var templates = templateCaches.get(getTemplateCacheKey(type, scopeName));
 
     if (templates !== undefined) {
-      templates.keyString.forEach(template => {
-        const {
-          element: {
-            content
-          }
-        } = template; // IE 11 doesn't support the iterable param Set constructor
+      templates.keyString.forEach(function (template) {
+        var content = template.element.content; // IE 11 doesn't support the iterable param Set constructor
 
-        const styles = new Set();
-        Array.from(content.querySelectorAll('style')).forEach(s => {
+        var styles = new Set();
+        Array.from(content.querySelectorAll('style')).forEach(function (s) {
           styles.add(s);
         });
         removeNodesFromTemplate(template, styles);
@@ -1569,7 +2041,7 @@ const removeStylesFromLitTemplates = scopeName => {
   });
 };
 
-const shadyRenderSet = new Set();
+var shadyRenderSet = new Set();
 /**
  * For the given scope name, ensures that ShadyCSS style scoping is performed.
  * This is done just once per scope name so the fragment and template cannot
@@ -1585,17 +2057,15 @@ const shadyRenderSet = new Set();
  * output.
  */
 
-const prepareTemplateStyles = (scopeName, renderedDOM, template) => {
+var prepareTemplateStyles = function prepareTemplateStyles(scopeName, renderedDOM, template) {
   shadyRenderSet.add(scopeName); // If `renderedDOM` is stamped from a Template, then we need to edit that
   // Template's underlying template element. Otherwise, we create one here
   // to give to ShadyCSS, which still requires one while scoping.
 
-  const templateElement = !!template ? template.element : document.createElement('template'); // Move styles out of rendered DOM and store.
+  var templateElement = !!template ? template.element : document.createElement('template'); // Move styles out of rendered DOM and store.
 
-  const styles = renderedDOM.querySelectorAll('style');
-  const {
-    length
-  } = styles; // If there are no styles, skip unnecessary work
+  var styles = renderedDOM.querySelectorAll('style');
+  var length = styles.length; // If there are no styles, skip unnecessary work
 
   if (length === 0) {
     // Ensure prepareTemplateStyles is called to support adding
@@ -1612,23 +2082,25 @@ const prepareTemplateStyles = (scopeName, renderedDOM, template) => {
     return;
   }
 
-  const condensedStyle = document.createElement('style'); // Collect styles into a single style. This helps us make sure ShadyCSS
+  var condensedStyle = document.createElement('style'); // Collect styles into a single style. This helps us make sure ShadyCSS
   // manipulations will not prevent us from being able to fix up template
   // part indices.
   // NOTE: collecting styles is inefficient for browsers but ShadyCSS
   // currently does this anyway. When it does not, this should be changed.
 
-  for (let i = 0; i < length; i++) {
-    const style = styles[i];
-    style.parentNode.removeChild(style);
-    condensedStyle.textContent += style.textContent;
+  for (var i = 0; i < length; i++) {
+    var _style = styles[i];
+
+    _style.parentNode.removeChild(_style);
+
+    condensedStyle.textContent += _style.textContent;
   } // Remove styles from nested templates in this scope.
 
 
   removeStylesFromLitTemplates(scopeName); // And then put the condensed style into the "root" template passed in as
   // `template`.
 
-  const content = templateElement.content;
+  var content = templateElement.content;
 
   if (!!template) {
     insertNodeIntoTemplate(template, condensedStyle, content.firstChild);
@@ -1640,7 +2112,7 @@ const prepareTemplateStyles = (scopeName, renderedDOM, template) => {
 
 
   window.ShadyCSS.prepareTemplateStyles(templateElement, scopeName);
-  const style = content.querySelector('style');
+  var style = content.querySelector('style');
 
   if (window.ShadyCSS.nativeShadow && style !== null) {
     // When in native Shadow DOM, ensure the style created by ShadyCSS is
@@ -1656,7 +2128,7 @@ const prepareTemplateStyles = (scopeName, renderedDOM, template) => {
     // NOTE, ShadyCSS creates its own style so we can safely add/remove
     // `condensedStyle` here.
     content.insertBefore(condensedStyle, content.firstChild);
-    const removes = new Set();
+    var removes = new Set();
     removes.add(condensedStyle);
     removeNodesFromTemplate(template, removes);
   }
@@ -1719,21 +2191,21 @@ const prepareTemplateStyles = (scopeName, renderedDOM, template) => {
  */
 
 
-const render = (result, container, options) => {
-  if (!options || typeof options !== 'object' || !options.scopeName) {
+var render = function render(result, container, options) {
+  if (!options || _typeof(options) !== 'object' || !options.scopeName) {
     throw new Error('The `scopeName` option is required.');
   }
 
-  const scopeName = options.scopeName;
-  const hasRendered = parts.has(container);
-  const needsScoping = compatibleShadyCSSVersion && container.nodeType === 11
+  var scopeName = options.scopeName;
+  var hasRendered = parts.has(container);
+  var needsScoping = compatibleShadyCSSVersion && container.nodeType === 11
   /* Node.DOCUMENT_FRAGMENT_NODE */
   && !!container.host; // Handle first render to a scope specially...
 
-  const firstScopeRender = needsScoping && !shadyRenderSet.has(scopeName); // On first scope render, render into a fragment; this cannot be a single
+  var firstScopeRender = needsScoping && !shadyRenderSet.has(scopeName); // On first scope render, render into a fragment; this cannot be a single
   // fragment that is reused since nested renders can occur synchronously.
 
-  const renderContainer = firstScopeRender ? document.createDocumentFragment() : container;
+  var renderContainer = firstScopeRender ? document.createDocumentFragment() : container;
   render$1(result, renderContainer, Object.assign({
     templateFactory: shadyTemplateFactory(scopeName)
   }, options)); // When performing first scope render,
@@ -1747,14 +2219,14 @@ const render = (result, container, options) => {
   // DOM will be re-used on subsequent renders.
 
   if (firstScopeRender) {
-    const part = parts.get(renderContainer);
-    parts.delete(renderContainer); // ShadyCSS might have style sheets (e.g. from `prepareAdoptedCssText`)
+    var part = parts.get(renderContainer);
+    parts["delete"](renderContainer); // ShadyCSS might have style sheets (e.g. from `prepareAdoptedCssText`)
     // that should apply to `renderContainer` even if the rendered value is
     // not a TemplateInstance. However, it will only insert scoped styles
     // into the document if `prepareTemplateStyles` has already been called
     // for the given scope name.
 
-    const template = part.value instanceof TemplateInstance ? part.value.template : undefined;
+    var template = part.value instanceof TemplateInstance ? part.value.template : undefined;
     prepareTemplateStyles(scopeName, renderContainer, template);
     removeNodes(container, container.firstChild);
     container.appendChild(renderContainer);
@@ -1786,539 +2258,680 @@ const render = (result, container, options) => {
  * http://polymer.github.io/PATENTS.txt
  */
 // serializer/deserializers for boolean attribute
-const fromBooleanAttribute = value => value !== null;
+var fromBooleanAttribute = function fromBooleanAttribute(value) {
+  return value !== null;
+};
 
-const toBooleanAttribute = value => value ? '' : null;
+var toBooleanAttribute = function toBooleanAttribute(value) {
+  return value ? '' : null;
+};
 /**
  * Change function that returns true if `value` is different from `oldValue`.
  * This method is used as the default for a property's `hasChanged` function.
  */
 
 
-const notEqual = (value, old) => {
+var notEqual = function notEqual(value, old) {
   // This ensures (old==NaN, value==NaN) always returns false
   return old !== value && (old === old || value === value);
 };
-const defaultPropertyDeclaration = {
+var defaultPropertyDeclaration = {
   attribute: true,
   type: String,
   reflect: false,
   hasChanged: notEqual
 };
-const microtaskPromise = new Promise(resolve => resolve(true));
-const STATE_HAS_UPDATED = 1;
-const STATE_UPDATE_REQUESTED = 1 << 2;
-const STATE_IS_REFLECTING = 1 << 3;
+var microtaskPromise = new Promise(function (resolve) {
+  return resolve(true);
+});
+var STATE_HAS_UPDATED = 1;
+var STATE_UPDATE_REQUESTED = 1 << 2;
+var STATE_IS_REFLECTING = 1 << 3;
 /**
  * Base element class which manages element properties and attributes. When
  * properties change, the `update` method is asynchronously called. This method
  * should be supplied by subclassers to render updates as desired.
  */
 
-class UpdatingElement extends HTMLElement {
-  constructor() {
-    super();
-    this._updateState = 0;
-    this._instanceProperties = undefined;
-    this._updatePromise = microtaskPromise;
+var UpdatingElement = /*#__PURE__*/function (_HTMLElement) {
+  _inherits(UpdatingElement, _HTMLElement);
+
+  var _super = _createSuper(UpdatingElement);
+
+  function UpdatingElement() {
+    var _this;
+
+    _classCallCheck(this, UpdatingElement);
+
+    _this = _super.call(this);
+    _this._updateState = 0;
+    _this._instanceProperties = undefined;
+    _this._updatePromise = microtaskPromise;
     /**
      * Map with keys for any properties that have changed since the last
      * update cycle with previous values.
      */
 
-    this._changedProperties = new Map();
+    _this._changedProperties = new Map();
     /**
      * Map with keys of properties that should be reflected when updated.
      */
 
-    this._reflectingProperties = undefined;
-    this.initialize();
+    _this._reflectingProperties = undefined;
+
+    _this.initialize();
+
+    return _this;
   }
   /**
    * Returns a list of attributes corresponding to the registered properties.
    */
 
 
-  static get observedAttributes() {
-    // note: piggy backing on this to ensure we're _finalized.
-    this._finalize();
+  _createClass(UpdatingElement, [{
+    key: "initialize",
+    value:
+    /**
+     * Performs element initialization. By default this calls `createRenderRoot`
+     * to create the element `renderRoot` node and captures any pre-set values for
+     * registered properties.
+     */
+    function initialize() {
+      this.renderRoot = this.createRenderRoot();
 
-    const attributes = [];
+      this._saveInstanceProperties();
+    }
+    /**
+     * Fixes any properties set on the instance before upgrade time.
+     * Otherwise these would shadow the accessor and break these properties.
+     * The properties are stored in a Map which is played back after the
+     * constructor runs. Note, on very old versions of Safari (<=9) or Chrome
+     * (<=41), properties created for native platform properties like (`id` or
+     * `name`) may not have default values set in the element constructor. On
+     * these browsers native properties appear on instances and therefore their
+     * default value will overwrite any element default (e.g. if the element sets
+     * this.id = 'id' in the constructor, the 'id' will become '' since this is
+     * the native platform default).
+     */
 
-    for (const [p, v] of this._classProperties) {
-      const attr = this._attributeNameForProperty(p, v);
+  }, {
+    key: "_saveInstanceProperties",
+    value: function _saveInstanceProperties() {
+      var _iterator = _createForOfIteratorHelper(this.constructor._classProperties),
+          _step;
 
-      if (attr !== undefined) {
-        this._attributeToPropertyMap.set(attr, p);
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var _step$value = _slicedToArray(_step.value, 1),
+              p = _step$value[0];
 
-        attributes.push(attr);
+          if (this.hasOwnProperty(p)) {
+            var value = this[p];
+            delete this[p];
+
+            if (!this._instanceProperties) {
+              this._instanceProperties = new Map();
+            }
+
+            this._instanceProperties.set(p, value);
+          }
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
       }
     }
+    /**
+     * Applies previously saved instance properties.
+     */
 
-    return attributes;
-  }
-  /**
-   * Creates a property accessor on the element prototype if one does not exist.
-   * The property setter calls the property's `hasChanged` property option
-   * or uses a strict identity check to determine whether or not to request
-   * an update.
-   */
+  }, {
+    key: "_applyInstanceProperties",
+    value: function _applyInstanceProperties() {
+      var _iterator2 = _createForOfIteratorHelper(this._instanceProperties),
+          _step2;
 
+      try {
+        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+          var _step2$value = _slicedToArray(_step2.value, 2),
+              p = _step2$value[0],
+              v = _step2$value[1];
 
-  static createProperty(name, options = defaultPropertyDeclaration) {
-    // ensure private storage for property declarations.
-    if (!this.hasOwnProperty('_classProperties')) {
-      this._classProperties = new Map(); // NOTE: Workaround IE11 not supporting Map constructor argument.
+          this[p] = v;
+        }
+      } catch (err) {
+        _iterator2.e(err);
+      } finally {
+        _iterator2.f();
+      }
 
-      const superProperties = Object.getPrototypeOf(this)._classProperties;
+      this._instanceProperties = undefined;
+    }
+    /**
+     * Returns the node into which the element should render and by default
+     * creates and returns an open shadowRoot. Implement to customize where the
+     * element's DOM is rendered. For example, to render into the element's
+     * childNodes, return `this`.
+     * @returns {Element|DocumentFragment} Returns a node into which to render.
+     */
 
-      if (superProperties !== undefined) {
-        superProperties.forEach((v, k) => this._classProperties.set(k, v));
+  }, {
+    key: "createRenderRoot",
+    value: function createRenderRoot() {
+      return this.attachShadow({
+        mode: 'open'
+      });
+    }
+    /**
+     * Uses ShadyCSS to keep element DOM updated.
+     */
+
+  }, {
+    key: "connectedCallback",
+    value: function connectedCallback() {
+      if (this._updateState & STATE_HAS_UPDATED) {
+        if (window.ShadyCSS !== undefined) {
+          window.ShadyCSS.styleElement(this);
+        }
+      } else {
+        this.requestUpdate();
       }
     }
+    /**
+     * Allows for `super.disconnectedCallback()` in extensions while
+     * reserving the possibility of making non-breaking feature additions
+     * when disconnecting at some point in the future.
+     */
 
-    this._classProperties.set(name, options); // Allow user defined accessors by not replacing an existing own-property
-    // accessor.
+  }, {
+    key: "disconnectedCallback",
+    value: function disconnectedCallback() {}
+    /**
+     * Synchronizes property values when attributes change.
+     */
 
-
-    if (this.prototype.hasOwnProperty(name)) {
-      return;
+  }, {
+    key: "attributeChangedCallback",
+    value: function attributeChangedCallback(name, old, value) {
+      if (old !== value) {
+        this._attributeToProperty(name, value);
+      }
     }
+  }, {
+    key: "_propertyToAttribute",
+    value: function _propertyToAttribute(name, value) {
+      var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : defaultPropertyDeclaration;
+      var ctor = this.constructor;
 
-    const key = typeof name === 'symbol' ? Symbol() : `__${name}`;
-    Object.defineProperty(this.prototype, name, {
-      get() {
-        return this[key];
-      },
+      var attrValue = ctor._propertyValueToAttribute(value, options);
 
-      set(value) {
-        const oldValue = this[name];
-        this[key] = value;
+      if (attrValue !== undefined) {
+        var attr = ctor._attributeNameForProperty(name, options);
 
-        this._requestPropertyUpdate(name, oldValue, options);
-      },
+        if (attr !== undefined) {
+          // Track if the property is being reflected to avoid
+          // setting the property again via `attributeChangedCallback`. Note:
+          // 1. this takes advantage of the fact that the callback is synchronous.
+          // 2. will behave incorrectly if multiple attributes are in the reaction
+          // stack at time of calling. However, since we process attributes
+          // in `update` this should not be possible (or an extreme corner case
+          // that we'd like to discover).
+          // mark state reflecting
+          this._updateState = this._updateState | STATE_IS_REFLECTING;
 
-      configurable: true,
-      enumerable: true
-    });
-  }
-  /**
-   * Creates property accessors for registered properties and ensures
-   * any superclasses are also finalized.
-   */
-
-
-  static _finalize() {
-    if (this.hasOwnProperty('_finalized') && this._finalized) {
-      return;
-    } // finalize any superclasses
+          if (attrValue === null) {
+            this.removeAttribute(attr);
+          } else {
+            this.setAttribute(attr, attrValue);
+          } // mark state not reflecting
 
 
-    const superCtor = Object.getPrototypeOf(this);
-
-    if (typeof superCtor._finalize === 'function') {
-      superCtor._finalize();
+          this._updateState = this._updateState & ~STATE_IS_REFLECTING;
+        }
+      }
     }
+  }, {
+    key: "_attributeToProperty",
+    value: function _attributeToProperty(name, value) {
+      // Use tracking info to avoid deserializing attribute value if it was
+      // just set from a property setter.
+      if (!(this._updateState & STATE_IS_REFLECTING)) {
+        var ctor = this.constructor;
 
-    this._finalized = true; // initialize Map populated in observedAttributes
+        var propName = ctor._attributeToPropertyMap.get(name);
 
-    this._attributeToPropertyMap = new Map(); // make any properties
+        if (propName !== undefined) {
+          var options = ctor._classProperties.get(propName);
 
-    const props = this.properties; // support symbols in properties (IE11 does not support this)
-
-    const propKeys = [...Object.getOwnPropertyNames(props), ...(typeof Object.getOwnPropertySymbols === 'function' ? Object.getOwnPropertySymbols(props) : [])];
-
-    for (const p of propKeys) {
-      // note, use of `any` is due to TypeSript lack of support for symbol in
-      // index types
-      this.createProperty(p, props[p]);
+          this[propName] = ctor._propertyValueFromAttribute(value, options);
+        }
+      }
     }
-  }
-  /**
-   * Returns the property name for the given attribute `name`.
-   */
+    /**
+     * Requests an update which is processed asynchronously. This should
+     * be called when an element should update based on some state not triggered
+     * by setting a property. In this case, pass no arguments. It should also be
+     * called when manually implementing a property setter. In this case, pass the
+     * property `name` and `oldValue` to ensure that any configured property
+     * options are honored. Returns the `updateComplete` Promise which is resolved
+     * when the update completes.
+     *
+     * @param name {PropertyKey} (optional) name of requesting property
+     * @param oldValue {any} (optional) old value of requesting property
+     * @returns {Promise} A Promise that is resolved when the update completes.
+     */
+
+  }, {
+    key: "requestUpdate",
+    value: function requestUpdate(name, oldValue) {
+      if (name !== undefined) {
+        var options = this.constructor._classProperties.get(name) || defaultPropertyDeclaration;
+        return this._requestPropertyUpdate(name, oldValue, options);
+      }
+
+      return this._invalidate();
+    }
+    /**
+     * Requests an update for a specific property and records change information.
+     * @param name {PropertyKey} name of requesting property
+     * @param oldValue {any} old value of requesting property
+     * @param options {PropertyDeclaration}
+     */
+
+  }, {
+    key: "_requestPropertyUpdate",
+    value: function _requestPropertyUpdate(name, oldValue, options) {
+      if (!this.constructor._valueHasChanged(this[name], oldValue, options.hasChanged)) {
+        return this.updateComplete;
+      } // track old value when changing.
 
 
-  static _attributeNameForProperty(name, options) {
-    const attribute = options !== undefined && options.attribute;
-    return attribute === false ? undefined : typeof attribute === 'string' ? attribute : typeof name === 'string' ? name.toLowerCase() : undefined;
-  }
-  /**
-   * Returns true if a property should request an update.
-   * Called when a property value is set and uses the `hasChanged`
-   * option for the property if present or a strict identity check.
-   */
+      if (!this._changedProperties.has(name)) {
+        this._changedProperties.set(name, oldValue);
+      } // add to reflecting properties set
 
 
-  static _valueHasChanged(value, old, hasChanged = notEqual) {
-    return hasChanged(value, old);
-  }
-  /**
-   * Returns the property value for the given attribute value.
-   * Called via the `attributeChangedCallback` and uses the property's `type`
-   * or `type.fromAttribute` property option.
-   */
-
-
-  static _propertyValueFromAttribute(value, options) {
-    const type = options && options.type;
-
-    if (type === undefined) {
-      return value;
-    } // Note: special case `Boolean` so users can use it as a `type`.
-
-
-    const fromAttribute = type === Boolean ? fromBooleanAttribute : typeof type === 'function' ? type : type.fromAttribute;
-    return fromAttribute ? fromAttribute(value) : value;
-  }
-  /**
-   * Returns the attribute value for the given property value. If this
-   * returns undefined, the property will *not* be reflected to an attribute.
-   * If this returns null, the attribute will be removed, otherwise the
-   * attribute will be set to the value.
-   * This uses the property's `reflect` and `type.toAttribute` property options.
-   */
-
-
-  static _propertyValueToAttribute(value, options) {
-    if (options === undefined || options.reflect === undefined) {
-      return;
-    } // Note: special case `Boolean` so users can use it as a `type`.
-
-
-    const toAttribute = options.type === Boolean ? toBooleanAttribute : options.type && options.type.toAttribute || String;
-    return toAttribute(value);
-  }
-  /**
-   * Performs element initialization. By default this calls `createRenderRoot`
-   * to create the element `renderRoot` node and captures any pre-set values for
-   * registered properties.
-   */
-
-
-  initialize() {
-    this.renderRoot = this.createRenderRoot();
-
-    this._saveInstanceProperties();
-  }
-  /**
-   * Fixes any properties set on the instance before upgrade time.
-   * Otherwise these would shadow the accessor and break these properties.
-   * The properties are stored in a Map which is played back after the
-   * constructor runs. Note, on very old versions of Safari (<=9) or Chrome
-   * (<=41), properties created for native platform properties like (`id` or
-   * `name`) may not have default values set in the element constructor. On
-   * these browsers native properties appear on instances and therefore their
-   * default value will overwrite any element default (e.g. if the element sets
-   * this.id = 'id' in the constructor, the 'id' will become '' since this is
-   * the native platform default).
-   */
-
-
-  _saveInstanceProperties() {
-    for (const [p] of this.constructor._classProperties) {
-      if (this.hasOwnProperty(p)) {
-        const value = this[p];
-        delete this[p];
-
-        if (!this._instanceProperties) {
-          this._instanceProperties = new Map();
+      if (options.reflect === true) {
+        if (this._reflectingProperties === undefined) {
+          this._reflectingProperties = new Map();
         }
 
-        this._instanceProperties.set(p, value);
-      }
-    }
-  }
-  /**
-   * Applies previously saved instance properties.
-   */
-
-
-  _applyInstanceProperties() {
-    for (const [p, v] of this._instanceProperties) {
-      this[p] = v;
-    }
-
-    this._instanceProperties = undefined;
-  }
-  /**
-   * Returns the node into which the element should render and by default
-   * creates and returns an open shadowRoot. Implement to customize where the
-   * element's DOM is rendered. For example, to render into the element's
-   * childNodes, return `this`.
-   * @returns {Element|DocumentFragment} Returns a node into which to render.
-   */
-
-
-  createRenderRoot() {
-    return this.attachShadow({
-      mode: 'open'
-    });
-  }
-  /**
-   * Uses ShadyCSS to keep element DOM updated.
-   */
-
-
-  connectedCallback() {
-    if (this._updateState & STATE_HAS_UPDATED) {
-      if (window.ShadyCSS !== undefined) {
-        window.ShadyCSS.styleElement(this);
-      }
-    } else {
-      this.requestUpdate();
-    }
-  }
-  /**
-   * Allows for `super.disconnectedCallback()` in extensions while
-   * reserving the possibility of making non-breaking feature additions
-   * when disconnecting at some point in the future.
-   */
-
-
-  disconnectedCallback() {}
-  /**
-   * Synchronizes property values when attributes change.
-   */
-
-
-  attributeChangedCallback(name, old, value) {
-    if (old !== value) {
-      this._attributeToProperty(name, value);
-    }
-  }
-
-  _propertyToAttribute(name, value, options = defaultPropertyDeclaration) {
-    const ctor = this.constructor;
-
-    const attrValue = ctor._propertyValueToAttribute(value, options);
-
-    if (attrValue !== undefined) {
-      const attr = ctor._attributeNameForProperty(name, options);
-
-      if (attr !== undefined) {
-        // Track if the property is being reflected to avoid
-        // setting the property again via `attributeChangedCallback`. Note:
-        // 1. this takes advantage of the fact that the callback is synchronous.
-        // 2. will behave incorrectly if multiple attributes are in the reaction
-        // stack at time of calling. However, since we process attributes
-        // in `update` this should not be possible (or an extreme corner case
-        // that we'd like to discover).
-        // mark state reflecting
-        this._updateState = this._updateState | STATE_IS_REFLECTING;
-
-        if (attrValue === null) {
-          this.removeAttribute(attr);
-        } else {
-          this.setAttribute(attr, attrValue);
-        } // mark state not reflecting
-
-
-        this._updateState = this._updateState & ~STATE_IS_REFLECTING;
-      }
-    }
-  }
-
-  _attributeToProperty(name, value) {
-    // Use tracking info to avoid deserializing attribute value if it was
-    // just set from a property setter.
-    if (!(this._updateState & STATE_IS_REFLECTING)) {
-      const ctor = this.constructor;
-
-      const propName = ctor._attributeToPropertyMap.get(name);
-
-      if (propName !== undefined) {
-        const options = ctor._classProperties.get(propName);
-
-        this[propName] = ctor._propertyValueFromAttribute(value, options);
-      }
-    }
-  }
-  /**
-   * Requests an update which is processed asynchronously. This should
-   * be called when an element should update based on some state not triggered
-   * by setting a property. In this case, pass no arguments. It should also be
-   * called when manually implementing a property setter. In this case, pass the
-   * property `name` and `oldValue` to ensure that any configured property
-   * options are honored. Returns the `updateComplete` Promise which is resolved
-   * when the update completes.
-   *
-   * @param name {PropertyKey} (optional) name of requesting property
-   * @param oldValue {any} (optional) old value of requesting property
-   * @returns {Promise} A Promise that is resolved when the update completes.
-   */
-
-
-  requestUpdate(name, oldValue) {
-    if (name !== undefined) {
-      const options = this.constructor._classProperties.get(name) || defaultPropertyDeclaration;
-      return this._requestPropertyUpdate(name, oldValue, options);
-    }
-
-    return this._invalidate();
-  }
-  /**
-   * Requests an update for a specific property and records change information.
-   * @param name {PropertyKey} name of requesting property
-   * @param oldValue {any} old value of requesting property
-   * @param options {PropertyDeclaration}
-   */
-
-
-  _requestPropertyUpdate(name, oldValue, options) {
-    if (!this.constructor._valueHasChanged(this[name], oldValue, options.hasChanged)) {
-      return this.updateComplete;
-    } // track old value when changing.
-
-
-    if (!this._changedProperties.has(name)) {
-      this._changedProperties.set(name, oldValue);
-    } // add to reflecting properties set
-
-
-    if (options.reflect === true) {
-      if (this._reflectingProperties === undefined) {
-        this._reflectingProperties = new Map();
+        this._reflectingProperties.set(name, options);
       }
 
-      this._reflectingProperties.set(name, options);
+      return this._invalidate();
     }
+    /**
+     * Invalidates the element causing it to asynchronously update regardless
+     * of whether or not any property changes are pending. This method is
+     * automatically called when any registered property changes.
+     */
 
-    return this._invalidate();
-  }
-  /**
-   * Invalidates the element causing it to asynchronously update regardless
-   * of whether or not any property changes are pending. This method is
-   * automatically called when any registered property changes.
-   */
+  }, {
+    key: "_invalidate",
+    value: function () {
+      var _invalidate2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+        var resolver, previousValidatePromise;
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                if (this._hasRequestedUpdate) {
+                  _context.next = 8;
+                  break;
+                }
 
+                // mark state updating...
+                this._updateState = this._updateState | STATE_UPDATE_REQUESTED;
+                previousValidatePromise = this._updatePromise;
+                this._updatePromise = new Promise(function (r) {
+                  return resolver = r;
+                });
+                _context.next = 6;
+                return previousValidatePromise;
 
-  async _invalidate() {
-    if (!this._hasRequestedUpdate) {
-      // mark state updating...
-      this._updateState = this._updateState | STATE_UPDATE_REQUESTED;
-      let resolver;
-      const previousValidatePromise = this._updatePromise;
-      this._updatePromise = new Promise(r => resolver = r);
-      await previousValidatePromise;
+              case 6:
+                this._validate();
 
-      this._validate();
+                resolver(!this._hasRequestedUpdate);
 
-      resolver(!this._hasRequestedUpdate);
-    }
+              case 8:
+                return _context.abrupt("return", this.updateComplete);
 
-    return this.updateComplete;
-  }
+              case 9:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
 
-  get _hasRequestedUpdate() {
-    return this._updateState & STATE_UPDATE_REQUESTED;
-  }
-  /**
-   * Validates the element by updating it.
-   */
-
-
-  _validate() {
-    // Mixin instance properties once, if they exist.
-    if (this._instanceProperties) {
-      this._applyInstanceProperties();
-    }
-
-    if (this.shouldUpdate(this._changedProperties)) {
-      const changedProperties = this._changedProperties;
-      this.update(changedProperties);
-
-      this._markUpdated();
-
-      if (!(this._updateState & STATE_HAS_UPDATED)) {
-        this._updateState = this._updateState | STATE_HAS_UPDATED;
-        this.firstUpdated(changedProperties);
+      function _invalidate() {
+        return _invalidate2.apply(this, arguments);
       }
 
-      this.updated(changedProperties);
-    } else {
-      this._markUpdated();
+      return _invalidate;
+    }()
+  }, {
+    key: "_hasRequestedUpdate",
+    get: function get() {
+      return this._updateState & STATE_UPDATE_REQUESTED;
     }
-  }
+    /**
+     * Validates the element by updating it.
+     */
 
-  _markUpdated() {
-    this._changedProperties = new Map();
-    this._updateState = this._updateState & ~STATE_UPDATE_REQUESTED;
-  }
-  /**
-   * Returns a Promise that resolves when the element has completed updating.
-   * The Promise value is a boolean that is `true` if the element completed the
-   * update without triggering another update. The Promise result is `false` if
-   * a property was set inside `updated()`. This getter can be implemented to
-   * await additional state. For example, it is sometimes useful to await a
-   * rendered element before fulfilling this Promise. To do this, first await
-   * `super.updateComplete` then any subsequent state.
-   *
-   * @returns {Promise} The Promise returns a boolean that indicates if the
-   * update resolved without triggering another update.
-   */
-
-
-  get updateComplete() {
-    return this._updatePromise;
-  }
-  /**
-   * Controls whether or not `update` should be called when the element requests
-   * an update. By default, this method always returns `true`, but this can be
-   * customized to control when to update.
-   *
-   * * @param _changedProperties Map of changed properties with old values
-   */
-
-
-  shouldUpdate(_changedProperties) {
-    return true;
-  }
-  /**
-   * Updates the element. This method reflects property values to attributes.
-   * It can be overridden to render and keep updated DOM in the element's
-   * `renderRoot`. Setting properties inside this method will *not* trigger
-   * another update.
-   *
-   * * @param _changedProperties Map of changed properties with old values
-   */
-
-
-  update(_changedProperties) {
-    if (this._reflectingProperties !== undefined && this._reflectingProperties.size > 0) {
-      for (const [k, v] of this._reflectingProperties) {
-        this._propertyToAttribute(k, this[k], v);
+  }, {
+    key: "_validate",
+    value: function _validate() {
+      // Mixin instance properties once, if they exist.
+      if (this._instanceProperties) {
+        this._applyInstanceProperties();
       }
 
-      this._reflectingProperties = undefined;
+      if (this.shouldUpdate(this._changedProperties)) {
+        var changedProperties = this._changedProperties;
+        this.update(changedProperties);
+
+        this._markUpdated();
+
+        if (!(this._updateState & STATE_HAS_UPDATED)) {
+          this._updateState = this._updateState | STATE_HAS_UPDATED;
+          this.firstUpdated(changedProperties);
+        }
+
+        this.updated(changedProperties);
+      } else {
+        this._markUpdated();
+      }
     }
-  }
-  /**
-   * Invoked whenever the element is updated. Implement to perform
-   * post-updating tasks via DOM APIs, for example, focusing an element.
-   *
-   * Setting properties inside this method will trigger the element to update
-   * again after this update cycle completes.
-   *
-   * * @param _changedProperties Map of changed properties with old values
-   */
+  }, {
+    key: "_markUpdated",
+    value: function _markUpdated() {
+      this._changedProperties = new Map();
+      this._updateState = this._updateState & ~STATE_UPDATE_REQUESTED;
+    }
+    /**
+     * Returns a Promise that resolves when the element has completed updating.
+     * The Promise value is a boolean that is `true` if the element completed the
+     * update without triggering another update. The Promise result is `false` if
+     * a property was set inside `updated()`. This getter can be implemented to
+     * await additional state. For example, it is sometimes useful to await a
+     * rendered element before fulfilling this Promise. To do this, first await
+     * `super.updateComplete` then any subsequent state.
+     *
+     * @returns {Promise} The Promise returns a boolean that indicates if the
+     * update resolved without triggering another update.
+     */
+
+  }, {
+    key: "updateComplete",
+    get: function get() {
+      return this._updatePromise;
+    }
+    /**
+     * Controls whether or not `update` should be called when the element requests
+     * an update. By default, this method always returns `true`, but this can be
+     * customized to control when to update.
+     *
+     * * @param _changedProperties Map of changed properties with old values
+     */
+
+  }, {
+    key: "shouldUpdate",
+    value: function shouldUpdate(_changedProperties) {
+      return true;
+    }
+    /**
+     * Updates the element. This method reflects property values to attributes.
+     * It can be overridden to render and keep updated DOM in the element's
+     * `renderRoot`. Setting properties inside this method will *not* trigger
+     * another update.
+     *
+     * * @param _changedProperties Map of changed properties with old values
+     */
+
+  }, {
+    key: "update",
+    value: function update(_changedProperties) {
+      if (this._reflectingProperties !== undefined && this._reflectingProperties.size > 0) {
+        var _iterator3 = _createForOfIteratorHelper(this._reflectingProperties),
+            _step3;
+
+        try {
+          for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+            var _step3$value = _slicedToArray(_step3.value, 2),
+                k = _step3$value[0],
+                v = _step3$value[1];
+
+            this._propertyToAttribute(k, this[k], v);
+          }
+        } catch (err) {
+          _iterator3.e(err);
+        } finally {
+          _iterator3.f();
+        }
+
+        this._reflectingProperties = undefined;
+      }
+    }
+    /**
+     * Invoked whenever the element is updated. Implement to perform
+     * post-updating tasks via DOM APIs, for example, focusing an element.
+     *
+     * Setting properties inside this method will trigger the element to update
+     * again after this update cycle completes.
+     *
+     * * @param _changedProperties Map of changed properties with old values
+     */
+
+  }, {
+    key: "updated",
+    value: function updated(_changedProperties) {}
+    /**
+     * Invoked when the element is first updated. Implement to perform one time
+     * work on the element after update.
+     *
+     * Setting properties inside this method will trigger the element to update
+     * again after this update cycle completes.
+     *
+     * * @param _changedProperties Map of changed properties with old values
+     */
+
+  }, {
+    key: "firstUpdated",
+    value: function firstUpdated(_changedProperties) {}
+  }], [{
+    key: "observedAttributes",
+    get: function get() {
+      // note: piggy backing on this to ensure we're _finalized.
+      this._finalize();
+
+      var attributes = [];
+
+      var _iterator4 = _createForOfIteratorHelper(this._classProperties),
+          _step4;
+
+      try {
+        for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
+          var _step4$value = _slicedToArray(_step4.value, 2),
+              p = _step4$value[0],
+              v = _step4$value[1];
+
+          var attr = this._attributeNameForProperty(p, v);
+
+          if (attr !== undefined) {
+            this._attributeToPropertyMap.set(attr, p);
+
+            attributes.push(attr);
+          }
+        }
+      } catch (err) {
+        _iterator4.e(err);
+      } finally {
+        _iterator4.f();
+      }
+
+      return attributes;
+    }
+    /**
+     * Creates a property accessor on the element prototype if one does not exist.
+     * The property setter calls the property's `hasChanged` property option
+     * or uses a strict identity check to determine whether or not to request
+     * an update.
+     */
+
+  }, {
+    key: "createProperty",
+    value: function createProperty(name) {
+      var _this2 = this;
+
+      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultPropertyDeclaration;
+
+      // ensure private storage for property declarations.
+      if (!this.hasOwnProperty('_classProperties')) {
+        this._classProperties = new Map(); // NOTE: Workaround IE11 not supporting Map constructor argument.
+
+        var superProperties = Object.getPrototypeOf(this)._classProperties;
+
+        if (superProperties !== undefined) {
+          superProperties.forEach(function (v, k) {
+            return _this2._classProperties.set(k, v);
+          });
+        }
+      }
+
+      this._classProperties.set(name, options); // Allow user defined accessors by not replacing an existing own-property
+      // accessor.
 
 
-  updated(_changedProperties) {}
-  /**
-   * Invoked when the element is first updated. Implement to perform one time
-   * work on the element after update.
-   *
-   * Setting properties inside this method will trigger the element to update
-   * again after this update cycle completes.
-   *
-   * * @param _changedProperties Map of changed properties with old values
-   */
+      if (this.prototype.hasOwnProperty(name)) {
+        return;
+      }
+
+      var key = _typeof(name) === 'symbol' ? Symbol() : "__".concat(name);
+      Object.defineProperty(this.prototype, name, {
+        get: function get() {
+          return this[key];
+        },
+        set: function set(value) {
+          var oldValue = this[name];
+          this[key] = value;
+
+          this._requestPropertyUpdate(name, oldValue, options);
+        },
+        configurable: true,
+        enumerable: true
+      });
+    }
+    /**
+     * Creates property accessors for registered properties and ensures
+     * any superclasses are also finalized.
+     */
+
+  }, {
+    key: "_finalize",
+    value: function _finalize() {
+      if (this.hasOwnProperty('_finalized') && this._finalized) {
+        return;
+      } // finalize any superclasses
 
 
-  firstUpdated(_changedProperties) {}
+      var superCtor = Object.getPrototypeOf(this);
 
-}
+      if (typeof superCtor._finalize === 'function') {
+        superCtor._finalize();
+      }
+
+      this._finalized = true; // initialize Map populated in observedAttributes
+
+      this._attributeToPropertyMap = new Map(); // make any properties
+
+      var props = this.properties; // support symbols in properties (IE11 does not support this)
+
+      var propKeys = [].concat(_toConsumableArray(Object.getOwnPropertyNames(props)), _toConsumableArray(typeof Object.getOwnPropertySymbols === 'function' ? Object.getOwnPropertySymbols(props) : []));
+
+      var _iterator5 = _createForOfIteratorHelper(propKeys),
+          _step5;
+
+      try {
+        for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
+          var p = _step5.value;
+          // note, use of `any` is due to TypeSript lack of support for symbol in
+          // index types
+          this.createProperty(p, props[p]);
+        }
+      } catch (err) {
+        _iterator5.e(err);
+      } finally {
+        _iterator5.f();
+      }
+    }
+    /**
+     * Returns the property name for the given attribute `name`.
+     */
+
+  }, {
+    key: "_attributeNameForProperty",
+    value: function _attributeNameForProperty(name, options) {
+      var attribute = options !== undefined && options.attribute;
+      return attribute === false ? undefined : typeof attribute === 'string' ? attribute : typeof name === 'string' ? name.toLowerCase() : undefined;
+    }
+    /**
+     * Returns true if a property should request an update.
+     * Called when a property value is set and uses the `hasChanged`
+     * option for the property if present or a strict identity check.
+     */
+
+  }, {
+    key: "_valueHasChanged",
+    value: function _valueHasChanged(value, old) {
+      var hasChanged = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : notEqual;
+      return hasChanged(value, old);
+    }
+    /**
+     * Returns the property value for the given attribute value.
+     * Called via the `attributeChangedCallback` and uses the property's `type`
+     * or `type.fromAttribute` property option.
+     */
+
+  }, {
+    key: "_propertyValueFromAttribute",
+    value: function _propertyValueFromAttribute(value, options) {
+      var type = options && options.type;
+
+      if (type === undefined) {
+        return value;
+      } // Note: special case `Boolean` so users can use it as a `type`.
+
+
+      var fromAttribute = type === Boolean ? fromBooleanAttribute : typeof type === 'function' ? type : type.fromAttribute;
+      return fromAttribute ? fromAttribute(value) : value;
+    }
+    /**
+     * Returns the attribute value for the given property value. If this
+     * returns undefined, the property will *not* be reflected to an attribute.
+     * If this returns null, the attribute will be removed, otherwise the
+     * attribute will be set to the value.
+     * This uses the property's `reflect` and `type.toAttribute` property options.
+     */
+
+  }, {
+    key: "_propertyValueToAttribute",
+    value: function _propertyValueToAttribute(value, options) {
+      if (options === undefined || options.reflect === undefined) {
+        return;
+      } // Note: special case `Boolean` so users can use it as a `type`.
+
+
+      var toAttribute = options.type === Boolean ? toBooleanAttribute : options.type && options.type.toAttribute || String;
+      return toAttribute(value);
+    }
+  }]);
+
+  return UpdatingElement;
+}( /*#__PURE__*/_wrapNativeSuper(HTMLElement));
 /**
  * Maps attribute names to properties; for example `foobar` attribute
  * to `fooBar` property.
@@ -2337,47 +2950,51 @@ UpdatingElement._finalized = true;
 UpdatingElement._classProperties = new Map();
 UpdatingElement.properties = {};
 
-/**
- * @license
- * Copyright (c) 2017 The Polymer Project Authors. All rights reserved.
- * This code may only be used under the BSD style license found at
- * http://polymer.github.io/LICENSE.txt
- * The complete set of authors may be found at
- * http://polymer.github.io/AUTHORS.txt
- * The complete set of contributors may be found at
- * http://polymer.github.io/CONTRIBUTORS.txt
- * Code distributed by Google as part of the polymer project is also
- * subject to an additional IP rights grant found at
- * http://polymer.github.io/PATENTS.txt
- */
-class LitElement extends UpdatingElement {
-  /**
-   * Updates the element. This method reflects property values to attributes
-   * and calls `render` to render DOM via lit-html. Setting properties inside
-   * this method will *not* trigger another update.
-   * * @param _changedProperties Map of changed properties with old values
-   */
-  update(changedProperties) {
-    super.update(changedProperties);
-    const templateResult = this.render();
+var LitElement = /*#__PURE__*/function (_UpdatingElement) {
+  _inherits(LitElement, _UpdatingElement);
 
-    if (templateResult instanceof TemplateResult) {
-      this.constructor.render(templateResult, this.renderRoot, {
-        scopeName: this.localName,
-        eventContext: this
-      });
-    }
+  var _super = _createSuper(LitElement);
+
+  function LitElement() {
+    _classCallCheck(this, LitElement);
+
+    return _super.apply(this, arguments);
   }
-  /**
-   * Invoked on each update to perform rendering tasks. This method must return
-   * a lit-html TemplateResult. Setting properties inside this method will *not*
-   * trigger the element to update.
-   */
 
+  _createClass(LitElement, [{
+    key: "update",
+    value:
+    /**
+     * Updates the element. This method reflects property values to attributes
+     * and calls `render` to render DOM via lit-html. Setting properties inside
+     * this method will *not* trigger another update.
+     * * @param _changedProperties Map of changed properties with old values
+     */
+    function update(changedProperties) {
+      _get(_getPrototypeOf(LitElement.prototype), "update", this).call(this, changedProperties);
 
-  render() {}
+      var templateResult = this.render();
 
-}
+      if (templateResult instanceof TemplateResult) {
+        this.constructor.render(templateResult, this.renderRoot, {
+          scopeName: this.localName,
+          eventContext: this
+        });
+      }
+    }
+    /**
+     * Invoked on each update to perform rendering tasks. This method must return
+     * a lit-html TemplateResult. Setting properties inside this method will *not*
+     * trigger the element to update.
+     */
+
+  }, {
+    key: "render",
+    value: function render() {}
+  }]);
+
+  return LitElement;
+}(UpdatingElement);
 /**
  * Render method used to render the lit-html TemplateResult to the element's
  * DOM.
@@ -2387,6 +3004,8 @@ class LitElement extends UpdatingElement {
  */
 
 LitElement.render = render;
+
+var _templateObject;
 
 window.initMap = function () {
   window.dispatchEvent(new CustomEvent('google-map-ready'));
@@ -2401,54 +3020,21 @@ window.initMap = function () {
  */
 
 
-class GoogleMapsLimited extends LitElement {
-  static get properties() {
-    return {
-      apiKey: {
-        type: String
-      },
-      lang: {
-        type: String
-      },
-      inChina: {
-        type: Boolean
-      },
-      markers: {
-        type: Object
-      },
-      selectedMarkerId: {
-        type: String
-      },
-      icon: {
-        type: String
-      },
-      selectedIcon: {
-        type: String
-      }
-    };
-  }
+var GoogleMapsLimited = /*#__PURE__*/function (_LitElement) {
+  _inherits(GoogleMapsLimited, _LitElement);
 
-  render() {
-    return html`
-      <style>
-        :host {
-          display: block
-        }
-        #map {
-          width: 100%;
-          height: 100%;
-        }
-      </style>
-      <div id="map"></div>
-    `;
-  }
+  var _super = _createSuper(GoogleMapsLimited);
 
-  constructor() {
-    super(); // _mapScriptTag sets up and the google maps loader script tag - we inject it here
+  function GoogleMapsLimited() {
+    var _this;
+
+    _classCallCheck(this, GoogleMapsLimited);
+
+    _this = _super.call(this); // _mapScriptTag sets up and the google maps loader script tag - we inject it here
     // and after it loads it will fire the google-map-ready event  
 
-    window.addEventListener('google-map-ready', () => {
-      this._mapRef = new google.maps.Map(this.shadowRoot.querySelector('#map'), {
+    window.addEventListener('google-map-ready', function () {
+      _this._mapRef = new google.maps.Map(_this.shadowRoot.querySelector('#map'), {
         center: {
           lat: 40,
           lng: -112
@@ -2457,135 +3043,191 @@ class GoogleMapsLimited extends LitElement {
         streetViewControl: false
       });
 
-      this._putMarkersOnMap(this._markers);
+      _this._putMarkersOnMap(_this._markers);
 
-      this._infoWindow = new google.maps.InfoWindow({
+      _this._infoWindow = new google.maps.InfoWindow({
         content: document.createElement('div')
       });
 
-      this._infoWindow.addListener('closeclick', () => {
-        this.selectedMarkerId = null;
+      _this._infoWindow.addListener('closeclick', function () {
+        _this.selectedMarkerId = null;
       });
     });
-    this.icon = this.icon || 'data:image/svg+xml;utf-8, <svg xmlns="http://www.w3.org/2000/svg" width="30" height="47"><g data-name="Layer 2"><path d="M15 46.59a3.11 3.11 0 0 1-3.15-3c-.91-8.7-4.07-12.72-6.85-16.26C2.51 24.17.17 21.19.17 16a14.83 14.83 0 0 1 29.66 0c0 5.19-2.34 8.17-4.83 11.33-2.78 3.54-5.94 7.56-6.87 16.25A3 3 0 0 1 15 46.59z" opacity=".33"/><path fill="none" d="M0 0h30v47H0z"/><path d="M15 .17A14.84 14.84 0 0 0 .17 15c0 5.19 2.34 8.17 4.83 11.33 2.78 3.54 5.94 7.56 6.87 16.25a3.11 3.11 0 0 0 3.14 3 3 3 0 0 0 3.11-3c.93-8.69 4.09-12.71 6.87-16.25 2.49-3.16 4.83-6.14 4.83-11.33A14.84 14.84 0 0 0 15 .17z" fill="rgb(255,255,255)"/><path d="M15 2.17A12.84 12.84 0 0 0 2.17 15c0 10 9.91 10.47 11.7 27.45a1.13 1.13 0 1 0 2.26 0C17.92 25.47 27.83 25 27.83 15A12.84 12.84 0 0 0 15 2.17zm0 17.29A4.46 4.46 0 1 1 19.46 15 4.46 4.46 0 0 1 15 19.46z" fill="rgb(231,69,60)"/></g></svg>';
-    this.selectedIcon = this.selectedIcon || 'data:image/svg+xml;utf-8, <svg xmlns="http://www.w3.org/2000/svg" width="30" height="47"><g data-name="Layer 2"><path d="M15 46.59a3.11 3.11 0 0 1-3.15-3c-.91-8.7-4.07-12.72-6.85-16.26C2.51 24.17.17 21.19.17 16a14.83 14.83 0 0 1 29.66 0c0 5.19-2.34 8.17-4.83 11.33-2.78 3.54-5.94 7.56-6.87 16.25A3 3 0 0 1 15 46.59z" opacity=".33"/><path fill="none" d="M0 0h30v47H0z"/><path d="M15 .17A14.84 14.84 0 0 0 .17 15c0 5.19 2.34 8.17 4.83 11.33 2.78 3.54 5.94 7.56 6.87 16.25a3.11 3.11 0 0 0 3.14 3 3 3 0 0 0 3.11-3c.93-8.69 4.09-12.71 6.87-16.25 2.49-3.16 4.83-6.14 4.83-11.33A14.84 14.84 0 0 0 15 .17z" fill="rgb(255,255,255)"/><path d="M15 2.17A12.84 12.84 0 0 0 2.17 15c0 10 9.91 10.47 11.7 27.45a1.13 1.13 0 1 0 2.26 0C17.92 25.47 27.83 25 27.83 15A12.84 12.84 0 0 0 15 2.17zm0 17.29A4.46 4.46 0 1 1 19.46 15 4.46 4.46 0 0 1 15 19.46z" fill="rgb(135,185,64)"/></g></svg>';
+    _this.icon = _this.icon || 'data:image/svg+xml;utf-8, <svg xmlns="http://www.w3.org/2000/svg" width="30" height="47"><g data-name="Layer 2"><path d="M15 46.59a3.11 3.11 0 0 1-3.15-3c-.91-8.7-4.07-12.72-6.85-16.26C2.51 24.17.17 21.19.17 16a14.83 14.83 0 0 1 29.66 0c0 5.19-2.34 8.17-4.83 11.33-2.78 3.54-5.94 7.56-6.87 16.25A3 3 0 0 1 15 46.59z" opacity=".33"/><path fill="none" d="M0 0h30v47H0z"/><path d="M15 .17A14.84 14.84 0 0 0 .17 15c0 5.19 2.34 8.17 4.83 11.33 2.78 3.54 5.94 7.56 6.87 16.25a3.11 3.11 0 0 0 3.14 3 3 3 0 0 0 3.11-3c.93-8.69 4.09-12.71 6.87-16.25 2.49-3.16 4.83-6.14 4.83-11.33A14.84 14.84 0 0 0 15 .17z" fill="rgb(255,255,255)"/><path d="M15 2.17A12.84 12.84 0 0 0 2.17 15c0 10 9.91 10.47 11.7 27.45a1.13 1.13 0 1 0 2.26 0C17.92 25.47 27.83 25 27.83 15A12.84 12.84 0 0 0 15 2.17zm0 17.29A4.46 4.46 0 1 1 19.46 15 4.46 4.46 0 0 1 15 19.46z" fill="rgb(231,69,60)"/></g></svg>';
+    _this.selectedIcon = _this.selectedIcon || 'data:image/svg+xml;utf-8, <svg xmlns="http://www.w3.org/2000/svg" width="30" height="47"><g data-name="Layer 2"><path d="M15 46.59a3.11 3.11 0 0 1-3.15-3c-.91-8.7-4.07-12.72-6.85-16.26C2.51 24.17.17 21.19.17 16a14.83 14.83 0 0 1 29.66 0c0 5.19-2.34 8.17-4.83 11.33-2.78 3.54-5.94 7.56-6.87 16.25A3 3 0 0 1 15 46.59z" opacity=".33"/><path fill="none" d="M0 0h30v47H0z"/><path d="M15 .17A14.84 14.84 0 0 0 .17 15c0 5.19 2.34 8.17 4.83 11.33 2.78 3.54 5.94 7.56 6.87 16.25a3.11 3.11 0 0 0 3.14 3 3 3 0 0 0 3.11-3c.93-8.69 4.09-12.71 6.87-16.25 2.49-3.16 4.83-6.14 4.83-11.33A14.84 14.84 0 0 0 15 .17z" fill="rgb(255,255,255)"/><path d="M15 2.17A12.84 12.84 0 0 0 2.17 15c0 10 9.91 10.47 11.7 27.45a1.13 1.13 0 1 0 2.26 0C17.92 25.47 27.83 25 27.83 15A12.84 12.84 0 0 0 15 2.17zm0 17.29A4.46 4.46 0 1 1 19.46 15 4.46 4.46 0 0 1 15 19.46z" fill="rgb(135,185,64)"/></g></svg>';
+    return _this;
   }
 
-  firstUpdated() {
-    this.shadowRoot.appendChild(this._mapScriptTag());
-    super.firstUpdated();
-  }
-
-  _mapScriptTag() {
-    const lang = 'en'; // init google maps
-
-    const googleMapsLoader = document.createElement('script');
-    googleMapsLoader.src = `https://maps.${this.inChina ? 'google.cn' : 'googleapis.com'}/maps/api/js?key=${this.apiKey}&language=${lang}&callback=initMap`;
-    googleMapsLoader.async = true;
-    googleMapsLoader.defer = true;
-    return googleMapsLoader;
-  }
-
-  set markers(markers) {
-    if (!markers) return;
-
-    this._putMarkersOnMap(markers);
-
-    this._markers = markers;
-  }
-
-  get markers() {
-    return this._markers;
-  }
-
-  set selectedMarkerId(id) {
-    if (!this._mapMarkers) return;
-    let oldMapMarker = this._mapMarkers[this._selectedMarkerId];
-    let newMapMarker = this._mapMarkers[id];
-    let newMarker = this._markers[id];
-    if (oldMapMarker) oldMapMarker.setIcon(this.icon);
-    if (newMapMarker) newMapMarker.setIcon(this.selectedIcon);
-    if (this._infoWindow) this._infoWindow.close();
-
-    if (newMarker && newMarker.InfoWindowContent) {
-      this._infoWindow.setContent(newMarker.InfoWindowContent);
-
-      this._infoWindow.open(this._mapRef, newMapMarker);
+  _createClass(GoogleMapsLimited, [{
+    key: "render",
+    value: function render() {
+      return html(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n      <style>\n        :host {\n          display: block\n        }\n        #map {\n          width: 100%;\n          height: 100%;\n        }\n      </style>\n      <div id=\"map\"></div>\n    "])));
     }
+  }, {
+    key: "firstUpdated",
+    value: function firstUpdated() {
+      this.shadowRoot.appendChild(this._mapScriptTag());
 
-    this.dispatchEvent(new CustomEvent('map-pin-selected', {
-      bubbles: true,
-      composed: true,
-      detail: {
-        id: this.selectedMarkerId
+      _get(_getPrototypeOf(GoogleMapsLimited.prototype), "firstUpdated", this).call(this);
+    }
+  }, {
+    key: "_mapScriptTag",
+    value: function _mapScriptTag() {
+      var lang = 'en'; // init google maps
+
+      var googleMapsLoader = document.createElement('script');
+      googleMapsLoader.src = "https://maps.".concat(this.inChina ? 'google.cn' : 'googleapis.com', "/maps/api/js?key=").concat(this.apiKey, "&language=").concat(lang, "&callback=initMap");
+      googleMapsLoader.async = true;
+      googleMapsLoader.defer = true;
+      return googleMapsLoader;
+    }
+  }, {
+    key: "markers",
+    get: function get() {
+      return this._markers;
+    },
+    set: function set(markers) {
+      if (!markers) return;
+
+      this._putMarkersOnMap(markers);
+
+      this._markers = markers;
+    }
+  }, {
+    key: "selectedMarkerId",
+    get: function get() {
+      return this._selectedMarkerId;
+    },
+    set: function set(id) {
+      if (!this._mapMarkers) return;
+      var oldMapMarker = this._mapMarkers[this._selectedMarkerId];
+      var newMapMarker = this._mapMarkers[id];
+      var newMarker = this._markers[id];
+      if (oldMapMarker) oldMapMarker.setIcon(this.icon);
+      if (newMapMarker) newMapMarker.setIcon(this.selectedIcon);
+      if (this._infoWindow) this._infoWindow.close();
+
+      if (newMarker && newMarker.InfoWindowContent) {
+        this._infoWindow.setContent(newMarker.InfoWindowContent);
+
+        this._infoWindow.open(this._mapRef, newMapMarker);
       }
-    }));
-    this._selectedMarkerId = id;
-  }
 
-  get selectedMarkerId() {
-    return this._selectedMarkerId;
-  }
+      this.dispatchEvent(new CustomEvent('map-pin-selected', {
+        bubbles: true,
+        composed: true,
+        detail: {
+          id: this.selectedMarkerId
+        }
+      }));
+      this._selectedMarkerId = id;
+    }
+  }, {
+    key: "_putMarkersOnMap",
+    value: function _putMarkersOnMap(markers) {
+      var _this2 = this;
 
-  _putMarkersOnMap(markers) {
-    if (!this._mapRef || !markers) return;
-    this._mapMarkers = markers.reduce((acc, item, index) => {
-      if (item.position) {
-        const mapMarker = new google.maps.Marker({
-          position: item.position,
-          icon: markers.icon || this.icon,
-          map: this._mapRef
-        });
-        mapMarker.addListener('click', () => {
-          this.selectedMarkerId = item.id || index;
-        });
-        acc[item.id || index] = mapMarker;
+      if (!this._mapRef || !markers) return;
+      this._mapMarkers = markers.reduce(function (acc, item, index) {
+        if (item.position) {
+          var mapMarker = new google.maps.Marker({
+            position: item.position,
+            icon: markers.icon || _this2.icon,
+            map: _this2._mapRef
+          });
+          mapMarker.addListener('click', function () {
+            _this2.selectedMarkerId = item.id || index;
+          });
+          acc[item.id || index] = mapMarker;
+          return acc;
+        }
+
         return acc;
-      }
+      }, []);
 
-      return acc;
-    }, []);
-
-    this._setDefaultBounds();
-  }
-
-  _setDefaultBounds() {
-    if (this._markers.length === 0) {
-      // show the whole world if there are no markers
-      var worldBounds = new google.maps.LatLngBounds(new google.maps.LatLng(70.4043, -143.5291), // Top-left
-      new google.maps.LatLng(-46.11251, 163.4288) // Bottom-right
-      );
-
-      this._mapRef.fitBounds(worldBounds, 0);
-    } else {
-      var initialBounds = this._mapMarkers.reduce((bounds, marker) => {
-        bounds.extend(marker.getPosition());
-        return bounds;
-      }, new google.maps.LatLngBounds());
-
-      this._mapRef.fitBounds(initialBounds);
+      this._setDefaultBounds();
     }
-  }
+  }, {
+    key: "_setDefaultBounds",
+    value: function _setDefaultBounds() {
+      if (this._markers.length === 0) {
+        // show the whole world if there are no markers
+        var worldBounds = new google.maps.LatLngBounds(new google.maps.LatLng(70.4043, -143.5291), // Top-left
+        new google.maps.LatLng(-46.11251, 163.4288) // Bottom-right
+        );
 
-}
+        this._mapRef.fitBounds(worldBounds, 0);
+      } else {
+        var initialBounds = this._mapMarkers.reduce(function (bounds, marker) {
+          bounds.extend(marker.getPosition());
+          return bounds;
+        }, new google.maps.LatLngBounds());
+
+        this._mapRef.fitBounds(initialBounds);
+      }
+    }
+  }], [{
+    key: "properties",
+    get: function get() {
+      return {
+        apiKey: {
+          type: String
+        },
+        lang: {
+          type: String
+        },
+        inChina: {
+          type: Boolean
+        },
+        markers: {
+          type: Object
+        },
+        selectedMarkerId: {
+          type: String
+        },
+        icon: {
+          type: String
+        },
+        selectedIcon: {
+          type: String
+        }
+      };
+    }
+  }]);
+
+  return GoogleMapsLimited;
+}(LitElement);
 
 window.customElements.define('google-maps-limited', GoogleMapsLimited);
 
-class SlumMap extends customElements.get("google-maps-limited") {
-  constructor() {
-    super();
-    this.apiKey = "";
+var SlumMap = /*#__PURE__*/function (_customElements$get) {
+  _inherits(SlumMap, _customElements$get);
+
+  var _super = _createSuper(SlumMap);
+
+  function SlumMap() {
+    var _this;
+
+    _classCallCheck(this, SlumMap);
+
+    _this = _super.call(this);
+    _this.apiKey = "";
+    return _this;
   }
 
-  static get properties() {
-    return {
-      apiKey: {
-        type: String,
-        attribute: "api-key"
-      }
-    };
-  }
+  _createClass(SlumMap, null, [{
+    key: "properties",
+    get: function get() {
+      return {
+        apiKey: {
+          type: String,
+          attribute: "api-key"
+        }
+      };
+    }
+  }]);
 
-}
+  return SlumMap;
+}(customElements.get("google-maps-limited"));
 customElements.define("slum-map", SlumMap);
 //# sourceMappingURL=bundle.js.map
