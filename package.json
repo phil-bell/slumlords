@@ -1,6 +1,8 @@
 {
   "name": "slumlords.london",
   "dependencies": {
+    "@babel/core": "^7.13.14",
+    "@rollup/plugin-babel": "^5.3.0",
     "@rollup/plugin-commonjs": "^17.1.0",
     "concurrently": "^6.0.0",
     "django-form-component": "^1.1.2",

@@ -1,14 +1,9 @@
 import resolve from "rollup-plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 import scss from "rollup-plugin-scss";
+import { babel } from "@rollup/plugin-babel";
 
-const dirs = [
-  "account",
-  "home",
-  "map",
-  "review",
-  "shared",
-]
+const dirs = ["account", "home", "map", "review", "shared"];
 
 export default dirs.map((name, index) => ({
   input: `slumlords/apps/${name}/static-src/${name}/js/main.js`,
@@ -22,5 +17,10 @@ export default dirs.map((name, index) => ({
   },
   preserveSymlinks: true,
   inlineDynamicImports: true,
-  plugins: [resolve(), commonjs(), scss({output: `slumlords/apps/${name}/static/${name}/css/bundle.css`})],
+  plugins: [
+    resolve(),
+    commonjs(),
+    scss({ output: `slumlords/apps/${name}/static/${name}/css/bundle.css` }),
+    babel({ babelHelpers: "bundled", presets: ['@babel/preset-env'] }),
+  ],
 }));
