@@ -1,0 +1,11 @@
+:root {
+  font-family: "Inconsolata", monospace;
+}
+
+.django-form__field-error {
+  color: red;
+}
+
+django-form::part(django-form__submit-button) {
+  background-color: aquamarine;
+}
