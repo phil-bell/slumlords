@@ -1,14 +1,16 @@
+{% extends 'shared/base.html' %}
 {% load static %}
-<!doctype html>
-    <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <title>Map</title>
-        <link rel="stylesheet" href="{% static 'css/map.css' %}">
-        <script type="module" src="{% static 'js/bundle.js' %}"></script>
-    </head>
-    <body>
-        {% block content %}
-        {% endblock content %}
-    </body>
-</html>
+
+{% block title %}
+  <title>Map</title>
+{% endblock title %}
+{% block links %}
+  <link rel="stylesheet" href="{% static 'css/map.css' %}">
+{% endblock links %}
+{% block scripts %}
+  <script type="module" src="{% static 'js/bundle.js' %}"></script>
+{% endblock scripts %}
+{% block base_content %}
+  {% block content %}
+  {% endblock content %}
+{% endblock base_content %}
