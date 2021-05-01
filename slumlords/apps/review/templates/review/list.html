@@ -1,12 +1,17 @@
 {% extends 'review/base.html' %}
 {% block content %}
+  <sections class="reviews">
   {% for review in reviews %}
-    <div>
-      <p>id: {{ review.pk }}</p>
-      <p>rating: {{ review.rating }}</p>
-      <p>tenant: {{ review.tenant }}</p>
-      <p>rental: {{ review.rental }}</p>
+    <div class="reviews__card">
+      <p>rating:</p>
+      <p class="reviews__rating"> {{ review.rating }}</p>
+      <p>landlord:</p>
+      <p> {{ review.rental.landlord.first_name }} {{ review.rental.landlord.last_name }}</p>
+      <p>rental:</p>
+      <p> {{ review.rental.address }}</p>
+      <p>description:</p>
+      <p> {{ review.description }}</p>
     </div>
-    <hr>
   {% endfor %}
+  </sectoin>
 {% endblock content %}

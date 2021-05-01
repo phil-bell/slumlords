@@ -1,0 +1,76 @@
+.login-form__form,
+.create-form__form {
+  display: flex;
+  flex-direction: column; }
+  .login-form__form p,
+  .create-form__form p {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    grid-template: "label input" 40px "help error" 20px / auto 1fr; }
+    .login-form__form p label,
+    .create-form__form p label {
+      grid-area: label; }
+    .login-form__form p input,
+    .create-form__form p input {
+      grid-area: input;
+      height: 20px;
+      width: 200px;
+      border: 0;
+      border-bottom: 1px solid var(--slum-grey-light);
+      justify-self: end; }
+      .login-form__form p input:focus,
+      .create-form__form p input:focus {
+        outline: none;
+        border-bottom-color: var(--slum-pink); }
+    .login-form__form p .django-form__field-error,
+    .create-form__form p .django-form__field-error {
+      justify-self: end;
+      grid-area: error; }
+    .login-form__form p .helptext,
+    .create-form__form p .helptext {
+      display: none; }
+    .login-form__form p #id_password,
+    .create-form__form p #id_password {
+      -webkit-text-security: none; }
+    .login-form__form p #id_password,
+    .create-form__form p #id_password {
+      -webkit-text-security: circle; }
+    .login-form__form p #id_password,
+    .create-form__form p #id_password {
+      -webkit-text-security: square; }
+    .login-form__form p #id_password,
+    .create-form__form p #id_password {
+      -webkit-text-security: disc;
+      /* Default */ }
+  .login-form__form .errorlist,
+  .create-form__form .errorlist {
+    display: none; }
+
+.login-form__submit-button,
+.create-form__submit-button {
+  border: 1px solid var(--slum-cyan-dark);
+  color: var(--slum-cyan-dark);
+  border-radius: 3px;
+  height: 30px;
+  background-color: white;
+  width: 55px;
+  align-self: flex-end;
+  margin: 10px 0; }
+  .login-form__submit-button:hover,
+  .create-form__submit-button:hover {
+    background-color: var(--slum-grey-lightest); }
+  .login-form__submit-button:focus,
+  .create-form__submit-button:focus {
+    outline: none; }
+  .login-form__submit-button:active,
+  .create-form__submit-button:active {
+    color: var(--slum-pink);
+    border-color: var(--slum-pink); }
+
+.login-form .errorlist,
+.create-form .errorlist {
+  list-style-type: none;
+  max-width: fit-content;
+  padding: 0;
+  color: var(--slum-pink); }

@@ -1,0 +1,58 @@
+.home {
+  &__container {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height: 300px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+}
+.feed {
+  width: 50%;
+  &__review {
+    margin: 10px;
+    padding: 10px;
+    width: 100%;
+    display: grid;
+    grid-template:
+      "tenant rating" 30px
+      "address landlord" 30px / 1fr auto;
+    gap: 10px;
+    border: 1px solid var(--slum-grey-lightest);
+    border-bottom-color: var(--slum-pink);
+    p {
+      margin: 0;
+    }
+  }
+  &__label {
+    font-size: var(--font-size-xs);
+    color: var(--slum-pink);
+    text-align: end;
+  }
+  &__tenant {
+    grid-area: tenant;
+    font-weight: bold;
+    color: var(--slum-purple);
+  }
+  &__rating {
+    grid-area: rating;
+    justify-self: end;
+  }
+  &__address {
+    grid-area: address;
+  }
+  &__landlord {
+    grid-area: landlord;
+    justify-self: end;
+  }
+  &__rating {
+    font-size: var(--font-size-xl);
+    font-weight: bold;
+    background-image: var(--slum-rainbow);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}

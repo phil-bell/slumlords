@@ -1,12 +1,13 @@
 {% extends 'shared/base.html' %}
 {% load static %}
 {% block title %}
-  <title>Reviews</title>
+  <title>Slumlords - Reviews</title>
 {% endblock title %}
 {% block links %}
   <link rel="stylesheet" href="{% static 'review/css/bundle.css' %}" />
 {% endblock links %}
 {% block scripts %}
+  <script type="module" src="{% static 'review/js/bundle.js' %}"></script>
 {% endblock scripts %}
 {% block base_content %}
   {% block content %}

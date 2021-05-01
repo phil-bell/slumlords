@@ -21,6 +21,18 @@ export default dirs.map((name, index) => ({
     resolve(),
     commonjs(),
     scss({ output: `slumlords/apps/${name}/static/${name}/css/bundle.css` }),
-    babel({ babelHelpers: "bundled", presets: ['@babel/preset-env'] }),
+    babel({
+      babelHelpers: "bundled",
+      presets: [
+        [
+          "@babel/preset-env",
+          {
+            targets: {
+              esmodules: true,
+            },
+          },
+        ],
+      ],
+    }),
   ],
 }));

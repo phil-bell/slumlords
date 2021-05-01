@@ -2,10 +2,93 @@
   font-family: "Inconsolata", monospace;
 }
 
+.review-form {
+  p {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    grid-template:
+      "label input" 30px
+      ". error" 35px / auto 1fr;
+    label {
+      grid-area: label;
+    }
+    input,
+    textarea {
+      grid-area: input;
+      height: 20px;
+      width: 200px;
+      border: 0;
+      border-bottom: 1px solid var(--slum-grey-light);
+      justify-self: end;
+      &:focus {
+        outline: none;
+        border-bottom-color: var(--slum-pink);
+      }
+    }
+    .django-form__field-error {
+      justify-self: end;
+      grid-area: error;
+    }
+  }
+}
+
 .django-form__field-error {
-  color: red;
+  color: var(--slum-pink);
+}
+
+django-form::part(django-form) {
+  display: flex;
+  flex-direction: column;
+  width: 450px;
 }
 
 django-form::part(django-form__submit-button) {
-  background-color: aquamarine;
+  border: 1px solid var(--slum-cyan-dark);
+  color: var(--slum-cyan-dark);
+  border-radius: 3px;
+  height: 30px;
+  background-color: white;
+  width: 55px;
+  align-self: flex-end;
+  margin: 10px 0;
+  &:hover {
+    background-color: var(--slum-grey-lightest);
+  }
+  &:focus {
+    outline: none;
+  }
+  &:active {
+    color: var(--slum-pink);
+    border-color: var(--slum-pink);
+  }
+}
+
+.reviews {
+  display: grid;
+  width: 90%;
+  grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+  grid-auto-rows: 1fr;
+  column-gap: 3rem;
+  row-gap: 3rem;
+  &__card {
+    padding: 10px;
+    border: 1px solid var(--slum-grey-lightest);
+    border-bottom-color: var(--slum-pink);
+    border-radius: 5px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    p:nth-child(even) {
+      justify-self: end;
+    }
+  }
+  &__rating {
+    font-size: var(--font-size-xl);
+    font-weight: bold;
+    margin: 10px;
+    background-image: var(--slum-rainbow);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 }

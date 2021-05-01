@@ -1,10 +1,12 @@
 {% extends 'account/base.html' %}
 {% block content %}
   <section class="login-form">
+    <h1>Login</h1>
     <form class="login-form__form" method="post" action="">
       {% csrf_token %}
-      {{ form }}
-      <input type="submit" value="login">
+      {{form.as_p}}
+      <input class="login-form__submit-button" type="submit" value="login">
     </form>
+    {{ form.non_field_errors }}
   </section>
 {% endblock content %}

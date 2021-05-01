@@ -1,7 +1,26 @@
 {% extends "home/base.html" %}
 {% block content %}
-        <section>
-            <h1>It may be possible for a landlord to be a good person,
-                but the act of landlording will always be immoral</h1>
-        </section>
+    <section class="home__container">
+        <h1>It may be possible for a landlord to be a good person,
+            but the act of landlording will always be immoral</h1>
+
+    </section>
+    <section class="feed">
+        <h1>The feed</h1>
+        {% for review in reviewsE %}
+            <article class="feed__review" href="{% url 'review:view' review.pk %}">
+                <div class="feed__tenant">{{ review.tenant.user }}</div>
+                <div class="feed__address">
+                    <p>{{ review.rental.address }}</p>
+                </div>
+                <div class="feed__landlord">
+                    <p class="feed__label">landlord</small>
+                    <p>{{review.rental.landlord.first_name}} {{review.rental.landlord.last_name}}</p>
+                </div>
+                <div class="feed__rating">
+                    {{ review.rating }}
+                </div>
+            </article>
+        {% endfor %}
+    </section>
 {% endblock content %}

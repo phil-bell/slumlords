@@ -1,3 +1,76 @@
-:root{
-    font-family: "Inconsolata", monospace;
+:root {
+  font-family: "Inconsolata", monospace;
+  --slum-cyan: #7be4d5;
+  --slum-cyan-dark: #70cec0;
+  --slum-pink: #ff487a;
+  --slum-purple: #8719b3;
+  --slum-grey-light: #c2c2c2;
+  --slum-grey-lightest: #f3f3f3;
+  --slum-rainbow: linear-gradient(
+    90deg,
+    #f79533 0%,
+    #f37055 15%,
+    #ef4e7b 30%,
+    #a166ab 44%,
+    #5073b8 58%,
+    #1098ad 72%,
+    #07b39b 86%,
+    #6dba82 100%
+  );
+  --font-size-xl: 26px;
+  --font-size-l: 22px;
+  --font-size: 20px;
+  --font-size-s: 18px;
+  --font-size-xs: 14px;
+}
+
+html {
+  border-top: 8px solid var(--slum-cyan);
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+
+    h1 {
+      background-image: var(--slum-rainbow);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav {
+      width: 50%;
+
+      &__item {
+        list-style-type: none;
+        margin: 12px;
+        color: var(--slum-purple);
+        &:last-child {
+          margin-left: auto;
+        }
+        :hover{
+          background: var(--slum-rainbow);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+      }
+      &__link {
+        text-decoration: none;
+        color: var(--slum-pink);
+      }
+      &__list {
+        display: flex;
+        flex-direction: row;
+      }
+    }
+  }
 }
