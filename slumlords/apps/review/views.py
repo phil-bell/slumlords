@@ -71,3 +71,8 @@ class ReviewListView(LoginRequiredMixin, TemplateView):
 
 class ReviewView(TemplateView):
     template_name = "review/view.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["review"] = Review.objects.get(pk=kwargs.get("pk"))
+        return context

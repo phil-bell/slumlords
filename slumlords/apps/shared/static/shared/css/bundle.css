@@ -43,6 +43,11 @@ html {
       background-clip: text;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent; }
+    html body input {
+      font-family: "Inconsolata", monospace;
+      font-size: 16px; }
+    html body label {
+      padding-top: 2px; }
     html body .nav {
       width: 50%; }
       html body .nav__item {

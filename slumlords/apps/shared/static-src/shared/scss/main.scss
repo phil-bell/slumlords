@@ -47,6 +47,14 @@ html {
       -webkit-text-fill-color: transparent;
     }
 
+    input {
+      font-family: "Inconsolata", monospace;
+      font-size: 16px;
+    }
+    label {
+      padding-top: 2px;
+    }
+
     .nav {
       width: 50%;
 
@@ -57,7 +65,7 @@ html {
         &:last-child {
           margin-left: auto;
         }
-        :hover{
+        :hover {
           background: var(--slum-rainbow);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
