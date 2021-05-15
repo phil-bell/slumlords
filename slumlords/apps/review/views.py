@@ -53,11 +53,11 @@ class ReviewCreateView(LoginRequiredMixin, TemplateView):
             self.review = form.save()
             self.landlord = form
             self.rental = form
-            self.review .rental = self.rental
-            self.review .tenant = request.user.tenant
+            self.review.rental = self.rental
+            self.review.tenant = request.user.tenant
             self.review.save()
             return HttpResponse()
-        return JsonResponse(data=self.review.errors, safe=False, status=400)
+        return JsonResponse(data=form.errors, safe=False, status=400)
 
 
 class ReviewListView(LoginRequiredMixin, TemplateView):
@@ -65,7 +65,9 @@ class ReviewListView(LoginRequiredMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context[
-            "reviews"
-        ] = Review.objects.filter(tenant__user=self.request.user)
+        context["reviews"] = Review.objects.filter(tenant__user=self.request.user)
         return context
+
+
+class ReviewView(TemplateView):
+    template_name = "review/view.html"

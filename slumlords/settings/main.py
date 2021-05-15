@@ -10,7 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import os
+import mimetypes
 from pathlib import Path
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -102,7 +104,7 @@ USE_L10N = True
 USE_TZ = True
 
 STATIC_URL = "/static/"
-STATICFILES_DIRS = [f"{BASE_DIR}/static/"]
+STATICFILES_DIRS = [f"{BASE_DIR}/apps/*/static/"]
 STATIC_ROOT = f"{BASE_DIR}/staticfiles/"
 
 CORS_ALLOWED_ORIGINS = ["https://maps.googleapis.com"]
@@ -111,6 +113,10 @@ CORS_ALLOW_ALL_ORIGINS = True
 LOGIN_URL = "account:login"
 LOGIN_REDIRECT_URL = "home"
 LOGOUT_REDIRECT_URL = "account:login"
+
+
+mimetypes.add_type("image/svg+xml", ".svg", True)
+mimetypes.add_type("image/svg+xml", ".svgz", True)
 
 try:
     from .local import *

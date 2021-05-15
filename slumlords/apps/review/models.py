@@ -87,6 +87,7 @@ class Review(models.Model):
     tenant = models.ForeignKey(
         "Tenant", null=True, blank=True, on_delete=models.SET_NULL
     )
+    rent
 
 
 class Tenant(models.Model):

@@ -1,10 +1,14 @@
 {% extends 'account/base.html' %}
 {% block content %}
 <section>
-  <form action="" method="post">
+  <h1>Create an account</h1>
+  <form class="create-form__form" method="post" action="">
+
+   <form class="create-form__form" method="post" action="">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Create</button>
+    <button class="create-form__submit-button" type="submit">Create</button>
   </form>
+  {{ form.non_field_errors }}
 </section>
 {% endblock content %}

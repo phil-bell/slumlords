@@ -8,24 +8,44 @@
       href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200;300;400;500;600;700;800;900&display=swap"
       rel="stylesheet"
     />
-    <script type="module" src="{% static 'js/bundle.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'shared/css/bundle.css' %}" />
+    <link
+      rel="icon"
+      href="{% static 'shared/img/favicon.ico' %}"
+    />
+    <script type="module" src="{% static 'shared/js/bundle.js' %}"></script>
     {% block title %}
     {% endblock title %}
     {% block links %}
-    {% endblock links %} {% block scripts %}
+    {% endblock links %}
+    {% block scripts %}
     {% endblock scripts %}
   </head>
   <body>
-    <section>
-      <ul>
-        <li><a href="{% url 'home' %}">home</a></li>
-        <li><a href="{% url 'map:view' %}">map</a></li>
-        <li><a href="{% url 'review:create' %}">create review</a></li>
-        <li><a href="{% url 'review:list' %}">list review</a></li>
-        <li>{% include 'shared/includes/login_panel.html' %}</li>
+    <section class="nav">
+      <ul class="nav__list">
+        <li class="nav__item">
+          <a class="nav__link" href="{% url 'home' %}">home</a>
+        </li>
+        <li class="nav__item">
+          <a class="nav__link" href="{% url 'map:view' %}">map</a>
+        </li>
+        <li class="nav__item">
+          <a class="nav__link" href="{% url 'review:create' %}"
+            >create review</a
+          >
+        </li>
+        <li class="nav__item">
+          <a class="nav__link" href="{% url 'review:list' %}">my reviews</a>
+        </li>
+        <li class="nav__item">
+          <a class="nav__link" href="{% url 'review:list' %}">my reviews</a>
+        </li>
+        <li class="nav__item">
+          {% include 'shared/includes/login_panel.html' %}
+        </li>
       </ul>
     </section>
-    {% block base_content %}
-    {% endblock base_content %}
+    {% block base_content %} {% endblock base_content %}
   </body>
 </html>

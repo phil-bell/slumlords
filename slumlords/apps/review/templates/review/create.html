@@ -1,8 +1,11 @@
 {% extends 'review/base.html' %}
 {% block content %}
+<section class="review-form">
 {% csrf_token %}
+  <h1> Write a review</h1>
   <django-form action="" method="post" button="Save">
     {{ review_form.media }}
     {{ review_form.as_p }}
   </django-form>
+</section>
 {% endblock content %}
