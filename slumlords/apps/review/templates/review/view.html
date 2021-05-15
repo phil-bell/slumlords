@@ -1,18 +1,12 @@
-{% extends 'review/base.html' %}
-{% block content %}
+{% extends 'review/base.html' %} {% block content %}
 
     <article class="review" href="{% url 'review:view' review.pk %}">
-        <div class="review__tenant">{{ review.tenant.user }}</div>
-        <div class="review__address">
-            <p>{{ review.rental.address }}</p>
-        </div>
-        <div class="review__landlord">
-            <p class="review__label">landlord</small>
-            <p>{{review.rental.landlord.first_name}} {{review.rental.landlord.last_name}}</p>
-        </div>
-        <div class="review__rating">
-            {{ review.rating }}
-        </div>
+        <div class="review__details">details</div>
+        <div class="review__phtotos">phtotos</div>
+        <div class="review__landlord">landlord</div>
+        <div class="review__map">map</div>
+        <div class="review__cons">cons</div>
+        <div class="review__pros">pros</div>
     </article>
 
 {% endblock content %}

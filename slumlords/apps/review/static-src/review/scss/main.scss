@@ -94,16 +94,31 @@ django-form::part(django-form__submit-button) {
 }
 
 .review {
-  border: solid 1px var(--)
-  &__address {
-
+  border: solid 1px var(--slum-grey-light);
+  border-bottom-color: var(--slum-pink);
+  border-radius: 5px;
+  display: grid;
+  grid-template:
+    "details photos" 1fr
+    "landlord map" 1fr
+    "cons pros" 1fr / 50% 50%;
+  gap: 10px;
+  &__cons {
+    grid-area: cons;
   }
-  &__label {
+  &__details {
+    grid-area: details;
   }
   &__landlord {
+    grid-area: landlord;
   }
-  &__rating {
+  &__map {
+    grid-area: map;
   }
-  &__tenant {
+  &__photos {
+    grid-area: photos;
+  }
+  &__pros {
+    grid-area: pros;
   }
 }
