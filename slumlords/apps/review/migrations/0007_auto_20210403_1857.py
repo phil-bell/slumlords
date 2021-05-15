@@ -9,18 +9,24 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('review', '0006_auto_20210329_0033'),
+        ("review", "0006_auto_20210329_0033"),
     ]
 
     operations = [
         migrations.RenameField(
-            model_name='review',
-            old_name='tenent',
-            new_name='tenant',
+            model_name="review",
+            old_name="tenent",
+            new_name="tenant",
         ),
         migrations.AlterField(
-            model_name='tenant',
-            name='user',
-            field=models.OneToOneField(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='tenant', to=settings.AUTH_USER_MODEL),
+            model_name="tenant",
+            name="user",
+            field=models.OneToOneField(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.SET_NULL,
+                related_name="tenant",
+                to=settings.AUTH_USER_MODEL,
+            ),
         ),
     ]
