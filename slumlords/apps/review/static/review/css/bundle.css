@@ -73,3 +73,6 @@ django-form::part(django-form__submit-button) {
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent; }
+
+.review {
+  boarder: solid 1px .review __address; }
