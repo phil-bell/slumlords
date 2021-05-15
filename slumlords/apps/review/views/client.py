@@ -4,8 +4,8 @@ from django.http.response import HttpResponse, JsonResponse
 from django.views.generic.base import TemplateView
 
 
-from .forms import ReviewForm
-from .models import Landlord, Property, Review
+from ..forms import ReviewForm
+from ..models import Landlord, Property, Review
 
 
 class ReviewCreateView(LoginRequiredMixin, TemplateView):
