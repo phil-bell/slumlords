@@ -20,15 +20,19 @@ ALLOWED_HOSTS = ["*"]
 
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "")
 
-INSTALLED_APPS = [
+DJANGO_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+]
+THIRD_PARTY_APPS = [
     "corsheaders",
     "address",
+]
+LOCAL_APPS = [
     "slumlords.api",
     "slumlords.apps.home",
     "slumlords.apps.map",
@@ -38,6 +42,11 @@ INSTALLED_APPS = [
     "slumlords.apps.wall_of_shame",
     "slumlords.apps.shared",
     "slumlords.apps.account",
+]
+INSTALLED_APPS = [
+    *DJANGO_APPS,
+    *THIRD_PARTY_APPS,
+    *LOCAL_APPS,
 ]
 
 MIDDLEWARE = [
@@ -114,6 +123,7 @@ LOGIN_URL = "account:login"
 LOGIN_REDIRECT_URL = "home"
 LOGOUT_REDIRECT_URL = "account:login"
 
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 mimetypes.add_type("image/svg+xml", ".svg", True)
 mimetypes.add_type("image/svg+xml", ".svgz", True)

@@ -87,7 +87,7 @@ class Review(models.Model):
     tenant = models.ForeignKey(
         "Tenant", null=True, blank=True, on_delete=models.SET_NULL
     )
-    rent
+    rent = models.DecimalField(max_digits=9, decimal_places=2, default=0)
 
 
 class Tenant(models.Model):
