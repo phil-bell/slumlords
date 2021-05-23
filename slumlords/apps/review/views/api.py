@@ -1,7 +1,13 @@
 from rest_framework import viewsets, mixins
 
-from ..serializers import LandlordSerializer, PropertySerializer, ReviewSerializer
-from ..models import Landlord, Property, Review
+from ..serializers import (
+    LandlordSerializer,
+    PhotoSerializer,
+    PointSerializer,
+    PropertySerializer,
+    ReviewSerializer,
+)
+from ..models import Landlord, Photo, Point, Property, Review
 
 
 class ReviewViewSet(
@@ -32,3 +38,23 @@ class PropertyViewSet(
 ):
     queryset = Property.objects.all()
     serializer_class = PropertySerializer
+
+
+class PointViewSet(
+    mixins.CreateModelMixin,
+    mixins.ListModelMixin,
+    mixins.RetrieveModelMixin,
+    viewsets.GenericViewSet,
+):
+    queryset = Point.objects.all()
+    serializer_class = PointSerializer
+
+
+class PhotoViewSet(
+    mixins.CreateModelMixin,
+    mixins.ListModelMixin,
+    mixins.RetrieveModelMixin,
+    viewsets.GenericViewSet,
+):
+    queryset = Photo.objects.all()
+    serializer_class = PhotoSerializer
