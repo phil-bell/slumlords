@@ -16,6 +16,11 @@
     "rollup-plugin-scss": "^2.6.1"
   },
   "devDependencies": {
+    "eslint": "^7.27.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.23.3",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.1.0",
     "prettier": "^2.2.1"
   },
   "scripts": {
