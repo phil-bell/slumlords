@@ -1,0 +1,11 @@
+html {
+  height: 100%; }
+
+body {
+  height: 100%; }
+
+slum-map {
+  height: 90%;
+  width: 90%;
+  border: 1px solid var(--slum-pink);
+  border-radius: 5px; }

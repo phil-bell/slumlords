@@ -1,0 +1,17 @@
+{% extends 'shared/base.html' %}
+{% load static %}
+
+{% block title %}
+  <title>Slumlords - Map</title>
+{% endblock title %}
+{% block links %}
+  <link rel="stylesheet" href="{% static 'map/css/bundle.css' %}" />
+
+{% endblock links %}
+{% block scripts %}
+  <script type="module" src="{% static 'map/js/bundle.js' %}"></script>
+{% endblock scripts %}
+{% block base_content %}
+  {% block content %}
+  {% endblock content %}
+{% endblock base_content %}

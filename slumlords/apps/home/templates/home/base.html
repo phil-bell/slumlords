@@ -1,13 +1,16 @@
+{% extends 'shared/base.html' %}
 {% load static %}
-<!doctype html>
-    <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <title>Home</title>
-        <script src="{% static 'js/bundle.js' %}"></script>
-    </head>
-    <body>
-        {% block content %}
-        {% endblock content %}
-    </body>
-</html>
+
+
+{% block title %}
+    <title>Slumlords - Home</title>
+{% endblock title %}
+{% block links %}
+    <link rel="stylesheet" href="{% static 'home/css/bundle.css' %}" />
+{% endblock links %}
+{% block scripts %}
+{% endblock scripts %}
+{% block base_content %}
+    {% block content %}
+    {% endblock content %}
+{% endblock base_content %}

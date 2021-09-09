@@ -1,0 +1,7 @@
+{% if request.user.is_authenticated  %}
+  <strong>{{ request.user }}</strong>
+  <a class="nav__link" href="{% url 'account:logout' %}">logout</a>
+{% else %}
+  <a class="nav__link" href="{% url 'account:login' %}">login</a>
+  <a class="nav__link" href="{% url 'account:create' %}">sign up</a>
+{% endif %}
