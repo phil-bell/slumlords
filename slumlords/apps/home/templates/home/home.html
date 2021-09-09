@@ -8,7 +8,7 @@
     <section class="feed">
         <h1>The feed</h1>
         {% for review in reviews %}
-            <article class="feed__review" href="{% url 'review:view' review.pk %}">
+            <article class="feed__review" href="">
                 <div class="feed__tenant">{{ review.tenant.user }}</div>
                 <div class="feed__address">
                     <p>{{ review.rental.address }}</p>

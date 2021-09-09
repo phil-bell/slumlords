@@ -23,6 +23,6 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("", HomeView.as_view(), name="home"),
     path("account/", include("slumlords.apps.account.urls")),
-    path("review/", include("slumlords.apps.review.urls")),
+    path("review/", include("slumlords.apps.review.urls.client")),
     path("map/", include("slumlords.apps.map.urls")),
 ]

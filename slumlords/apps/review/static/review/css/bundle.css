@@ -73,3 +73,23 @@ django-form::part(django-form__submit-button) {
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent; }
+
+.review {
+  border: solid 1px var(--slum-grey-light);
+  border-bottom-color: var(--slum-pink);
+  border-radius: 5px;
+  display: grid;
+  grid-template: "details photos" 1fr "landlord map" 1fr "cons pros" 1fr / 50% 50%;
+  gap: 10px; }
+  .review__cons {
+    grid-area: cons; }
+  .review__details {
+    grid-area: details; }
+  .review__landlord {
+    grid-area: landlord; }
+  .review__map {
+    grid-area: map; }
+  .review__photos {
+    grid-area: photos; }
+  .review__pros {
+    grid-area: pros; }

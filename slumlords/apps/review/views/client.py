@@ -4,8 +4,8 @@ from django.http.response import HttpResponse, JsonResponse
 from django.views.generic.base import TemplateView
 
 
-from .forms import ReviewForm
-from .models import Landlord, Property, Review
+from ..forms import ReviewForm
+from ..models import Landlord, Property, Review
 
 
 class ReviewCreateView(LoginRequiredMixin, TemplateView):
@@ -69,8 +69,8 @@ class ReviewListView(LoginRequiredMixin, TemplateView):
         return context
 
 
-class ReviewView(TemplateView):
-    template_name = "review/view.html"
+class ReviewRetrieve(TemplateView):
+    template_name = "review/retrieve.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
