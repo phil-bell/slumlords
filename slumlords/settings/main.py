@@ -33,13 +33,9 @@ THIRD_PARTY_APPS = [
     "address",
 ]
 LOCAL_APPS = [
-    "slumlords.api",
     "slumlords.apps.home",
     "slumlords.apps.map",
-    "slumlords.apps.reading",
     "slumlords.apps.review",
-    "slumlords.apps.support",
-    "slumlords.apps.wall_of_shame",
     "slumlords.apps.shared",
     "slumlords.apps.account",
 ]
