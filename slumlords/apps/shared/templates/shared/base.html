@@ -23,28 +23,17 @@
   </head>
   <body>
     <section class="nav">
-      <ul class="nav__list">
-        <li class="nav__item">
-          <a class="nav__link" href="{% url 'home' %}">home</a>
-        </li>
-        <li class="nav__item">
-          <a class="nav__link" href="{% url 'map:view' %}">map</a>
-        </li>
-        <li class="nav__item">
-          <a class="nav__link" href="{% url 'review:create' %}"
-            >create review</a
-          >
-        </li>
-        <li class="nav__item">
-          <a class="nav__link" href="{% url 'review:list' %}">my reviews</a>
-        </li>
-        <li class="nav__item">
-          <a class="nav__link" href="{% url 'review:list' %}">my reviews</a>
-        </li>
-        <li class="nav__item">
-          {% include 'shared/includes/login_panel.html' %}
-        </li>
-      </ul>
+      <slum-nav>
+        <slum-nav-item href="{% url 'home' %}">home</slum-nav-item>
+        <slum-nav-item href="{% url 'map:view' %}">map</slum-nav-item>
+        <slum-nav-item href="{% url 'review:list' %}">reviews</slum-nav-item>
+        <slum-nav-item end>
+          <slum-login-button
+            logout-link="{% url 'account:logout' %}"
+            login-link="{% url 'account:login' %}">
+          </slum-login-button>
+        </slum-nav-item>
+      </slum-nav>
     </section>
     {% block base_content %} {% endblock base_content %}
   </body>

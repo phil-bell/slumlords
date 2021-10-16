@@ -1,7 +1,7 @@
-import resolve from "rollup-plugin-node-resolve";
-import commonjs from "@rollup/plugin-commonjs";
-import scss from "rollup-plugin-scss";
 import { babel } from "@rollup/plugin-babel";
+import commonjs from "@rollup/plugin-commonjs";
+import resolve from "rollup-plugin-node-resolve";
+import scss from "rollup-plugin-scss";
 
 const dirs = ["account", "home", "map", "review", "shared"];
 
@@ -33,6 +33,9 @@ export default dirs.map((name, index) => ({
           },
         ],
       ],
+      plugins: [
+        "@babel/plugin-proposal-class-properties"
+      ]
     }),
   ],
 }));

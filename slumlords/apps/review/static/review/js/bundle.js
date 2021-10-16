@@ -154,147 +154,147 @@ class Template {
       if (node.nodeType === 1
       /* Node.ELEMENT_NODE */
       ) {
-          if (node.hasAttributes()) {
-            var attributes = node.attributes;
-            var {
-              length: _length
-            } = attributes; // Per
-            // https://developer.mozilla.org/en-US/docs/Web/API/NamedNodeMap,
-            // attributes are not guaranteed to be returned in document order.
-            // In particular, Edge/IE can return them out of order, so we cannot
-            // assume a correspondence between part index and attribute index.
+        if (node.hasAttributes()) {
+          var attributes = node.attributes;
+          var {
+            length: _length
+          } = attributes; // Per
+          // https://developer.mozilla.org/en-US/docs/Web/API/NamedNodeMap,
+          // attributes are not guaranteed to be returned in document order.
+          // In particular, Edge/IE can return them out of order, so we cannot
+          // assume a correspondence between part index and attribute index.
 
-            var count = 0;
+          var count = 0;
 
-            for (var i = 0; i < _length; i++) {
-              if (endsWith(attributes[i].name, boundAttributeSuffix)) {
-                count++;
-              }
-            }
-
-            while (count-- > 0) {
-              // Get the template literal section leading up to the first
-              // expression in this attribute
-              var stringForPart = strings[partIndex]; // Find the attribute name
-
-              var name = lastAttributeNameRegex.exec(stringForPart)[2]; // Find the corresponding attribute
-              // All bound attributes have had a suffix added in
-              // TemplateResult#getHTML to opt out of special attribute
-              // handling. To look up the attribute value we also need to add
-              // the suffix.
-
-              var attributeLookupName = name.toLowerCase() + boundAttributeSuffix;
-              var attributeValue = node.getAttribute(attributeLookupName);
-              node.removeAttribute(attributeLookupName);
-              var statics = attributeValue.split(markerRegex);
-              this.parts.push({
-                type: 'attribute',
-                index,
-                name,
-                strings: statics
-              });
-              partIndex += statics.length - 1;
+          for (var i = 0; i < _length; i++) {
+            if (endsWith(attributes[i].name, boundAttributeSuffix)) {
+              count++;
             }
           }
 
-          if (node.tagName === 'TEMPLATE') {
-            stack.push(node);
-            walker.currentNode = node.content;
-          }
-        } else if (node.nodeType === 3
-      /* Node.TEXT_NODE */
-      ) {
-          var data = node.data;
+          while (count-- > 0) {
+            // Get the template literal section leading up to the first
+            // expression in this attribute
+            var stringForPart = strings[partIndex]; // Find the attribute name
 
-          if (data.indexOf(marker) >= 0) {
-            var parent = node.parentNode;
+            var name = lastAttributeNameRegex.exec(stringForPart)[2]; // Find the corresponding attribute
+            // All bound attributes have had a suffix added in
+            // TemplateResult#getHTML to opt out of special attribute
+            // handling. To look up the attribute value we also need to add
+            // the suffix.
 
-            var _strings = data.split(markerRegex);
-
-            var lastIndex = _strings.length - 1; // Generate a new text node for each literal section
-            // These nodes are also used as the markers for node parts
-
-            for (var _i = 0; _i < lastIndex; _i++) {
-              var insert = void 0;
-              var s = _strings[_i];
-
-              if (s === '') {
-                insert = createMarker();
-              } else {
-                var match = lastAttributeNameRegex.exec(s);
-
-                if (match !== null && endsWith(match[2], boundAttributeSuffix)) {
-                  s = s.slice(0, match.index) + match[1] + match[2].slice(0, -boundAttributeSuffix.length) + match[3];
-                }
-
-                insert = document.createTextNode(s);
-              }
-
-              parent.insertBefore(insert, node);
-              this.parts.push({
-                type: 'node',
-                index: ++index
-              });
-            } // If there's no text, we must insert a comment to mark our place.
-            // Else, we can trust it will stick around after cloning.
-
-
-            if (_strings[lastIndex] === '') {
-              parent.insertBefore(createMarker(), node);
-              nodesToRemove.push(node);
-            } else {
-              node.data = _strings[lastIndex];
-            } // We have a part for each match found
-
-
-            partIndex += lastIndex;
-          }
-        } else if (node.nodeType === 8
-      /* Node.COMMENT_NODE */
-      ) {
-          if (node.data === marker) {
-            var _parent = node.parentNode; // Add a new marker node to be the startNode of the Part if any of
-            // the following are true:
-            //  * We don't have a previousSibling
-            //  * The previousSibling is already the start of a previous part
-
-            if (node.previousSibling === null || index === lastPartIndex) {
-              index++;
-
-              _parent.insertBefore(createMarker(), node);
-            }
-
-            lastPartIndex = index;
+            var attributeLookupName = name.toLowerCase() + boundAttributeSuffix;
+            var attributeValue = node.getAttribute(attributeLookupName);
+            node.removeAttribute(attributeLookupName);
+            var statics = attributeValue.split(markerRegex);
             this.parts.push({
-              type: 'node',
-              index
-            }); // If we don't have a nextSibling, keep this node so we have an end.
-            // Else, we can remove it to save future costs.
-
-            if (node.nextSibling === null) {
-              node.data = '';
-            } else {
-              nodesToRemove.push(node);
-              index--;
-            }
-
-            partIndex++;
-          } else {
-            var _i2 = -1;
-
-            while ((_i2 = node.data.indexOf(marker, _i2 + 1)) !== -1) {
-              // Comment node has a binding marker inside, make an inactive part
-              // The binding won't work, but subsequent bindings will
-              // TODO (justinfagnani): consider whether it's even worth it to
-              // make bindings in comments work
-              this.parts.push({
-                type: 'node',
-                index: -1
-              });
-              partIndex++;
-            }
+              type: 'attribute',
+              index,
+              name,
+              strings: statics
+            });
+            partIndex += statics.length - 1;
           }
         }
+
+        if (node.tagName === 'TEMPLATE') {
+          stack.push(node);
+          walker.currentNode = node.content;
+        }
+      } else if (node.nodeType === 3
+      /* Node.TEXT_NODE */
+      ) {
+        var data = node.data;
+
+        if (data.indexOf(marker) >= 0) {
+          var parent = node.parentNode;
+
+          var _strings = data.split(markerRegex);
+
+          var lastIndex = _strings.length - 1; // Generate a new text node for each literal section
+          // These nodes are also used as the markers for node parts
+
+          for (var _i = 0; _i < lastIndex; _i++) {
+            var insert = void 0;
+            var s = _strings[_i];
+
+            if (s === '') {
+              insert = createMarker();
+            } else {
+              var match = lastAttributeNameRegex.exec(s);
+
+              if (match !== null && endsWith(match[2], boundAttributeSuffix)) {
+                s = s.slice(0, match.index) + match[1] + match[2].slice(0, -boundAttributeSuffix.length) + match[3];
+              }
+
+              insert = document.createTextNode(s);
+            }
+
+            parent.insertBefore(insert, node);
+            this.parts.push({
+              type: 'node',
+              index: ++index
+            });
+          } // If there's no text, we must insert a comment to mark our place.
+          // Else, we can trust it will stick around after cloning.
+
+
+          if (_strings[lastIndex] === '') {
+            parent.insertBefore(createMarker(), node);
+            nodesToRemove.push(node);
+          } else {
+            node.data = _strings[lastIndex];
+          } // We have a part for each match found
+
+
+          partIndex += lastIndex;
+        }
+      } else if (node.nodeType === 8
+      /* Node.COMMENT_NODE */
+      ) {
+        if (node.data === marker) {
+          var _parent = node.parentNode; // Add a new marker node to be the startNode of the Part if any of
+          // the following are true:
+          //  * We don't have a previousSibling
+          //  * The previousSibling is already the start of a previous part
+
+          if (node.previousSibling === null || index === lastPartIndex) {
+            index++;
+
+            _parent.insertBefore(createMarker(), node);
+          }
+
+          lastPartIndex = index;
+          this.parts.push({
+            type: 'node',
+            index
+          }); // If we don't have a nextSibling, keep this node so we have an end.
+          // Else, we can remove it to save future costs.
+
+          if (node.nextSibling === null) {
+            node.data = '';
+          } else {
+            nodesToRemove.push(node);
+            index--;
+          }
+
+          partIndex++;
+        } else {
+          var _i2 = -1;
+
+          while ((_i2 = node.data.indexOf(marker, _i2 + 1)) !== -1) {
+            // Comment node has a binding marker inside, make an inactive part
+            // The binding won't work, but subsequent bindings will
+            // TODO (justinfagnani): consider whether it's even worth it to
+            // make bindings in comments work
+            this.parts.push({
+              type: 'node',
+              index: -1
+            });
+            partIndex++;
+          }
+        }
+      }
     } // Remove text binding nodes after the walk to not disturb the TreeWalker
 
 
@@ -1086,11 +1086,11 @@ class NodePart {
     if (node === this.endNode.previousSibling && node.nodeType === 3
     /* Node.TEXT_NODE */
     ) {
-        // If we only have a single text node between the markers, we can just
-        // set its value, rather than replacing it.
-        // TODO(justinfagnani): Can we just check if this.value is primitive?
-        node.data = valueAsString;
-      } else {
+      // If we only have a single text node between the markers, we can just
+      // set its value, rather than replacing it.
+      // TODO(justinfagnani): Can we just check if this.value is primitive?
+      node.data = valueAsString;
+    } else {
       this.__commitNode(document.createTextNode(valueAsString));
     }
 
@@ -1526,7 +1526,7 @@ var defaultTemplateProcessor = new DefaultTemplateProcessor();
 // TODO(justinfagnani): inject version number at build time
 
 if (typeof window !== 'undefined') {
-  (window['litHtmlVersions'] || (window['litHtmlVersions'] = [])).push('1.3.0');
+  (window['litHtmlVersions'] || (window['litHtmlVersions'] = [])).push('1.4.1');
 }
 /**
  * Interprets a template literal as an HTML template that can efficiently
@@ -1895,6 +1895,7 @@ var defaultConverter = {
 
       case Object:
       case Array:
+        // Type assert to adhere to Bazel's "must type assert JSON parse" rule.
         return JSON.parse(value);
     }
 
@@ -2541,10 +2542,33 @@ class UpdatingElement extends HTMLElement {
    *       await this._myChild.updateComplete;
    *     }
    *   }
+   * @deprecated Override `getUpdateComplete()` instead for forward
+   *     compatibility with `lit-element` 3.0 / `@lit/reactive-element`.
    */
 
 
   _getUpdateComplete() {
+    return this.getUpdateComplete();
+  }
+  /**
+   * Override point for the `updateComplete` promise.
+   *
+   * It is not safe to override the `updateComplete` getter directly due to a
+   * limitation in TypeScript which means it is not possible to call a
+   * superclass getter (e.g. `super.updateComplete.then(...)`) when the target
+   * language is ES5 (https://github.com/microsoft/TypeScript/issues/338).
+   * This method should be overridden instead. For example:
+   *
+   *   class MyElement extends LitElement {
+   *     async getUpdateComplete() {
+   *       await super.getUpdateComplete();
+   *       await this._myChild.updateComplete;
+   *     }
+   *   }
+   */
+
+
+  getUpdateComplete() {
     return this._updatePromise;
   }
   /**
@@ -2689,7 +2713,7 @@ var unsafeCSS = value => {
 // This line will be used in regexes to search for LitElement usage.
 // TODO(justinfagnani): inject version number at build time
 
-(window['litElementVersions'] || (window['litElementVersions'] = [])).push('2.4.0');
+(window['litElementVersions'] || (window['litElementVersions'] = [])).push('2.5.1');
 /**
  * Sentinal value used to avoid calling lit-html's render function when
  * subclasses do not implement `render`
@@ -2801,9 +2825,7 @@ class LitElement extends UpdatingElement {
 
 
   createRenderRoot() {
-    return this.attachShadow({
-      mode: 'open'
-    });
+    return this.attachShadow(this.constructor.shadowRootOptions);
   }
   /**
    * Applies styling to the element shadowRoot using the [[`styles`]]
@@ -2923,6 +2945,11 @@ LitElement['finalized'] = true;
  */
 
 LitElement.render = render;
+/** @nocollapse */
+
+LitElement.shadowRootOptions = {
+  mode: 'open'
+};
 
 function createCommonjsModule(fn) {
   var module = { exports: {} };
@@ -3159,7 +3186,7 @@ class DjangoForm extends LitElement {
     var _this = this;
 
     return _asyncToGenerator(function* () {
-      Object.entries(errors).map((_ref) => {
+      Object.entries(errors).map(_ref => {
         var [field, error] = _ref;
         var input = document.querySelector("#id_".concat(field));
 

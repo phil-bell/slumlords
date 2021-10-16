@@ -1,7 +1,6 @@
 {% if request.user.is_authenticated  %}
   <strong>{{ request.user }}</strong>
-  <a class="nav__link" href="{% url 'account:logout' %}">logout</a>
+  <slum-nav-item end link="{% url 'account:logout' %}">logout</slum-nav-item>
 {% else %}
-  <a class="nav__link" href="{% url 'account:login' %}">login</a>
-  <a class="nav__link" href="{% url 'account:create' %}">sign up</a>
+  <slum-nav-item end link="{% url 'account:login' %}">login sign up</slum-nav-item>
 {% endif %}
