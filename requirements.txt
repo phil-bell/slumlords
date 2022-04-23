@@ -1,5 +1,5 @@
-Django==3.2
-django-address==0.2.5
-django-cors-headers==3.7.0
-djangorestframework==3.12.4
-geopy==2.1.0
+Django<4
+django-address<0.3
+django-cors-headers<4
+djangorestframework<4
+geopy<3
